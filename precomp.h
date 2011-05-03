@@ -40,6 +40,6 @@
 #include <Terrain/OgreTerrainGroup.h>
 #include <Terrain/OgreTerrainMaterialGeneratorA.h>
 
-#endif // WX_PRECOMP
+#endif // WX_PRECOM
 
 
