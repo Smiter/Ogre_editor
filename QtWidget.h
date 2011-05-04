@@ -44,6 +44,8 @@ class OgreWidget : public QGLWidget
 };
 ////////////////////////
 //HUI!!!!!!!!!!!!!!!!!!!!!!
+
+// Sam takoi, pes :(
 #endif
 
 
