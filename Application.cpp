@@ -10,22 +10,17 @@ int main(int argc, char **argv)
 
 
     MainWidget *window = new MainWidget;
-    OgreWidget * test = new OgreWidget();
 
     QBoxLayout *layout = new QBoxLayout(QBoxLayout::LeftToRight);
-    layout->addWidget(test);
-    test->setSizePolicy(QSizePolicy::Maximum,QSizePolicy::Maximum);
+    layout->addWidget(window->ogreWindow);
+    window->ogreWindow->setSizePolicy(QSizePolicy::Maximum,QSizePolicy::Maximum);
     layout->setMargin(20);
-    layout->setAlignment(test,Qt::AlignTop | Qt::AlignLeft);
+    layout->setAlignment(window->ogreWindow,Qt::AlignTop | Qt::AlignLeft);
     window->setLayout(layout);
 
     window->show();
-    test->show();
 
-    window->resize(1024,768);
-    test->resize(500,500);
-    test->move(20,20);
-
+    window->resize(640,480);
 
     return app.exec();
 }

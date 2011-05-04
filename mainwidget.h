@@ -2,6 +2,10 @@
 #define MAINWIDGET_H
 
 #include <QWidget>
+#include <QListWidget>
+#include <QDockWidget>
+#include "QtWidget.h"
+
 
 namespace Ui {
     class MainWidget;
@@ -15,8 +19,10 @@ public:
     explicit MainWidget(QWidget *parent = 0);
     ~MainWidget();
 
-private:
+public:
     Ui::MainWidget *ui;
+    OgreWidget *ogreWindow;
+
 };
 
 #endif // MAINWIDGET_H
