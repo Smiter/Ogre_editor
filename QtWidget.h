@@ -45,8 +45,12 @@ class OgreWidget : public QGLWidget
 ////////////////////////
 //HUI!!!!!!!!!!!!!!!!!!!!!!
 
+<<<<<<< HEAD
 
 //esho raz hui!!!
+=======
+// Sam takoi, pes :(
+>>>>>>> 9f8494e7628a58bf9359245e71bea845dd472ec9
 #endif
 
 
