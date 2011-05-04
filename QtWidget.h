@@ -42,7 +42,8 @@ class OgreWidget : public QGLWidget
   Ogre::Viewport *mViewport;
   Ogre::SceneManager *mSceneMgr;
 };
-////////////////////////////////
+////////////////////////
+//HUI!!!!!!!!!!!!!!!!!!!!!!
 #endif
 
 
