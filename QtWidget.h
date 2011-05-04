@@ -44,6 +44,9 @@ class OgreWidget : public QGLWidget
 };
 ////////////////////////
 //HUI!!!!!!!!!!!!!!!!!!!!!!
+
+
+//esho raz hui!!!
 #endif
 
 
