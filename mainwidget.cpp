@@ -3,9 +3,12 @@
 
 MainWidget::MainWidget(QWidget *parent) :
     QWidget(parent),
-    ui(new Ui::MainWidget)
+    ui(new Ui::MainWidget),
+    ogreWindow(new OgreWidget)
+
 {
-    ui->setupUi(this);  
+    ui->setupUi(this);
+
 }
 
 MainWidget::~MainWidget()

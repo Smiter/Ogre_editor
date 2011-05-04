@@ -27,7 +27,7 @@ class OgreWidget : public QGLWidget
 
   QSize sizeHint() const  //оверрайд вирт функции для layout-ов. Минимальный размер который принимает окно при ресайзе.
   {
-     return QSize(500, 500);
+     return QSize(300, 300);
   }
 
 
@@ -42,11 +42,7 @@ class OgreWidget : public QGLWidget
   Ogre::Viewport *mViewport;
   Ogre::SceneManager *mSceneMgr;
 };
-////////////////////////
-//HUI!!!!!!!!!!!!!!!!!!!!!!
 
-// Sam takoi, pes :(
-// peni
 #endif
 
 
