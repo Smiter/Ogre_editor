@@ -1,3 +1,5 @@
+// The OGRE scene class. It represents the 3D content of the editor
+
 #ifndef __OGREWIDGET_H__
 #define __OGREWIDGET_H__
 
