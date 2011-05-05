@@ -5,10 +5,12 @@ MainWindow::MainWindow(QWidget *parent) :  QMainWindow(parent),  ui(new Ui::Main
 {
     ui->setupUi(this);
     ogreWindow = new OgreWidget();
-    this->setCentralWidget(ui->tabWidget);
-    ui->tabWidget->insertTab(0,ogreWindow,"Scene");
-    ui->tabWidget->removeTab(1);
-    ui->tabWidget->setCurrentIndex(0);
+
+    QTabWidget *tab = new QTabWidget;
+    QWidget *wi = new QWidget;
+    tab->addTab(ogreWindow,"Scene");
+    tab->addTab(wi,"Game");
+    this->setCentralWidget(tab);
 
     initProjectExplorer();
 }
@@ -20,7 +22,7 @@ MainWindow::~MainWindow()
 
 void MainWindow::initProjectExplorer()
 {
-    fileSystemModel = new QFileSystemModel();
+    QFileSystemModel *fileSystemModel = new QFileSystemModel();
     fileSystemModel->setRootPath(QDir::currentPath());
 
     QStringList filters;

@@ -20,8 +20,6 @@ public:
     Ui::MainWindow *ui;
     OgreWidget *ogreWindow;
 
-    QFileSystemModel *fileSystemModel;
-
 private:
 
     void initProjectExplorer();
