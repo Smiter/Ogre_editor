@@ -40,5 +40,3 @@ class OgreWidget : public QGLWidget
 #endif
 
 
-//github request pull
-

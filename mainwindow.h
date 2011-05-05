@@ -2,6 +2,8 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <QFileSystemModel>
+
 #include "QtWidget.h"
 
 namespace Ui {
@@ -17,6 +19,13 @@ public:
     ~MainWindow();
     Ui::MainWindow *ui;
     OgreWidget *ogreWindow;
+
+    QFileSystemModel *fileSystemModel;
+
+private:
+
+    void initProjectExplorer();
+
 };
 
 #endif // MAINWINDOW_H

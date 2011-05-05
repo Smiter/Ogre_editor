@@ -27,17 +27,28 @@
     #include <QtGui/QTextEdit>
     #include <QtGui/QVBoxLayout>
     #include <QtGui/QWidget>*/
+
+// QT HEADERS
 #include <QDebug>
-#include<Ogre.h>
-#include<string.h>
+//#include <QFileSystemModel>
+#include <QDir>
+#include <QStringList>
+
+// OGRE HEADERS
+#include <Ogre.h>
 #include <OgrePrerequisites.h>
 #include "OgreSingleton.h"
 #include <OgreString.h>
 #include <OgreVector3.h>
 #include <OgreQuaternion.h>
-#include <vector>
 #include <Terrain/OgreTerrain.h>
 #include <Terrain/OgreTerrainGroup.h>
 #include <Terrain/OgreTerrainMaterialGeneratorA.h>
 
+// STANDART HEADERS
+#include <string.h>
+#include <vector>
+
 #endif // WX_PRECOMP
+
+

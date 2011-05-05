@@ -7,51 +7,57 @@
     <x>0</x>
     <y>0</y>
     <width>756</width>
-    <height>485</height>
+    <height>488</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>MainWindow</string>
   </property>
-  <widget class="QWidget" name="centralwidget">
-   <widget class="QTabWidget" name="tabWidget">
-    <property name="geometry">
-     <rect>
-      <x>40</x>
-      <y>100</y>
-      <width>125</width>
-      <height>80</height>
-     </rect>
-    </property>
-    <property name="currentIndex">
-     <number>0</number>
-    </property>
-    <widget class="QWidget" name="tab">
-     <property name="enabled">
-      <bool>true</bool>
-     </property>
-     <attribute name="title">
-      <string>Tab 1</string>
-     </attribute>
-    </widget>
-    <widget class="QWidget" name="tab_2">
-     <attribute name="title">
-      <string>Tab 2</string>
-     </attribute>
-    </widget>
-   </widget>
-  </widget>
+  <widget class="QWidget" name="centralwidget"/>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
     <rect>
      <x>0</x>
      <y>0</y>
      <width>756</width>
-     <height>20</height>
+     <height>21</height>
     </rect>
    </property>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
+  <widget class="QDockWidget" name="dockOgre">
+   <property name="sizePolicy">
+    <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
+     <horstretch>0</horstretch>
+     <verstretch>0</verstretch>
+    </sizepolicy>
+   </property>
+   <property name="minimumSize">
+    <size>
+     <width>200</width>
+     <height>200</height>
+    </size>
+   </property>
+   <property name="baseSize">
+    <size>
+     <width>0</width>
+     <height>0</height>
+    </size>
+   </property>
+   <property name="layoutDirection">
+    <enum>Qt::RightToLeft</enum>
+   </property>
+   <property name="features">
+    <set>QDockWidget::DockWidgetMovable</set>
+   </property>
+   <property name="windowTitle">
+    <string>Scene</string>
+   </property>
+   <attribute name="dockWidgetArea">
+    <number>1</number>
+   </attribute>
+   <widget class="QWidget" name="dockWidgetContents_13"/>
+  </widget>
   <widget class="QDockWidget" name="componentsGUI">
    <property name="sizePolicy">
     <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
@@ -62,11 +68,8 @@
    <property name="minimumSize">
     <size>
      <width>240</width>
-     <height>37</height>
+     <height>38</height>
     </size>
-   </property>
-   <property name="layoutDirection">
-    <enum>Qt::LeftToRight</enum>
    </property>
    <property name="autoFillBackground">
     <bool>true</bool>
@@ -455,9 +458,15 @@
       <rect>
        <x>0</x>
        <y>0</y>
-       <width>201</width>
-       <height>51</height>
+       <width>381</width>
+       <height>81</height>
       </rect>
+     </property>
+     <property name="layoutDirection">
+      <enum>Qt::LeftToRight</enum>
+     </property>
+     <property name="autoFillBackground">
+      <bool>true</bool>
      </property>
     </widget>
    </widget>
@@ -485,14 +494,26 @@
     <number>8</number>
    </attribute>
    <widget class="QWidget" name="dockWidgetContents_15">
-    <widget class="QTreeView" name="treeView_8">
+    <widget class="QTreeView" name="prExplorerTree">
      <property name="geometry">
       <rect>
        <x>0</x>
        <y>0</y>
-       <width>191</width>
-       <height>51</height>
+       <width>381</width>
+       <height>81</height>
       </rect>
+     </property>
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Maximum" vsizetype="Expanding">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="layoutDirection">
+      <enum>Qt::LeftToRight</enum>
+     </property>
+     <property name="autoFillBackground">
+      <bool>true</bool>
      </property>
     </widget>
    </widget>
