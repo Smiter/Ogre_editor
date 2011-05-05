@@ -25,12 +25,6 @@ class OgreWidget : public QGLWidget
   virtual void resizeGL( int, int );
   virtual void paintGL();
 
-  QSize sizeHint() const  //оверрайд вирт функции для layout-ов. Минимальный размер который принимает окно при ресайзе.
-  {
-     return QSize(391, 291);
-  }
-
-
   void init( std::string, std::string, std::string );
   void initResourses();
 

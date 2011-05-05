@@ -71,10 +71,10 @@ Ogre::RenderSystem* OgreWidget::chooseRenderer( Ogre::RenderSystemList *renderer
 
 void OgreWidget::initResourses()
 {
-  Ogre::ResourceGroupManager::getSingleton().addResourceLocation("D:/Temp/QTProjects/QtOgreEditor/media/materials/textures", std::string("FileSystem"), "MyGroup", false);
-  Ogre::ResourceGroupManager::getSingleton().addResourceLocation("D:/Temp/QTProjects/QtOgreEditor/media/models",std::string("FileSystem"), "MyGroup", false);
-  Ogre::ResourceGroupManager::getSingleton().addResourceLocation("D:/Temp/QTProjects/QtOgreEditor/media/materials",std::string("FileSystem"), "MyGroup", false);
-  Ogre::ResourceGroupManager::getSingleton().addResourceLocation("D:/Temp/QTProjects/QtOgreEditor/media/myGUI",std::string("FileSystem"), "MyGroup", false);
-  Ogre::ResourceGroupManager::getSingleton().addResourceLocation("D:/Temp/QTProjects/QtOgreEditor/media/scenes",std::string("FileSystem"), "MyGroup", false);
+  Ogre::ResourceGroupManager::getSingleton().addResourceLocation("d:/Qtcreator/projects/OGRE_EDITOR/media/materials/textures", std::string("FileSystem"), "MyGroup", false);
+  Ogre::ResourceGroupManager::getSingleton().addResourceLocation("d:/Qtcreator/projects/OGRE_EDITOR/media/models",std::string("FileSystem"), "MyGroup", false);
+  Ogre::ResourceGroupManager::getSingleton().addResourceLocation("d:/Qtcreator/projects/OGRE_EDITOR/media/materials",std::string("FileSystem"), "MyGroup", false);
+  Ogre::ResourceGroupManager::getSingleton().addResourceLocation("d:/Qtcreator/projects/OGRE_EDITOR/media/myGUI",std::string("FileSystem"), "MyGroup", false);
+  Ogre::ResourceGroupManager::getSingleton().addResourceLocation("d:/Qtcreator/projects/OGRE_EDITOR/media/scenes",std::string("FileSystem"), "MyGroup", false);
   Ogre::ResourceGroupManager::getSingleton().initialiseAllResourceGroups();
 }
