@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'mainwindow.ui'
 **
-** Created: Thu 5. May 18:42:17 2011
+** Created: Thu 5. May 22:36:58 2011
 **      by: Qt User Interface Compiler version 4.7.2
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -25,6 +25,7 @@
 #include <QtGui/QPushButton>
 #include <QtGui/QScrollBar>
 #include <QtGui/QStatusBar>
+#include <QtGui/QTabWidget>
 #include <QtGui/QTreeView>
 #include <QtGui/QWidget>
 
@@ -34,10 +35,11 @@ class Ui_MainWindow
 {
 public:
     QWidget *centralwidget;
+    QTabWidget *tabWidget;
+    QWidget *tab;
+    QWidget *tab_2;
     QMenuBar *menubar;
     QStatusBar *statusbar;
-    QDockWidget *dockOgre;
-    QWidget *dockWidgetContents_13;
     QDockWidget *componentsGUI;
     QWidget *dockWidgetContents_12;
     QGroupBox *sceneNodeGUI_4;
@@ -83,6 +85,16 @@ public:
         MainWindow->resize(756, 485);
         centralwidget = new QWidget(MainWindow);
         centralwidget->setObjectName(QString::fromUtf8("centralwidget"));
+        tabWidget = new QTabWidget(centralwidget);
+        tabWidget->setObjectName(QString::fromUtf8("tabWidget"));
+        tabWidget->setGeometry(QRect(40, 100, 125, 80));
+        tab = new QWidget();
+        tab->setObjectName(QString::fromUtf8("tab"));
+        tab->setEnabled(true);
+        tabWidget->addTab(tab, QString());
+        tab_2 = new QWidget();
+        tab_2->setObjectName(QString::fromUtf8("tab_2"));
+        tabWidget->addTab(tab_2, QString());
         MainWindow->setCentralWidget(centralwidget);
         menubar = new QMenuBar(MainWindow);
         menubar->setObjectName(QString::fromUtf8("menubar"));
@@ -91,26 +103,15 @@ public:
         statusbar = new QStatusBar(MainWindow);
         statusbar->setObjectName(QString::fromUtf8("statusbar"));
         MainWindow->setStatusBar(statusbar);
-        dockOgre = new QDockWidget(MainWindow);
-        dockOgre->setObjectName(QString::fromUtf8("dockOgre"));
+        componentsGUI = new QDockWidget(MainWindow);
+        componentsGUI->setObjectName(QString::fromUtf8("componentsGUI"));
         QSizePolicy sizePolicy(QSizePolicy::Maximum, QSizePolicy::Maximum);
         sizePolicy.setHorizontalStretch(0);
         sizePolicy.setVerticalStretch(0);
-        sizePolicy.setHeightForWidth(dockOgre->sizePolicy().hasHeightForWidth());
-        dockOgre->setSizePolicy(sizePolicy);
-        dockOgre->setMinimumSize(QSize(200, 200));
-        dockOgre->setBaseSize(QSize(0, 0));
-        dockOgre->setLayoutDirection(Qt::RightToLeft);
-        dockOgre->setFeatures(QDockWidget::DockWidgetMovable);
-        dockWidgetContents_13 = new QWidget();
-        dockWidgetContents_13->setObjectName(QString::fromUtf8("dockWidgetContents_13"));
-        dockOgre->setWidget(dockWidgetContents_13);
-        MainWindow->addDockWidget(static_cast<Qt::DockWidgetArea>(1), dockOgre);
-        componentsGUI = new QDockWidget(MainWindow);
-        componentsGUI->setObjectName(QString::fromUtf8("componentsGUI"));
         sizePolicy.setHeightForWidth(componentsGUI->sizePolicy().hasHeightForWidth());
         componentsGUI->setSizePolicy(sizePolicy);
         componentsGUI->setMinimumSize(QSize(240, 37));
+        componentsGUI->setLayoutDirection(Qt::LeftToRight);
         componentsGUI->setAutoFillBackground(true);
         componentsGUI->setFeatures(QDockWidget::DockWidgetMovable);
         dockWidgetContents_12 = new QWidget();
@@ -237,13 +238,17 @@ public:
 
         retranslateUi(MainWindow);
 
+        tabWidget->setCurrentIndex(0);
+
+
         QMetaObject::connectSlotsByName(MainWindow);
     } // setupUi
 
     void retranslateUi(QMainWindow *MainWindow)
     {
         MainWindow->setWindowTitle(QApplication::translate("MainWindow", "MainWindow", 0, QApplication::UnicodeUTF8));
-        dockOgre->setWindowTitle(QApplication::translate("MainWindow", "Scene", 0, QApplication::UnicodeUTF8));
+        tabWidget->setTabText(tabWidget->indexOf(tab), QApplication::translate("MainWindow", "Tab 1", 0, QApplication::UnicodeUTF8));
+        tabWidget->setTabText(tabWidget->indexOf(tab_2), QApplication::translate("MainWindow", "Tab 2", 0, QApplication::UnicodeUTF8));
         componentsGUI->setWindowTitle(QApplication::translate("MainWindow", "Components", 0, QApplication::UnicodeUTF8));
         sceneNodeGUI_4->setTitle(QApplication::translate("MainWindow", "Scene Node", 0, QApplication::UnicodeUTF8));
         label_28->setText(QApplication::translate("MainWindow", "Position:", 0, QApplication::UnicodeUTF8));

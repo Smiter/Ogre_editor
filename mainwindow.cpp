@@ -5,8 +5,11 @@ MainWindow::MainWindow(QWidget *parent) :  QMainWindow(parent),  ui(new Ui::Main
 {
     ui->setupUi(this);
     ogreWindow = new OgreWidget();
-    ui->dockOgre->setWidget(ogreWindow);
-    this->setCentralWidget(ui->dockOgre);
+    this->setCentralWidget(ui->tabWidget);
+    ui->tabWidget->insertTab(0,ogreWindow,"Scene");
+    ui->tabWidget->removeTab(1);
+    ui->tabWidget->setCurrentIndex(0);
+
 }
 
 MainWindow::~MainWindow()
