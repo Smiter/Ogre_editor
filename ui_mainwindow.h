@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'mainwindow.ui'
 **
-** Created: Thu 5. May 22:53:44 2011
+** Created: Thu 5. May 23:07:38 2011
 **      by: Qt User Interface Compiler version 4.7.2
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -76,7 +76,7 @@ public:
     QTreeView *treeView_7;
     QDockWidget *projExplorerGUI;
     QWidget *dockWidgetContents_15;
-    QTreeView *treeView_8;
+    QTreeView *prExplorerTree;
 
     void setupUi(QMainWindow *MainWindow)
     {
@@ -98,7 +98,7 @@ public:
         MainWindow->setCentralWidget(centralwidget);
         menubar = new QMenuBar(MainWindow);
         menubar->setObjectName(QString::fromUtf8("menubar"));
-        menubar->setGeometry(QRect(0, 0, 756, 20));
+        menubar->setGeometry(QRect(0, 0, 756, 21));
         MainWindow->setMenuBar(menubar);
         statusbar = new QStatusBar(MainWindow);
         statusbar->setObjectName(QString::fromUtf8("statusbar"));
@@ -110,7 +110,7 @@ public:
         sizePolicy.setVerticalStretch(0);
         sizePolicy.setHeightForWidth(componentsGUI->sizePolicy().hasHeightForWidth());
         componentsGUI->setSizePolicy(sizePolicy);
-        componentsGUI->setMinimumSize(QSize(240, 37));
+        componentsGUI->setMinimumSize(QSize(240, 38));
         componentsGUI->setLayoutDirection(Qt::LeftToRight);
         componentsGUI->setAutoFillBackground(true);
         componentsGUI->setFeatures(QDockWidget::DockWidgetMovable);
@@ -230,9 +230,9 @@ public:
         projExplorerGUI->setFeatures(QDockWidget::DockWidgetMovable);
         dockWidgetContents_15 = new QWidget();
         dockWidgetContents_15->setObjectName(QString::fromUtf8("dockWidgetContents_15"));
-        treeView_8 = new QTreeView(dockWidgetContents_15);
-        treeView_8->setObjectName(QString::fromUtf8("treeView_8"));
-        treeView_8->setGeometry(QRect(0, 0, 191, 51));
+        prExplorerTree = new QTreeView(dockWidgetContents_15);
+        prExplorerTree->setObjectName(QString::fromUtf8("prExplorerTree"));
+        prExplorerTree->setGeometry(QRect(0, 0, 381, 81));
         projExplorerGUI->setWidget(dockWidgetContents_15);
         MainWindow->addDockWidget(static_cast<Qt::DockWidgetArea>(8), projExplorerGUI);
 
