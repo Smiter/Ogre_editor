@@ -41,6 +41,3 @@
 #include <Terrain/OgreTerrainMaterialGeneratorA.h>
 
 #endif // WX_PRECOMP
-
-
-//some shit !!!!!!!!!!!
