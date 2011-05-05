@@ -14,13 +14,13 @@ int main(int argc, char **argv)
     QBoxLayout *layout = new QBoxLayout(QBoxLayout::LeftToRight);
     layout->addWidget(window->ogreWindow);
     window->ogreWindow->setSizePolicy(QSizePolicy::Maximum,QSizePolicy::Maximum);
-    layout->setMargin(20);
+    layout->setMargin(10);
     layout->setAlignment(window->ogreWindow,Qt::AlignTop | Qt::AlignLeft);
     window->setLayout(layout);
 
     window->show();
 
-    window->resize(640,480);
+//    window->resize(640,480);
 
     return app.exec();
 }
