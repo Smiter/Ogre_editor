@@ -36,8 +36,8 @@
    </property>
    <property name="minimumSize">
     <size>
-     <width>515</width>
-     <height>522</height>
+     <width>50</width>
+     <height>50</height>
     </size>
    </property>
    <property name="layoutDirection">
@@ -350,8 +350,8 @@
    </property>
    <property name="minimumSize">
     <size>
-     <width>300</width>
-     <height>200</height>
+     <width>50</width>
+     <height>50</height>
     </size>
    </property>
    <property name="floating">
@@ -394,8 +394,8 @@
    </property>
    <property name="minimumSize">
     <size>
-     <width>300</width>
-     <height>200</height>
+     <width>50</width>
+     <height>50</height>
     </size>
    </property>
    <property name="maximumSize">

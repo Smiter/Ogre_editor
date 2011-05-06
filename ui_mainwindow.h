@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'mainwindow.ui'
 **
-** Created: Fri 6. May 14:13:24 2011
+** Created: Fri 6. May 14:35:44 2011
 **      by: Qt User Interface Compiler version 4.7.2
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -105,7 +105,7 @@ public:
         sizePolicy.setVerticalStretch(0);
         sizePolicy.setHeightForWidth(componentsGUI->sizePolicy().hasHeightForWidth());
         componentsGUI->setSizePolicy(sizePolicy);
-        componentsGUI->setMinimumSize(QSize(515, 522));
+        componentsGUI->setMinimumSize(QSize(50, 50));
         componentsGUI->setLayoutDirection(Qt::LeftToRight);
         componentsGUI->setAutoFillBackground(true);
         componentsGUI->setFeatures(QDockWidget::DockWidgetMovable);
@@ -317,7 +317,7 @@ public:
         sceneNodesGUI->setObjectName(QString::fromUtf8("sceneNodesGUI"));
         sizePolicy.setHeightForWidth(sceneNodesGUI->sizePolicy().hasHeightForWidth());
         sceneNodesGUI->setSizePolicy(sizePolicy);
-        sceneNodesGUI->setMinimumSize(QSize(300, 200));
+        sceneNodesGUI->setMinimumSize(QSize(50, 50));
         sceneNodesGUI->setFloating(false);
         sceneNodesGUI->setFeatures(QDockWidget::DockWidgetMovable);
         sceneNodesGUI->setWindowTitle(QString::fromUtf8("Scene Nodes"));
@@ -343,7 +343,7 @@ public:
         projExplorerGUI->setObjectName(QString::fromUtf8("projExplorerGUI"));
         sizePolicy.setHeightForWidth(projExplorerGUI->sizePolicy().hasHeightForWidth());
         projExplorerGUI->setSizePolicy(sizePolicy);
-        projExplorerGUI->setMinimumSize(QSize(300, 200));
+        projExplorerGUI->setMinimumSize(QSize(50, 50));
         projExplorerGUI->setMaximumSize(QSize(5000, 5000));
         projExplorerGUI->setFeatures(QDockWidget::DockWidgetMovable);
         dockWidgetContents_15 = new QWidget();
