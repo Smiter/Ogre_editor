@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'mainwindow.ui'
 **
-** Created: Fri 6. May 14:35:44 2011
+** Created: Sat 7. May 17:14:31 2011
 **      by: Qt User Interface Compiler version 4.7.2
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -25,8 +25,10 @@
 #include <QtGui/QMainWindow>
 #include <QtGui/QMenuBar>
 #include <QtGui/QPushButton>
+#include <QtGui/QScrollArea>
 #include <QtGui/QStatusBar>
 #include <QtGui/QTreeView>
+#include <QtGui/QVBoxLayout>
 #include <QtGui/QWidget>
 
 QT_BEGIN_NAMESPACE
@@ -35,53 +37,54 @@ class Ui_MainWindow
 {
 public:
     QWidget *centralwidget;
+    QVBoxLayout *verticalLayout;
     QMenuBar *menubar;
     QStatusBar *statusbar;
-    QDockWidget *componentsGUI;
-    QWidget *dockWidgetContents_12;
-    QGridLayout *gridLayout_2;
-    QGridLayout *gridLayout;
-    QGroupBox *sceneNodeGUI_4;
-    QGridLayout *gridLayout_4;
-    QGridLayout *gridLayout_3;
-    QLineEdit *lineEdit_42;
-    QLineEdit *lineEdit_45;
-    QLineEdit *lineEdit_39;
-    QLineEdit *lineEdit_37;
-    QLineEdit *lineEdit_40;
-    QLineEdit *lineEdit_44;
-    QLineEdit *lineEdit_41;
-    QLineEdit *lineEdit_38;
-    QLineEdit *lineEdit_43;
-    QLabel *label_29;
-    QLabel *label_30;
-    QLabel *label_31;
-    QGroupBox *material_4;
-    QGridLayout *gridLayout_8;
-    QGridLayout *gridLayout_7;
-    QPushButton *pushButton_12;
-    QLineEdit *lineEdit_48;
-    QLabel *label_35;
-    QGraphicsView *graphicsView_4;
-    QGroupBox *enitityGUI_4;
-    QGridLayout *gridLayout_6;
-    QGridLayout *gridLayout_5;
-    QPushButton *pushButton_11;
-    QPushButton *pushButton_10;
-    QLineEdit *lineEdit_46;
-    QLabel *label_34;
-    QLineEdit *lineEdit_47;
-    QLabel *label_36;
-    QDockWidget *sceneNodesGUI;
-    QWidget *dockWidgetContents_14;
-    QHBoxLayout *horizontalLayout_4;
-    QHBoxLayout *horizontalLayout_2;
-    QTreeView *treeView_7;
     QDockWidget *projExplorerGUI;
     QWidget *dockWidgetContents_15;
     QHBoxLayout *horizontalLayout_3;
     QHBoxLayout *horizontalLayout;
     QTreeView *prExplorerTree;
+    QDockWidget *sceneNodesGUI;
+    QWidget *dockWidgetContents_14;
+    QHBoxLayout *horizontalLayout_4;
+    QHBoxLayout *horizontalLayout_2;
+    QTreeView *treeView_7;
+    QDockWidget *componentsGUI;
+    QWidget *dockWidgetContents;
+    QGridLayout *gridLayout_9;
+    QScrollArea *scrollArea;
+    QWidget *scrollAreaWidgetContents_3;
+    QVBoxLayout *verticalLayout_2;
+    QGridLayout *gridLayout;
+    QGroupBox *sceneNodeGUI_4;
+    QGridLayout *gridLayout_4;
+    QGridLayout *gridLayout_3;
+    QLineEdit *position_z;
+    QLineEdit *position_x;
+    QLineEdit *position_y;
+    QLineEdit *rotation_x;
+    QLineEdit *rotation_y;
+    QLineEdit *rotation_z;
+    QLineEdit *scale_x;
+    QLineEdit *scale_y;
+    QLineEdit *scale_z;
+    QLabel *label_29;
+    QLabel *label_30;
+    QLabel *label_31;
+    QGroupBox *enitityGUI_4;
+    QGridLayout *gridLayout_6;
+    QGridLayout *gridLayout_5;
+    QLineEdit *mesh_edit;
+    QLineEdit *texture_edit;
+    QLabel *label_34;
+    QPushButton *pushButton_11;
+    QPushButton *pushButton_10;
+    QLabel *label_36;
+    QGroupBox *material_4;
+    QGridLayout *gridLayout_8;
+    QGridLayout *gridLayout_7;
+    QGraphicsView *graphicsView_4;
 
     void setupUi(QMainWindow *MainWindow)
     {
@@ -90,6 +93,8 @@ public:
         MainWindow->resize(762, 589);
         centralwidget = new QWidget(MainWindow);
         centralwidget->setObjectName(QString::fromUtf8("centralwidget"));
+        verticalLayout = new QVBoxLayout(centralwidget);
+        verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
         MainWindow->setCentralWidget(centralwidget);
         menubar = new QMenuBar(MainWindow);
         menubar->setObjectName(QString::fromUtf8("menubar"));
@@ -98,252 +103,14 @@ public:
         statusbar = new QStatusBar(MainWindow);
         statusbar->setObjectName(QString::fromUtf8("statusbar"));
         MainWindow->setStatusBar(statusbar);
-        componentsGUI = new QDockWidget(MainWindow);
-        componentsGUI->setObjectName(QString::fromUtf8("componentsGUI"));
+        projExplorerGUI = new QDockWidget(MainWindow);
+        projExplorerGUI->setObjectName(QString::fromUtf8("projExplorerGUI"));
         QSizePolicy sizePolicy(QSizePolicy::Preferred, QSizePolicy::Preferred);
         sizePolicy.setHorizontalStretch(0);
         sizePolicy.setVerticalStretch(0);
-        sizePolicy.setHeightForWidth(componentsGUI->sizePolicy().hasHeightForWidth());
-        componentsGUI->setSizePolicy(sizePolicy);
-        componentsGUI->setMinimumSize(QSize(50, 50));
-        componentsGUI->setLayoutDirection(Qt::LeftToRight);
-        componentsGUI->setAutoFillBackground(true);
-        componentsGUI->setFeatures(QDockWidget::DockWidgetMovable);
-        dockWidgetContents_12 = new QWidget();
-        dockWidgetContents_12->setObjectName(QString::fromUtf8("dockWidgetContents_12"));
-        dockWidgetContents_12->setLayoutDirection(Qt::RightToLeft);
-        gridLayout_2 = new QGridLayout(dockWidgetContents_12);
-        gridLayout_2->setObjectName(QString::fromUtf8("gridLayout_2"));
-        gridLayout = new QGridLayout();
-        gridLayout->setObjectName(QString::fromUtf8("gridLayout"));
-        sceneNodeGUI_4 = new QGroupBox(dockWidgetContents_12);
-        sceneNodeGUI_4->setObjectName(QString::fromUtf8("sceneNodeGUI_4"));
-        gridLayout_4 = new QGridLayout(sceneNodeGUI_4);
-        gridLayout_4->setObjectName(QString::fromUtf8("gridLayout_4"));
-        gridLayout_3 = new QGridLayout();
-        gridLayout_3->setObjectName(QString::fromUtf8("gridLayout_3"));
-        lineEdit_42 = new QLineEdit(sceneNodeGUI_4);
-        lineEdit_42->setObjectName(QString::fromUtf8("lineEdit_42"));
-        QSizePolicy sizePolicy1(QSizePolicy::Preferred, QSizePolicy::Fixed);
-        sizePolicy1.setHorizontalStretch(0);
-        sizePolicy1.setVerticalStretch(0);
-        sizePolicy1.setHeightForWidth(lineEdit_42->sizePolicy().hasHeightForWidth());
-        lineEdit_42->setSizePolicy(sizePolicy1);
-
-        gridLayout_3->addWidget(lineEdit_42, 1, 0, 1, 1);
-
-        lineEdit_45 = new QLineEdit(sceneNodeGUI_4);
-        lineEdit_45->setObjectName(QString::fromUtf8("lineEdit_45"));
-        sizePolicy1.setHeightForWidth(lineEdit_45->sizePolicy().hasHeightForWidth());
-        lineEdit_45->setSizePolicy(sizePolicy1);
-
-        gridLayout_3->addWidget(lineEdit_45, 1, 2, 1, 1);
-
-        lineEdit_39 = new QLineEdit(sceneNodeGUI_4);
-        lineEdit_39->setObjectName(QString::fromUtf8("lineEdit_39"));
-        sizePolicy1.setHeightForWidth(lineEdit_39->sizePolicy().hasHeightForWidth());
-        lineEdit_39->setSizePolicy(sizePolicy1);
-
-        gridLayout_3->addWidget(lineEdit_39, 1, 1, 1, 1);
-
-        lineEdit_37 = new QLineEdit(sceneNodeGUI_4);
-        lineEdit_37->setObjectName(QString::fromUtf8("lineEdit_37"));
-        sizePolicy1.setHeightForWidth(lineEdit_37->sizePolicy().hasHeightForWidth());
-        lineEdit_37->setSizePolicy(sizePolicy1);
-
-        gridLayout_3->addWidget(lineEdit_37, 2, 2, 1, 1);
-
-        lineEdit_40 = new QLineEdit(sceneNodeGUI_4);
-        lineEdit_40->setObjectName(QString::fromUtf8("lineEdit_40"));
-        sizePolicy1.setHeightForWidth(lineEdit_40->sizePolicy().hasHeightForWidth());
-        lineEdit_40->setSizePolicy(sizePolicy1);
-
-        gridLayout_3->addWidget(lineEdit_40, 2, 1, 1, 1);
-
-        lineEdit_44 = new QLineEdit(sceneNodeGUI_4);
-        lineEdit_44->setObjectName(QString::fromUtf8("lineEdit_44"));
-        sizePolicy1.setHeightForWidth(lineEdit_44->sizePolicy().hasHeightForWidth());
-        lineEdit_44->setSizePolicy(sizePolicy1);
-
-        gridLayout_3->addWidget(lineEdit_44, 2, 0, 1, 1);
-
-        lineEdit_41 = new QLineEdit(sceneNodeGUI_4);
-        lineEdit_41->setObjectName(QString::fromUtf8("lineEdit_41"));
-        sizePolicy1.setHeightForWidth(lineEdit_41->sizePolicy().hasHeightForWidth());
-        lineEdit_41->setSizePolicy(sizePolicy1);
-
-        gridLayout_3->addWidget(lineEdit_41, 3, 2, 1, 1);
-
-        lineEdit_38 = new QLineEdit(sceneNodeGUI_4);
-        lineEdit_38->setObjectName(QString::fromUtf8("lineEdit_38"));
-        sizePolicy1.setHeightForWidth(lineEdit_38->sizePolicy().hasHeightForWidth());
-        lineEdit_38->setSizePolicy(sizePolicy1);
-
-        gridLayout_3->addWidget(lineEdit_38, 3, 1, 1, 1);
-
-        lineEdit_43 = new QLineEdit(sceneNodeGUI_4);
-        lineEdit_43->setObjectName(QString::fromUtf8("lineEdit_43"));
-        sizePolicy1.setHeightForWidth(lineEdit_43->sizePolicy().hasHeightForWidth());
-        lineEdit_43->setSizePolicy(sizePolicy1);
-
-        gridLayout_3->addWidget(lineEdit_43, 3, 0, 1, 1);
-
-        label_29 = new QLabel(sceneNodeGUI_4);
-        label_29->setObjectName(QString::fromUtf8("label_29"));
-        sizePolicy.setHeightForWidth(label_29->sizePolicy().hasHeightForWidth());
-        label_29->setSizePolicy(sizePolicy);
-
-        gridLayout_3->addWidget(label_29, 0, 2, 1, 1);
-
-        label_30 = new QLabel(sceneNodeGUI_4);
-        label_30->setObjectName(QString::fromUtf8("label_30"));
-
-        gridLayout_3->addWidget(label_30, 0, 1, 1, 1);
-
-        label_31 = new QLabel(sceneNodeGUI_4);
-        label_31->setObjectName(QString::fromUtf8("label_31"));
-
-        gridLayout_3->addWidget(label_31, 0, 0, 1, 1);
-
-
-        gridLayout_4->addLayout(gridLayout_3, 0, 0, 1, 1);
-
-
-        gridLayout->addWidget(sceneNodeGUI_4, 0, 0, 1, 1);
-
-        material_4 = new QGroupBox(dockWidgetContents_12);
-        material_4->setObjectName(QString::fromUtf8("material_4"));
-        gridLayout_8 = new QGridLayout(material_4);
-        gridLayout_8->setObjectName(QString::fromUtf8("gridLayout_8"));
-        gridLayout_7 = new QGridLayout();
-        gridLayout_7->setObjectName(QString::fromUtf8("gridLayout_7"));
-        gridLayout_7->setHorizontalSpacing(50);
-        pushButton_12 = new QPushButton(material_4);
-        pushButton_12->setObjectName(QString::fromUtf8("pushButton_12"));
-
-        gridLayout_7->addWidget(pushButton_12, 1, 0, 1, 1);
-
-        lineEdit_48 = new QLineEdit(material_4);
-        lineEdit_48->setObjectName(QString::fromUtf8("lineEdit_48"));
-        sizePolicy1.setHeightForWidth(lineEdit_48->sizePolicy().hasHeightForWidth());
-        lineEdit_48->setSizePolicy(sizePolicy1);
-
-        gridLayout_7->addWidget(lineEdit_48, 1, 1, 1, 1);
-
-        label_35 = new QLabel(material_4);
-        label_35->setObjectName(QString::fromUtf8("label_35"));
-        QSizePolicy sizePolicy2(QSizePolicy::Fixed, QSizePolicy::Fixed);
-        sizePolicy2.setHorizontalStretch(0);
-        sizePolicy2.setVerticalStretch(0);
-        sizePolicy2.setHeightForWidth(label_35->sizePolicy().hasHeightForWidth());
-        label_35->setSizePolicy(sizePolicy2);
-
-        gridLayout_7->addWidget(label_35, 1, 2, 1, 1);
-
-        graphicsView_4 = new QGraphicsView(material_4);
-        graphicsView_4->setObjectName(QString::fromUtf8("graphicsView_4"));
-        sizePolicy.setHeightForWidth(graphicsView_4->sizePolicy().hasHeightForWidth());
-        graphicsView_4->setSizePolicy(sizePolicy);
-
-        gridLayout_7->addWidget(graphicsView_4, 2, 1, 1, 1);
-
-
-        gridLayout_8->addLayout(gridLayout_7, 0, 0, 1, 1);
-
-
-        gridLayout->addWidget(material_4, 2, 0, 1, 1);
-
-        enitityGUI_4 = new QGroupBox(dockWidgetContents_12);
-        enitityGUI_4->setObjectName(QString::fromUtf8("enitityGUI_4"));
-        gridLayout_6 = new QGridLayout(enitityGUI_4);
-        gridLayout_6->setObjectName(QString::fromUtf8("gridLayout_6"));
-        gridLayout_5 = new QGridLayout();
-        gridLayout_5->setObjectName(QString::fromUtf8("gridLayout_5"));
-        gridLayout_5->setHorizontalSpacing(20);
-        pushButton_11 = new QPushButton(enitityGUI_4);
-        pushButton_11->setObjectName(QString::fromUtf8("pushButton_11"));
-        sizePolicy1.setHeightForWidth(pushButton_11->sizePolicy().hasHeightForWidth());
-        pushButton_11->setSizePolicy(sizePolicy1);
-
-        gridLayout_5->addWidget(pushButton_11, 0, 0, 1, 1);
-
-        pushButton_10 = new QPushButton(enitityGUI_4);
-        pushButton_10->setObjectName(QString::fromUtf8("pushButton_10"));
-        sizePolicy1.setHeightForWidth(pushButton_10->sizePolicy().hasHeightForWidth());
-        pushButton_10->setSizePolicy(sizePolicy1);
-
-        gridLayout_5->addWidget(pushButton_10, 1, 0, 1, 1);
-
-        lineEdit_46 = new QLineEdit(enitityGUI_4);
-        lineEdit_46->setObjectName(QString::fromUtf8("lineEdit_46"));
-        sizePolicy1.setHeightForWidth(lineEdit_46->sizePolicy().hasHeightForWidth());
-        lineEdit_46->setSizePolicy(sizePolicy1);
-
-        gridLayout_5->addWidget(lineEdit_46, 0, 1, 1, 1);
-
-        label_34 = new QLabel(enitityGUI_4);
-        label_34->setObjectName(QString::fromUtf8("label_34"));
-        sizePolicy2.setHeightForWidth(label_34->sizePolicy().hasHeightForWidth());
-        label_34->setSizePolicy(sizePolicy2);
-
-        gridLayout_5->addWidget(label_34, 0, 2, 1, 1);
-
-        lineEdit_47 = new QLineEdit(enitityGUI_4);
-        lineEdit_47->setObjectName(QString::fromUtf8("lineEdit_47"));
-        sizePolicy1.setHeightForWidth(lineEdit_47->sizePolicy().hasHeightForWidth());
-        lineEdit_47->setSizePolicy(sizePolicy1);
-
-        gridLayout_5->addWidget(lineEdit_47, 1, 1, 1, 1);
-
-        label_36 = new QLabel(enitityGUI_4);
-        label_36->setObjectName(QString::fromUtf8("label_36"));
-        sizePolicy2.setHeightForWidth(label_36->sizePolicy().hasHeightForWidth());
-        label_36->setSizePolicy(sizePolicy2);
-
-        gridLayout_5->addWidget(label_36, 1, 2, 1, 1);
-
-
-        gridLayout_6->addLayout(gridLayout_5, 0, 0, 1, 1);
-
-
-        gridLayout->addWidget(enitityGUI_4, 1, 0, 1, 1);
-
-
-        gridLayout_2->addLayout(gridLayout, 0, 0, 1, 1);
-
-        componentsGUI->setWidget(dockWidgetContents_12);
-        MainWindow->addDockWidget(static_cast<Qt::DockWidgetArea>(2), componentsGUI);
-        sceneNodesGUI = new QDockWidget(MainWindow);
-        sceneNodesGUI->setObjectName(QString::fromUtf8("sceneNodesGUI"));
-        sizePolicy.setHeightForWidth(sceneNodesGUI->sizePolicy().hasHeightForWidth());
-        sceneNodesGUI->setSizePolicy(sizePolicy);
-        sceneNodesGUI->setMinimumSize(QSize(50, 50));
-        sceneNodesGUI->setFloating(false);
-        sceneNodesGUI->setFeatures(QDockWidget::DockWidgetMovable);
-        sceneNodesGUI->setWindowTitle(QString::fromUtf8("Scene Nodes"));
-        dockWidgetContents_14 = new QWidget();
-        dockWidgetContents_14->setObjectName(QString::fromUtf8("dockWidgetContents_14"));
-        horizontalLayout_4 = new QHBoxLayout(dockWidgetContents_14);
-        horizontalLayout_4->setObjectName(QString::fromUtf8("horizontalLayout_4"));
-        horizontalLayout_2 = new QHBoxLayout();
-        horizontalLayout_2->setObjectName(QString::fromUtf8("horizontalLayout_2"));
-        treeView_7 = new QTreeView(dockWidgetContents_14);
-        treeView_7->setObjectName(QString::fromUtf8("treeView_7"));
-        sizePolicy.setHeightForWidth(treeView_7->sizePolicy().hasHeightForWidth());
-        treeView_7->setSizePolicy(sizePolicy);
-
-        horizontalLayout_2->addWidget(treeView_7);
-
-
-        horizontalLayout_4->addLayout(horizontalLayout_2);
-
-        sceneNodesGUI->setWidget(dockWidgetContents_14);
-        MainWindow->addDockWidget(static_cast<Qt::DockWidgetArea>(8), sceneNodesGUI);
-        projExplorerGUI = new QDockWidget(MainWindow);
-        projExplorerGUI->setObjectName(QString::fromUtf8("projExplorerGUI"));
         sizePolicy.setHeightForWidth(projExplorerGUI->sizePolicy().hasHeightForWidth());
         projExplorerGUI->setSizePolicy(sizePolicy);
-        projExplorerGUI->setMinimumSize(QSize(50, 50));
+        projExplorerGUI->setMinimumSize(QSize(82, 103));
         projExplorerGUI->setMaximumSize(QSize(5000, 5000));
         projExplorerGUI->setFeatures(QDockWidget::DockWidgetMovable);
         dockWidgetContents_15 = new QWidget();
@@ -368,6 +135,257 @@ public:
 
         projExplorerGUI->setWidget(dockWidgetContents_15);
         MainWindow->addDockWidget(static_cast<Qt::DockWidgetArea>(8), projExplorerGUI);
+        sceneNodesGUI = new QDockWidget(MainWindow);
+        sceneNodesGUI->setObjectName(QString::fromUtf8("sceneNodesGUI"));
+        sizePolicy.setHeightForWidth(sceneNodesGUI->sizePolicy().hasHeightForWidth());
+        sceneNodesGUI->setSizePolicy(sizePolicy);
+        sceneNodesGUI->setMinimumSize(QSize(82, 103));
+        sceneNodesGUI->setFloating(false);
+        sceneNodesGUI->setFeatures(QDockWidget::DockWidgetMovable);
+        sceneNodesGUI->setWindowTitle(QString::fromUtf8("Scene Nodes"));
+        dockWidgetContents_14 = new QWidget();
+        dockWidgetContents_14->setObjectName(QString::fromUtf8("dockWidgetContents_14"));
+        horizontalLayout_4 = new QHBoxLayout(dockWidgetContents_14);
+        horizontalLayout_4->setObjectName(QString::fromUtf8("horizontalLayout_4"));
+        horizontalLayout_2 = new QHBoxLayout();
+        horizontalLayout_2->setObjectName(QString::fromUtf8("horizontalLayout_2"));
+        treeView_7 = new QTreeView(dockWidgetContents_14);
+        treeView_7->setObjectName(QString::fromUtf8("treeView_7"));
+        sizePolicy.setHeightForWidth(treeView_7->sizePolicy().hasHeightForWidth());
+        treeView_7->setSizePolicy(sizePolicy);
+
+        horizontalLayout_2->addWidget(treeView_7);
+
+
+        horizontalLayout_4->addLayout(horizontalLayout_2);
+
+        sceneNodesGUI->setWidget(dockWidgetContents_14);
+        MainWindow->addDockWidget(static_cast<Qt::DockWidgetArea>(8), sceneNodesGUI);
+        componentsGUI = new QDockWidget(MainWindow);
+        componentsGUI->setObjectName(QString::fromUtf8("componentsGUI"));
+        QSizePolicy sizePolicy1(QSizePolicy::Preferred, QSizePolicy::Ignored);
+        sizePolicy1.setHorizontalStretch(0);
+        sizePolicy1.setVerticalStretch(0);
+        sizePolicy1.setHeightForWidth(componentsGUI->sizePolicy().hasHeightForWidth());
+        componentsGUI->setSizePolicy(sizePolicy1);
+        componentsGUI->setMinimumSize(QSize(350, 200));
+        componentsGUI->setMaximumSize(QSize(700, 700));
+        componentsGUI->setFeatures(QDockWidget::DockWidgetMovable);
+        dockWidgetContents = new QWidget();
+        dockWidgetContents->setObjectName(QString::fromUtf8("dockWidgetContents"));
+        sizePolicy1.setHeightForWidth(dockWidgetContents->sizePolicy().hasHeightForWidth());
+        dockWidgetContents->setSizePolicy(sizePolicy1);
+        gridLayout_9 = new QGridLayout(dockWidgetContents);
+        gridLayout_9->setObjectName(QString::fromUtf8("gridLayout_9"));
+        scrollArea = new QScrollArea(dockWidgetContents);
+        scrollArea->setObjectName(QString::fromUtf8("scrollArea"));
+        sizePolicy.setHeightForWidth(scrollArea->sizePolicy().hasHeightForWidth());
+        scrollArea->setSizePolicy(sizePolicy);
+        scrollArea->setAutoFillBackground(true);
+        scrollArea->setVerticalScrollBarPolicy(Qt::ScrollBarAsNeeded);
+        scrollArea->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+        scrollArea->setWidgetResizable(true);
+        scrollAreaWidgetContents_3 = new QWidget();
+        scrollAreaWidgetContents_3->setObjectName(QString::fromUtf8("scrollAreaWidgetContents_3"));
+        scrollAreaWidgetContents_3->setGeometry(QRect(0, -66, 385, 472));
+        verticalLayout_2 = new QVBoxLayout(scrollAreaWidgetContents_3);
+        verticalLayout_2->setObjectName(QString::fromUtf8("verticalLayout_2"));
+        gridLayout = new QGridLayout();
+        gridLayout->setObjectName(QString::fromUtf8("gridLayout"));
+        sceneNodeGUI_4 = new QGroupBox(scrollAreaWidgetContents_3);
+        sceneNodeGUI_4->setObjectName(QString::fromUtf8("sceneNodeGUI_4"));
+        QSizePolicy sizePolicy2(QSizePolicy::Preferred, QSizePolicy::Fixed);
+        sizePolicy2.setHorizontalStretch(0);
+        sizePolicy2.setVerticalStretch(0);
+        sizePolicy2.setHeightForWidth(sceneNodeGUI_4->sizePolicy().hasHeightForWidth());
+        sceneNodeGUI_4->setSizePolicy(sizePolicy2);
+        sceneNodeGUI_4->setLayoutDirection(Qt::LeftToRight);
+        gridLayout_4 = new QGridLayout(sceneNodeGUI_4);
+        gridLayout_4->setObjectName(QString::fromUtf8("gridLayout_4"));
+        gridLayout_3 = new QGridLayout();
+        gridLayout_3->setObjectName(QString::fromUtf8("gridLayout_3"));
+        position_z = new QLineEdit(sceneNodeGUI_4);
+        position_z->setObjectName(QString::fromUtf8("position_z"));
+        sizePolicy2.setHeightForWidth(position_z->sizePolicy().hasHeightForWidth());
+        position_z->setSizePolicy(sizePolicy2);
+
+        gridLayout_3->addWidget(position_z, 1, 0, 1, 1);
+
+        position_x = new QLineEdit(sceneNodeGUI_4);
+        position_x->setObjectName(QString::fromUtf8("position_x"));
+        sizePolicy2.setHeightForWidth(position_x->sizePolicy().hasHeightForWidth());
+        position_x->setSizePolicy(sizePolicy2);
+
+        gridLayout_3->addWidget(position_x, 1, 2, 1, 1);
+
+        position_y = new QLineEdit(sceneNodeGUI_4);
+        position_y->setObjectName(QString::fromUtf8("position_y"));
+        sizePolicy2.setHeightForWidth(position_y->sizePolicy().hasHeightForWidth());
+        position_y->setSizePolicy(sizePolicy2);
+
+        gridLayout_3->addWidget(position_y, 1, 1, 1, 1);
+
+        rotation_x = new QLineEdit(sceneNodeGUI_4);
+        rotation_x->setObjectName(QString::fromUtf8("rotation_x"));
+        sizePolicy2.setHeightForWidth(rotation_x->sizePolicy().hasHeightForWidth());
+        rotation_x->setSizePolicy(sizePolicy2);
+
+        gridLayout_3->addWidget(rotation_x, 2, 2, 1, 1);
+
+        rotation_y = new QLineEdit(sceneNodeGUI_4);
+        rotation_y->setObjectName(QString::fromUtf8("rotation_y"));
+        sizePolicy2.setHeightForWidth(rotation_y->sizePolicy().hasHeightForWidth());
+        rotation_y->setSizePolicy(sizePolicy2);
+
+        gridLayout_3->addWidget(rotation_y, 2, 1, 1, 1);
+
+        rotation_z = new QLineEdit(sceneNodeGUI_4);
+        rotation_z->setObjectName(QString::fromUtf8("rotation_z"));
+        sizePolicy2.setHeightForWidth(rotation_z->sizePolicy().hasHeightForWidth());
+        rotation_z->setSizePolicy(sizePolicy2);
+
+        gridLayout_3->addWidget(rotation_z, 2, 0, 1, 1);
+
+        scale_x = new QLineEdit(sceneNodeGUI_4);
+        scale_x->setObjectName(QString::fromUtf8("scale_x"));
+        sizePolicy2.setHeightForWidth(scale_x->sizePolicy().hasHeightForWidth());
+        scale_x->setSizePolicy(sizePolicy2);
+
+        gridLayout_3->addWidget(scale_x, 3, 2, 1, 1);
+
+        scale_y = new QLineEdit(sceneNodeGUI_4);
+        scale_y->setObjectName(QString::fromUtf8("scale_y"));
+        sizePolicy2.setHeightForWidth(scale_y->sizePolicy().hasHeightForWidth());
+        scale_y->setSizePolicy(sizePolicy2);
+
+        gridLayout_3->addWidget(scale_y, 3, 1, 1, 1);
+
+        scale_z = new QLineEdit(sceneNodeGUI_4);
+        scale_z->setObjectName(QString::fromUtf8("scale_z"));
+        sizePolicy2.setHeightForWidth(scale_z->sizePolicy().hasHeightForWidth());
+        scale_z->setSizePolicy(sizePolicy2);
+
+        gridLayout_3->addWidget(scale_z, 3, 0, 1, 1);
+
+        label_29 = new QLabel(sceneNodeGUI_4);
+        label_29->setObjectName(QString::fromUtf8("label_29"));
+        sizePolicy.setHeightForWidth(label_29->sizePolicy().hasHeightForWidth());
+        label_29->setSizePolicy(sizePolicy);
+
+        gridLayout_3->addWidget(label_29, 0, 2, 1, 1);
+
+        label_30 = new QLabel(sceneNodeGUI_4);
+        label_30->setObjectName(QString::fromUtf8("label_30"));
+
+        gridLayout_3->addWidget(label_30, 0, 1, 1, 1);
+
+        label_31 = new QLabel(sceneNodeGUI_4);
+        label_31->setObjectName(QString::fromUtf8("label_31"));
+
+        gridLayout_3->addWidget(label_31, 0, 0, 1, 1);
+
+
+        gridLayout_4->addLayout(gridLayout_3, 0, 0, 1, 1);
+
+
+        gridLayout->addWidget(sceneNodeGUI_4, 0, 0, 1, 1);
+
+        enitityGUI_4 = new QGroupBox(scrollAreaWidgetContents_3);
+        enitityGUI_4->setObjectName(QString::fromUtf8("enitityGUI_4"));
+        sizePolicy2.setHeightForWidth(enitityGUI_4->sizePolicy().hasHeightForWidth());
+        enitityGUI_4->setSizePolicy(sizePolicy2);
+        enitityGUI_4->setLayoutDirection(Qt::LeftToRight);
+        gridLayout_6 = new QGridLayout(enitityGUI_4);
+        gridLayout_6->setObjectName(QString::fromUtf8("gridLayout_6"));
+        gridLayout_5 = new QGridLayout();
+        gridLayout_5->setObjectName(QString::fromUtf8("gridLayout_5"));
+        gridLayout_5->setHorizontalSpacing(20);
+        mesh_edit = new QLineEdit(enitityGUI_4);
+        mesh_edit->setObjectName(QString::fromUtf8("mesh_edit"));
+        sizePolicy2.setHeightForWidth(mesh_edit->sizePolicy().hasHeightForWidth());
+        mesh_edit->setSizePolicy(sizePolicy2);
+
+        gridLayout_5->addWidget(mesh_edit, 0, 1, 1, 1);
+
+        texture_edit = new QLineEdit(enitityGUI_4);
+        texture_edit->setObjectName(QString::fromUtf8("texture_edit"));
+        sizePolicy2.setHeightForWidth(texture_edit->sizePolicy().hasHeightForWidth());
+        texture_edit->setSizePolicy(sizePolicy2);
+
+        gridLayout_5->addWidget(texture_edit, 1, 1, 1, 1);
+
+        label_34 = new QLabel(enitityGUI_4);
+        label_34->setObjectName(QString::fromUtf8("label_34"));
+        QSizePolicy sizePolicy3(QSizePolicy::Fixed, QSizePolicy::Fixed);
+        sizePolicy3.setHorizontalStretch(0);
+        sizePolicy3.setVerticalStretch(0);
+        sizePolicy3.setHeightForWidth(label_34->sizePolicy().hasHeightForWidth());
+        label_34->setSizePolicy(sizePolicy3);
+
+        gridLayout_5->addWidget(label_34, 0, 0, 1, 1);
+
+        pushButton_11 = new QPushButton(enitityGUI_4);
+        pushButton_11->setObjectName(QString::fromUtf8("pushButton_11"));
+        sizePolicy2.setHeightForWidth(pushButton_11->sizePolicy().hasHeightForWidth());
+        pushButton_11->setSizePolicy(sizePolicy2);
+
+        gridLayout_5->addWidget(pushButton_11, 0, 2, 1, 1);
+
+        pushButton_10 = new QPushButton(enitityGUI_4);
+        pushButton_10->setObjectName(QString::fromUtf8("pushButton_10"));
+        sizePolicy2.setHeightForWidth(pushButton_10->sizePolicy().hasHeightForWidth());
+        pushButton_10->setSizePolicy(sizePolicy2);
+
+        gridLayout_5->addWidget(pushButton_10, 1, 2, 1, 1);
+
+        label_36 = new QLabel(enitityGUI_4);
+        label_36->setObjectName(QString::fromUtf8("label_36"));
+        sizePolicy3.setHeightForWidth(label_36->sizePolicy().hasHeightForWidth());
+        label_36->setSizePolicy(sizePolicy3);
+
+        gridLayout_5->addWidget(label_36, 1, 0, 1, 1);
+
+
+        gridLayout_6->addLayout(gridLayout_5, 0, 0, 1, 1);
+
+
+        gridLayout->addWidget(enitityGUI_4, 1, 0, 1, 1);
+
+        material_4 = new QGroupBox(scrollAreaWidgetContents_3);
+        material_4->setObjectName(QString::fromUtf8("material_4"));
+        sizePolicy2.setHeightForWidth(material_4->sizePolicy().hasHeightForWidth());
+        material_4->setSizePolicy(sizePolicy2);
+        material_4->setLayoutDirection(Qt::LeftToRight);
+        gridLayout_8 = new QGridLayout(material_4);
+        gridLayout_8->setObjectName(QString::fromUtf8("gridLayout_8"));
+        gridLayout_7 = new QGridLayout();
+        gridLayout_7->setObjectName(QString::fromUtf8("gridLayout_7"));
+        gridLayout_7->setHorizontalSpacing(50);
+        graphicsView_4 = new QGraphicsView(material_4);
+        graphicsView_4->setObjectName(QString::fromUtf8("graphicsView_4"));
+        graphicsView_4->setEnabled(true);
+        sizePolicy2.setHeightForWidth(graphicsView_4->sizePolicy().hasHeightForWidth());
+        graphicsView_4->setSizePolicy(sizePolicy2);
+
+        gridLayout_7->addWidget(graphicsView_4, 1, 0, 1, 1);
+
+
+        gridLayout_8->addLayout(gridLayout_7, 0, 0, 1, 1);
+
+
+        gridLayout->addWidget(material_4, 2, 0, 1, 1);
+
+
+        verticalLayout_2->addLayout(gridLayout);
+
+        scrollArea->setWidget(scrollAreaWidgetContents_3);
+
+        gridLayout_9->addWidget(scrollArea, 0, 0, 1, 1);
+
+        componentsGUI->setWidget(dockWidgetContents);
+        MainWindow->addDockWidget(static_cast<Qt::DockWidgetArea>(2), componentsGUI);
+        componentsGUI->raise();
+        componentsGUI->raise();
 
         retranslateUi(MainWindow);
 
@@ -377,20 +395,17 @@ public:
     void retranslateUi(QMainWindow *MainWindow)
     {
         MainWindow->setWindowTitle(QApplication::translate("MainWindow", "MainWindow", 0, QApplication::UnicodeUTF8));
-        componentsGUI->setWindowTitle(QApplication::translate("MainWindow", "Components", 0, QApplication::UnicodeUTF8));
+        projExplorerGUI->setWindowTitle(QApplication::translate("MainWindow", "Project Explorer", 0, QApplication::UnicodeUTF8));
         sceneNodeGUI_4->setTitle(QApplication::translate("MainWindow", "Scene Node", 0, QApplication::UnicodeUTF8));
         label_29->setText(QApplication::translate("MainWindow", "X", 0, QApplication::UnicodeUTF8));
         label_30->setText(QApplication::translate("MainWindow", "\320\243", 0, QApplication::UnicodeUTF8));
         label_31->setText(QApplication::translate("MainWindow", "Z", 0, QApplication::UnicodeUTF8));
-        material_4->setTitle(QApplication::translate("MainWindow", "Material", 0, QApplication::UnicodeUTF8));
-        pushButton_12->setText(QApplication::translate("MainWindow", "Pick", 0, QApplication::UnicodeUTF8));
-        label_35->setText(QApplication::translate("MainWindow", "Material:", 0, QApplication::UnicodeUTF8));
         enitityGUI_4->setTitle(QApplication::translate("MainWindow", "Entity", 0, QApplication::UnicodeUTF8));
+        label_34->setText(QApplication::translate("MainWindow", "Mesh:", 0, QApplication::UnicodeUTF8));
         pushButton_11->setText(QApplication::translate("MainWindow", "Pick", 0, QApplication::UnicodeUTF8));
         pushButton_10->setText(QApplication::translate("MainWindow", "Pick", 0, QApplication::UnicodeUTF8));
-        label_34->setText(QApplication::translate("MainWindow", "Mesh:", 0, QApplication::UnicodeUTF8));
-        label_36->setText(QApplication::translate("MainWindow", "Texture:", 0, QApplication::UnicodeUTF8));
-        projExplorerGUI->setWindowTitle(QApplication::translate("MainWindow", "Project Explorer", 0, QApplication::UnicodeUTF8));
+        label_36->setText(QApplication::translate("MainWindow", "Material:", 0, QApplication::UnicodeUTF8));
+        material_4->setTitle(QApplication::translate("MainWindow", "Material", 0, QApplication::UnicodeUTF8));
     } // retranslateUi
 
 };

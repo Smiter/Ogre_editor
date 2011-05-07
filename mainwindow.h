@@ -20,9 +20,19 @@ public:
     Ui::MainWindow *ui;
     OgreWidget *ogreWindow;
 
+    static MainWindow * instance;
+    static MainWindow * getInstance()
+    {
+        if (instance == 0)
+            instance = new MainWindow;
+        return instance;
+    }
+    void updateTransform(Ogre::SceneNode*, Ogre::Entity *);
+
 private:
 
     void initProjectExplorer();
+
 
 };
 
