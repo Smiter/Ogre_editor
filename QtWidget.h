@@ -7,6 +7,7 @@
 
 class OgreWidget : public QGLWidget
 {
+
  Q_OBJECT
 
  public:
@@ -34,7 +35,19 @@ private:
   Ogre::SceneNode   *CurrentNode;
   Ogre::RaySceneQuery   *mRaySceneQuery;
 
-};
+<<<<<<< HEAD
+=======
+  Ogre::Root *mOgreRoot;
+  Ogre::RenderWindow *mOgreWindow;
+  Ogre::Camera *mCamera;
+  Ogre::Viewport *mViewport;
+  Ogre::SceneManager *mSceneMgr;
+
+ public:
+
+  Ogre::SceneManager *getSceneManager();
+  
+ };
 
 #endif
 

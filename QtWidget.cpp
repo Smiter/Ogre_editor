@@ -1,12 +1,10 @@
 #include "QtWidget.h"
 #include "mainwindow.h"
 
-
 OgreWidget::OgreWidget( QWidget *parent ): QGLWidget( parent ), mOgreWindow(NULL)
 {
   init( "plugins.cfg", "ogre.cfg", "ogre.log" );
 }
-
 
 void OgreWidget::init( std::string plugins_file,  std::string ogre_cfg_file, std::string ogre_log )
 {
@@ -50,16 +48,9 @@ void OgreWidget::initializeGL()
 
   Ogre::Viewport *mViewport = mOgreWindow->addViewport( mCamera );
   mViewport->setBackgroundColour( Ogre::ColourValue( 0.2,0.2,0.2 ) );
-  Ogre::Entity * myEntity =mSceneMgr->createEntity("vasea" , "robot.mesh");
-  Ogre::SceneNode * mynode = mSceneMgr->getRootSceneNode()->createChildSceneNode("vasea");
-  mynode->attachObject( myEntity );
-  myEntity->setMaterialName("RobotMaterial");
-  mynode->setPosition(200,0,100);
-  mynode->scale(1.1, 1.1, 1.1);
 
   mRaySceneQuery = new Ogre::DefaultRaySceneQuery(mSceneMgr);
   CurrentNode=0;
-
 }
 
 void OgreWidget::paintGL()
@@ -286,3 +277,7 @@ void OgreWidget::GetMeshInformation(const Ogre::MeshPtr mesh, size_t &vertex_cou
         }
  }
 
+Ogre::SceneManager *OgreWidget::getSceneManager()
+{
+    return mSceneMgr;
+}

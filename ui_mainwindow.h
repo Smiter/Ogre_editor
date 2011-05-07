@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'mainwindow.ui'
 **
-** Created: Sat 7. May 17:14:31 2011
+** Created: Sat 7. May 17:40:52 2011
 **      by: Qt User Interface Compiler version 4.7.2
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -49,7 +49,7 @@ public:
     QWidget *dockWidgetContents_14;
     QHBoxLayout *horizontalLayout_4;
     QHBoxLayout *horizontalLayout_2;
-    QTreeView *treeView_7;
+    QTreeView *sceneNodesTree;
     QDockWidget *componentsGUI;
     QWidget *dockWidgetContents;
     QGridLayout *gridLayout_9;
@@ -149,12 +149,11 @@ public:
         horizontalLayout_4->setObjectName(QString::fromUtf8("horizontalLayout_4"));
         horizontalLayout_2 = new QHBoxLayout();
         horizontalLayout_2->setObjectName(QString::fromUtf8("horizontalLayout_2"));
-        treeView_7 = new QTreeView(dockWidgetContents_14);
-        treeView_7->setObjectName(QString::fromUtf8("treeView_7"));
-        sizePolicy.setHeightForWidth(treeView_7->sizePolicy().hasHeightForWidth());
-        treeView_7->setSizePolicy(sizePolicy);
+        sceneNodesTree = new QTreeView(dockWidgetContents_14);
+        sceneNodesTree->setObjectName(QString::fromUtf8("sceneNodesTree"));
+        sceneNodesTree->header()->setVisible(false);
 
-        horizontalLayout_2->addWidget(treeView_7);
+        horizontalLayout_2->addWidget(sceneNodesTree);
 
 
         horizontalLayout_4->addLayout(horizontalLayout_2);

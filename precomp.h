@@ -31,6 +31,11 @@
 #include <QDebug>
 #include<Ogre.h>
 #include<string.h>
+#include <QDir>
+#include <QStringList>
+#include <QBoxLayout>
+
+// OGRE HEADERS
 #include <OgrePrerequisites.h>
 #include "OgreSingleton.h"
 #include <OgreString.h>
