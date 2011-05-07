@@ -51,6 +51,11 @@ void OgreWidget::initializeGL()
 
   mRaySceneQuery = new Ogre::DefaultRaySceneQuery(mSceneMgr);
   CurrentNode=0;
+
+  timer = new QTimer;
+  QObject::connect(timer, SIGNAL(timeout()), this,SLOT(OnRenderTimer()));
+  timer->setInterval(10);
+  timer->start();
 }
 
 void OgreWidget::paintGL()
@@ -72,12 +77,13 @@ Ogre::RenderSystem* OgreWidget::chooseRenderer( Ogre::RenderSystemList *renderer
 
 void OgreWidget::initResourses()
 {
-  Ogre::ResourceGroupManager::getSingleton().addResourceLocation("d:/Qtcreator/projects/OGRE_EDITOR/media/materials/textures", std::string("FileSystem"), "MyGroup", false);
-  Ogre::ResourceGroupManager::getSingleton().addResourceLocation("d:/Qtcreator/projects/OGRE_EDITOR/media/models",std::string("FileSystem"), "MyGroup", false);
-  Ogre::ResourceGroupManager::getSingleton().addResourceLocation("d:/Qtcreator/projects/OGRE_EDITOR/media/materials",std::string("FileSystem"), "MyGroup", false);
-  Ogre::ResourceGroupManager::getSingleton().addResourceLocation("d:/Qtcreator/projects/OGRE_EDITOR/media/myGUI",std::string("FileSystem"), "MyGroup", false);
-  Ogre::ResourceGroupManager::getSingleton().addResourceLocation("d:/Qtcreator/projects/OGRE_EDITOR/media/scenes",std::string("FileSystem"), "MyGroup", false);
-  Ogre::ResourceGroupManager::getSingleton().initialiseAllResourceGroups();
+    Ogre::String path = QDir::currentPath().toStdString();
+    Ogre::ResourceGroupManager::getSingleton().addResourceLocation(path + "/media/materials/textures", std::string("FileSystem"), "MyGroup", false);
+    Ogre::ResourceGroupManager::getSingleton().addResourceLocation(path + "/media/models",std::string("FileSystem"), "MyGroup", false);
+    Ogre::ResourceGroupManager::getSingleton().addResourceLocation(path + "/media/materials",std::string("FileSystem"), "MyGroup", false);
+    Ogre::ResourceGroupManager::getSingleton().addResourceLocation(path + "/media/myGUI",std::string("FileSystem"), "MyGroup", false);
+    Ogre::ResourceGroupManager::getSingleton().addResourceLocation(path + "/media/scenes",std::string("FileSystem"), "MyGroup", false);
+    Ogre::ResourceGroupManager::getSingleton().initialiseAllResourceGroups();
 }
 
 OgreWidget::~OgreWidget()
@@ -86,6 +92,10 @@ OgreWidget::~OgreWidget()
     delete mOgreRoot;
     destroy();
 }
+void OgreWidget::OnRenderTimer()
+{
+    Ogre::Root::getSingleton().renderOneFrame();
+}
 
 void OgreWidget::mousePressEvent ( QMouseEvent * event )
 {
@@ -93,7 +103,7 @@ void OgreWidget::mousePressEvent ( QMouseEvent * event )
 
         if( (CurrentNode = raycastOnScene(event->x() ,   event->y() )) != 0 ){
             qDebug()<< QString::fromStdString(CurrentNode->getName());
-            MainWindow::getInstance()->updateTransform(CurrentNode,mSceneMgr->getEntity(CurrentNode->getName()));
+            MainWindow::getInstance()->UpdateComponents(CurrentNode,mSceneMgr->getEntity(CurrentNode->getName()));
         }
     }
 }

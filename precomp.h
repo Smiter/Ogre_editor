@@ -8,7 +8,7 @@
 #include <QDebug>
 //#include <QDir>
 #include <QStringList>
-
+#include <QTimer>
 
 // OGRE HEADERS
 #include <Ogre.h>

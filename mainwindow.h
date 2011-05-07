@@ -30,9 +30,10 @@ public:
     Ui::MainWindow *ui;
     OgreWidget *ogreWindow;
 
-    void updateTransform(Ogre::SceneNode*, Ogre::Entity *);
+    void UpdateComponents(Ogre::SceneNode*, Ogre::Entity *);
     void createRobot(Ogre::Vector3);
     static int objectsCount;
+
 
 
 private:
@@ -40,6 +41,8 @@ private:
     void initSceneNodesList();
     void initProjectExplorer();
 
+public slots:
+    void OnPositionChanged(const QString &);
 
 };
 
