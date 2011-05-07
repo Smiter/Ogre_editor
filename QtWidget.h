@@ -5,7 +5,7 @@
 
 class OgreWidget : public QGLWidget
 {
-  //Q_OBJECT
+ // Q_OBJECT
 
  public:
   OgreWidget( QWidget *parent=0 ): QGLWidget( parent ), mOgreWindow(NULL)
@@ -35,6 +35,10 @@ class OgreWidget : public QGLWidget
   Ogre::Camera *mCamera;
   Ogre::Viewport *mViewport;
   Ogre::SceneManager *mSceneMgr;
+
+ public:
+
+  Ogre::SceneManager *getSceneManager();
 };
 
 #endif

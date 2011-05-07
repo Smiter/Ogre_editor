@@ -1,7 +1,16 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
-MainWindow::MainWindow(QWidget *parent) :  QMainWindow(parent),  ui(new Ui::MainWindow)/*, ogreWindow(new OgreWidget(this))*/
+#include <QGridLayout>
+#include <QTreeWidgetItem>
+
+//#include <OgreSceneNode.h>
+//#include <OgreSceneManager.h>
+
+MainWindow * MainWindow::instance = 0;
+int MainWindow::objectsCount = 0;
+
+MainWindow::MainWindow(QWidget *parent) :  QMainWindow(parent),  ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
     ogreWindow = new OgreWidget();
@@ -13,6 +22,7 @@ MainWindow::MainWindow(QWidget *parent) :  QMainWindow(parent),  ui(new Ui::Main
     this->setCentralWidget(tab);
 
     initProjectExplorer();
+
 }
 
 MainWindow::~MainWindow()
@@ -41,5 +51,30 @@ void MainWindow::initProjectExplorer()
     ui->prExplorerTree->setRootIndex(fileSystemModel->index(QDir::currentPath()));
 
     ui->prExplorerTree->show();
+}
+
+void MainWindow::createRobot(Ogre::Vector3 pos)
+{
+    objectsCount++;
+
+    Ogre::Entity * myEntity =
+            ogreWindow->getSceneManager()->createEntity("robot" +
+                           QString::number(objectsCount).toStdString(),
+                                                            "robot.mesh");
+    Ogre::SceneNode * mynode =
+            ogreWindow->getSceneManager()->getRootSceneNode()->createChildSceneNode("robot" +
+                                       QString::number(objectsCount).toStdString());
+
+    mynode->attachObject( myEntity );
+    myEntity->setMaterialName("RobotMaterial");
+    mynode->setPosition(pos);
+    mynode->scale(1.1, 1.1, 1.1);
+
+    QStringList lst;
+    lst << QString::fromStdString(mynode->getName());
+    QTreeWidgetItem* pItem = new QTreeWidgetItem(lst, 0);
+
+    ui->sceneNodesTree->addTopLevelItem(pItem);
 
 }
+

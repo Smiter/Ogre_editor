@@ -6,23 +6,21 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>762</width>
-    <height>589</height>
+    <width>602</width>
+    <height>557</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>MainWindow</string>
   </property>
-  <widget class="QWidget" name="centralwidget">
-   <zorder>graphicsView_4</zorder>
-  </widget>
+  <widget class="QWidget" name="centralwidget"/>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>762</width>
-     <height>20</height>
+     <width>602</width>
+     <height>21</height>
     </rect>
    </property>
   </widget>
@@ -36,8 +34,8 @@
    </property>
    <property name="minimumSize">
     <size>
-     <width>50</width>
-     <height>50</height>
+     <width>330</width>
+     <height>402</height>
     </size>
    </property>
    <property name="layoutDirection">
@@ -350,8 +348,8 @@
    </property>
    <property name="minimumSize">
     <size>
-     <width>50</width>
-     <height>50</height>
+     <width>91</width>
+     <height>113</height>
     </size>
    </property>
    <property name="floating">
@@ -371,13 +369,15 @@
      <item>
       <layout class="QHBoxLayout" name="horizontalLayout_2">
        <item>
-        <widget class="QTreeView" name="treeView_7">
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
-         </property>
+        <widget class="QTreeWidget" name="sceneNodesTree">
+         <attribute name="headerVisible">
+          <bool>false</bool>
+         </attribute>
+         <column>
+          <property name="text">
+           <string notr="true">1</string>
+          </property>
+         </column>
         </widget>
        </item>
       </layout>
@@ -394,8 +394,8 @@
    </property>
    <property name="minimumSize">
     <size>
-     <width>50</width>
-     <height>50</height>
+     <width>91</width>
+     <height>113</height>
     </size>
    </property>
    <property name="maximumSize">
@@ -424,27 +424,6 @@
            <horstretch>0</horstretch>
            <verstretch>0</verstretch>
           </sizepolicy>
-         </property>
-         <property name="minimumSize">
-          <size>
-           <width>0</width>
-           <height>0</height>
-          </size>
-         </property>
-         <property name="maximumSize">
-          <size>
-           <width>65656</width>
-           <height>76767</height>
-          </size>
-         </property>
-         <property name="sizeIncrement">
-          <size>
-           <width>0</width>
-           <height>0</height>
-          </size>
-         </property>
-         <property name="animated">
-          <bool>true</bool>
          </property>
         </widget>
        </item>

@@ -33,6 +33,7 @@
 //#include <QFileSystemModel>
 #include <QDir>
 #include <QStringList>
+#include <QBoxLayout>
 
 // OGRE HEADERS
 #include <Ogre.h>

@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'mainwindow.ui'
 **
-** Created: Fri 6. May 14:35:44 2011
+** Created: Sat 7. May 15:53:41 2011
 **      by: Qt User Interface Compiler version 4.7.2
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -27,6 +27,7 @@
 #include <QtGui/QPushButton>
 #include <QtGui/QStatusBar>
 #include <QtGui/QTreeView>
+#include <QtGui/QTreeWidget>
 #include <QtGui/QWidget>
 
 QT_BEGIN_NAMESPACE
@@ -76,7 +77,7 @@ public:
     QWidget *dockWidgetContents_14;
     QHBoxLayout *horizontalLayout_4;
     QHBoxLayout *horizontalLayout_2;
-    QTreeView *treeView_7;
+    QTreeWidget *sceneNodesTree;
     QDockWidget *projExplorerGUI;
     QWidget *dockWidgetContents_15;
     QHBoxLayout *horizontalLayout_3;
@@ -87,13 +88,13 @@ public:
     {
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName(QString::fromUtf8("MainWindow"));
-        MainWindow->resize(762, 589);
+        MainWindow->resize(602, 557);
         centralwidget = new QWidget(MainWindow);
         centralwidget->setObjectName(QString::fromUtf8("centralwidget"));
         MainWindow->setCentralWidget(centralwidget);
         menubar = new QMenuBar(MainWindow);
         menubar->setObjectName(QString::fromUtf8("menubar"));
-        menubar->setGeometry(QRect(0, 0, 762, 20));
+        menubar->setGeometry(QRect(0, 0, 602, 21));
         MainWindow->setMenuBar(menubar);
         statusbar = new QStatusBar(MainWindow);
         statusbar->setObjectName(QString::fromUtf8("statusbar"));
@@ -105,7 +106,7 @@ public:
         sizePolicy.setVerticalStretch(0);
         sizePolicy.setHeightForWidth(componentsGUI->sizePolicy().hasHeightForWidth());
         componentsGUI->setSizePolicy(sizePolicy);
-        componentsGUI->setMinimumSize(QSize(50, 50));
+        componentsGUI->setMinimumSize(QSize(330, 402));
         componentsGUI->setLayoutDirection(Qt::LeftToRight);
         componentsGUI->setAutoFillBackground(true);
         componentsGUI->setFeatures(QDockWidget::DockWidgetMovable);
@@ -317,7 +318,7 @@ public:
         sceneNodesGUI->setObjectName(QString::fromUtf8("sceneNodesGUI"));
         sizePolicy.setHeightForWidth(sceneNodesGUI->sizePolicy().hasHeightForWidth());
         sceneNodesGUI->setSizePolicy(sizePolicy);
-        sceneNodesGUI->setMinimumSize(QSize(50, 50));
+        sceneNodesGUI->setMinimumSize(QSize(91, 113));
         sceneNodesGUI->setFloating(false);
         sceneNodesGUI->setFeatures(QDockWidget::DockWidgetMovable);
         sceneNodesGUI->setWindowTitle(QString::fromUtf8("Scene Nodes"));
@@ -327,12 +328,14 @@ public:
         horizontalLayout_4->setObjectName(QString::fromUtf8("horizontalLayout_4"));
         horizontalLayout_2 = new QHBoxLayout();
         horizontalLayout_2->setObjectName(QString::fromUtf8("horizontalLayout_2"));
-        treeView_7 = new QTreeView(dockWidgetContents_14);
-        treeView_7->setObjectName(QString::fromUtf8("treeView_7"));
-        sizePolicy.setHeightForWidth(treeView_7->sizePolicy().hasHeightForWidth());
-        treeView_7->setSizePolicy(sizePolicy);
+        sceneNodesTree = new QTreeWidget(dockWidgetContents_14);
+        QTreeWidgetItem *__qtreewidgetitem = new QTreeWidgetItem();
+        __qtreewidgetitem->setText(0, QString::fromUtf8("1"));
+        sceneNodesTree->setHeaderItem(__qtreewidgetitem);
+        sceneNodesTree->setObjectName(QString::fromUtf8("sceneNodesTree"));
+        sceneNodesTree->header()->setVisible(false);
 
-        horizontalLayout_2->addWidget(treeView_7);
+        horizontalLayout_2->addWidget(sceneNodesTree);
 
 
         horizontalLayout_4->addLayout(horizontalLayout_2);
@@ -343,7 +346,7 @@ public:
         projExplorerGUI->setObjectName(QString::fromUtf8("projExplorerGUI"));
         sizePolicy.setHeightForWidth(projExplorerGUI->sizePolicy().hasHeightForWidth());
         projExplorerGUI->setSizePolicy(sizePolicy);
-        projExplorerGUI->setMinimumSize(QSize(50, 50));
+        projExplorerGUI->setMinimumSize(QSize(91, 113));
         projExplorerGUI->setMaximumSize(QSize(5000, 5000));
         projExplorerGUI->setFeatures(QDockWidget::DockWidgetMovable);
         dockWidgetContents_15 = new QWidget();
@@ -356,10 +359,6 @@ public:
         prExplorerTree->setObjectName(QString::fromUtf8("prExplorerTree"));
         sizePolicy.setHeightForWidth(prExplorerTree->sizePolicy().hasHeightForWidth());
         prExplorerTree->setSizePolicy(sizePolicy);
-        prExplorerTree->setMinimumSize(QSize(0, 0));
-        prExplorerTree->setMaximumSize(QSize(65656, 76767));
-        prExplorerTree->setSizeIncrement(QSize(0, 0));
-        prExplorerTree->setAnimated(true);
 
         horizontalLayout->addWidget(prExplorerTree);
 
