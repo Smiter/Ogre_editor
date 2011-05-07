@@ -2,7 +2,8 @@
 #define __OGREWIDGET_H__
 
 #include <QtOpenGL/QGLWidget>
-
+#include <QDir>
+//#include <QStringList>
 
 
 class OgreWidget : public QGLWidget
@@ -33,15 +34,7 @@ private:
   Ogre::Viewport    *mViewport;
   Ogre::SceneManager    *mSceneMgr;
   Ogre::SceneNode   *CurrentNode;
-  Ogre::RaySceneQuery   *mRaySceneQuery;
-
-<<<<<<< HEAD
-=======
-  Ogre::Root *mOgreRoot;
-  Ogre::RenderWindow *mOgreWindow;
-  Ogre::Camera *mCamera;
-  Ogre::Viewport *mViewport;
-  Ogre::SceneManager *mSceneMgr;
+  Ogre::RaySceneQuery   *mRaySceneQuery;  
 
  public:
 

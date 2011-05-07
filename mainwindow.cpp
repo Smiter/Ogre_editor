@@ -28,7 +28,7 @@ MainWindow::~MainWindow()
 {
     delete ui;
 }
-MainWindow* MainWindow::instance = 0;
+
 
 void MainWindow::initProjectExplorer()
 {

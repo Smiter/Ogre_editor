@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'mainwindow.ui'
 **
-** Created: Sat 7. May 17:40:52 2011
+** Created: Sat 7. May 18:07:48 2011
 **      by: Qt User Interface Compiler version 4.7.2
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -28,6 +28,7 @@
 #include <QtGui/QScrollArea>
 #include <QtGui/QStatusBar>
 #include <QtGui/QTreeView>
+#include <QtGui/QTreeWidget>
 #include <QtGui/QVBoxLayout>
 #include <QtGui/QWidget>
 
@@ -49,7 +50,7 @@ public:
     QWidget *dockWidgetContents_14;
     QHBoxLayout *horizontalLayout_4;
     QHBoxLayout *horizontalLayout_2;
-    QTreeView *sceneNodesTree;
+    QTreeWidget *sceneNodesTree;
     QDockWidget *componentsGUI;
     QWidget *dockWidgetContents;
     QGridLayout *gridLayout_9;
@@ -149,7 +150,10 @@ public:
         horizontalLayout_4->setObjectName(QString::fromUtf8("horizontalLayout_4"));
         horizontalLayout_2 = new QHBoxLayout();
         horizontalLayout_2->setObjectName(QString::fromUtf8("horizontalLayout_2"));
-        sceneNodesTree = new QTreeView(dockWidgetContents_14);
+        sceneNodesTree = new QTreeWidget(dockWidgetContents_14);
+        QTreeWidgetItem *__qtreewidgetitem = new QTreeWidgetItem();
+        __qtreewidgetitem->setText(0, QString::fromUtf8("1"));
+        sceneNodesTree->setHeaderItem(__qtreewidgetitem);
         sceneNodesTree->setObjectName(QString::fromUtf8("sceneNodesTree"));
         sceneNodesTree->header()->setVisible(false);
 
