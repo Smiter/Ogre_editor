@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'mainwindow.ui'
 **
-** Created: Sun 8. May 16:16:04 2011
+** Created: Sun 8. May 17:09:01 2011
 **      by: Qt User Interface Compiler version 4.7.2
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -69,9 +69,12 @@ public:
     QLineEdit *scale_x;
     QLineEdit *scale_y;
     QLineEdit *scale_z;
-    QLabel *label_29;
     QLabel *label_30;
+    QLabel *label_29;
     QLabel *label_31;
+    QLabel *label;
+    QLabel *label_2;
+    QLabel *label_3;
     QGroupBox *enitityGUI_4;
     QGridLayout *gridLayout_6;
     QGridLayout *gridLayout_5;
@@ -187,7 +190,7 @@ public:
         scrollArea->setWidgetResizable(true);
         scrollAreaWidgetContents_3 = new QWidget();
         scrollAreaWidgetContents_3->setObjectName(QString::fromUtf8("scrollAreaWidgetContents_3"));
-        scrollAreaWidgetContents_3->setGeometry(QRect(0, 0, 436, 446));
+        scrollAreaWidgetContents_3->setGeometry(QRect(0, 0, 436, 466));
         QSizePolicy sizePolicy2(QSizePolicy::Preferred, QSizePolicy::Fixed);
         sizePolicy2.setHorizontalStretch(0);
         sizePolicy2.setVerticalStretch(0);
@@ -210,91 +213,191 @@ public:
         gridLayout_4 = new QGridLayout(sceneNodeGUI_4);
         gridLayout_4->setObjectName(QString::fromUtf8("gridLayout_4"));
         gridLayout_3 = new QGridLayout();
+        gridLayout_3->setSpacing(12);
         gridLayout_3->setObjectName(QString::fromUtf8("gridLayout_3"));
         gridLayout_3->setSizeConstraint(QLayout::SetDefaultConstraint);
         position_z = new QLineEdit(sceneNodeGUI_4);
         position_z->setObjectName(QString::fromUtf8("position_z"));
         sizePolicy2.setHeightForWidth(position_z->sizePolicy().hasHeightForWidth());
         position_z->setSizePolicy(sizePolicy2);
+        position_z->setStyleSheet(QString::fromUtf8("QLineEdit {	\n"
+"     border: 2px solid gray;\n"
+"     border-radius: 7px;\n"
+"     padding: 0 8px;\n"
+"     background: rgb(225, 248, 250);	\n"
+"	 border-color:rgb(16, 18, 12);\n"
+"\n"
+" }"));
 
-        gridLayout_3->addWidget(position_z, 1, 0, 1, 1);
+        gridLayout_3->addWidget(position_z, 1, 1, 1, 1);
 
         position_x = new QLineEdit(sceneNodeGUI_4);
         position_x->setObjectName(QString::fromUtf8("position_x"));
         sizePolicy2.setHeightForWidth(position_x->sizePolicy().hasHeightForWidth());
         position_x->setSizePolicy(sizePolicy2);
+        position_x->setStyleSheet(QString::fromUtf8("QLineEdit {	\n"
+"     border: 2px solid gray;\n"
+"     border-radius: 7px;\n"
+"     padding: 0 8px;\n"
+"     background: rgb(225, 248, 250);	\n"
+"	 border-color:rgb(16, 18, 12);\n"
+"\n"
+" }"));
 
-        gridLayout_3->addWidget(position_x, 1, 2, 1, 1);
+        gridLayout_3->addWidget(position_x, 1, 3, 1, 1);
 
         position_y = new QLineEdit(sceneNodeGUI_4);
         position_y->setObjectName(QString::fromUtf8("position_y"));
         sizePolicy2.setHeightForWidth(position_y->sizePolicy().hasHeightForWidth());
         position_y->setSizePolicy(sizePolicy2);
+        position_y->setStyleSheet(QString::fromUtf8("QLineEdit {	\n"
+"     border: 2px solid gray;\n"
+"     border-radius: 7px;\n"
+"     padding: 0 8px;\n"
+"     background: rgb(225, 248, 250);	\n"
+"	 border-color:rgb(16, 18, 12);\n"
+"\n"
+" }"));
 
-        gridLayout_3->addWidget(position_y, 1, 1, 1, 1);
+        gridLayout_3->addWidget(position_y, 1, 2, 1, 1);
 
         rotation_x = new QLineEdit(sceneNodeGUI_4);
         rotation_x->setObjectName(QString::fromUtf8("rotation_x"));
         sizePolicy2.setHeightForWidth(rotation_x->sizePolicy().hasHeightForWidth());
         rotation_x->setSizePolicy(sizePolicy2);
+        rotation_x->setStyleSheet(QString::fromUtf8("QLineEdit {	\n"
+"     border: 2px solid gray;\n"
+"     border-radius: 7px;\n"
+"     padding: 0 8px;\n"
+"     background: rgb(225, 248, 250);	\n"
+"	 border-color:rgb(16, 18, 12);\n"
+"\n"
+" }"));
 
-        gridLayout_3->addWidget(rotation_x, 2, 2, 1, 1);
+        gridLayout_3->addWidget(rotation_x, 2, 3, 1, 1);
 
         rotation_y = new QLineEdit(sceneNodeGUI_4);
         rotation_y->setObjectName(QString::fromUtf8("rotation_y"));
         sizePolicy2.setHeightForWidth(rotation_y->sizePolicy().hasHeightForWidth());
         rotation_y->setSizePolicy(sizePolicy2);
+        rotation_y->setStyleSheet(QString::fromUtf8("QLineEdit {	\n"
+"     border: 2px solid gray;\n"
+"     border-radius: 7px;\n"
+"     padding: 0 8px;\n"
+"     background: rgb(225, 248, 250);	\n"
+"	 border-color:rgb(16, 18, 12);\n"
+"\n"
+" }"));
 
-        gridLayout_3->addWidget(rotation_y, 2, 1, 1, 1);
+        gridLayout_3->addWidget(rotation_y, 2, 2, 1, 1);
 
         rotation_z = new QLineEdit(sceneNodeGUI_4);
         rotation_z->setObjectName(QString::fromUtf8("rotation_z"));
         sizePolicy2.setHeightForWidth(rotation_z->sizePolicy().hasHeightForWidth());
         rotation_z->setSizePolicy(sizePolicy2);
+        rotation_z->setStyleSheet(QString::fromUtf8("QLineEdit {	\n"
+"     border: 2px solid gray;\n"
+"     border-radius: 7px;\n"
+"     padding: 0 8px;\n"
+"     background: rgb(225, 248, 250);	\n"
+"	 border-color:rgb(16, 18, 12);\n"
+"\n"
+" }"));
 
-        gridLayout_3->addWidget(rotation_z, 2, 0, 1, 1);
+        gridLayout_3->addWidget(rotation_z, 2, 1, 1, 1);
 
         scale_x = new QLineEdit(sceneNodeGUI_4);
         scale_x->setObjectName(QString::fromUtf8("scale_x"));
         sizePolicy2.setHeightForWidth(scale_x->sizePolicy().hasHeightForWidth());
         scale_x->setSizePolicy(sizePolicy2);
+        scale_x->setStyleSheet(QString::fromUtf8("QLineEdit {	\n"
+"     border: 2px solid gray;\n"
+"     border-radius: 7px;\n"
+"     padding: 0 8px;\n"
+"     background: rgb(225, 248, 250);	\n"
+"	 border-color:rgb(16, 18, 12);\n"
+"\n"
+" }"));
 
-        gridLayout_3->addWidget(scale_x, 3, 2, 1, 1);
+        gridLayout_3->addWidget(scale_x, 3, 3, 1, 1);
 
         scale_y = new QLineEdit(sceneNodeGUI_4);
         scale_y->setObjectName(QString::fromUtf8("scale_y"));
         sizePolicy2.setHeightForWidth(scale_y->sizePolicy().hasHeightForWidth());
         scale_y->setSizePolicy(sizePolicy2);
+        scale_y->setStyleSheet(QString::fromUtf8("QLineEdit {	\n"
+"     border: 2px solid gray;\n"
+"     border-radius: 7px;\n"
+"     padding: 0 8px;\n"
+"     background: rgb(225, 248, 250);	\n"
+"	 border-color:rgb(16, 18, 12);\n"
+"\n"
+" }"));
 
-        gridLayout_3->addWidget(scale_y, 3, 1, 1, 1);
+        gridLayout_3->addWidget(scale_y, 3, 2, 1, 1);
 
         scale_z = new QLineEdit(sceneNodeGUI_4);
         scale_z->setObjectName(QString::fromUtf8("scale_z"));
         sizePolicy2.setHeightForWidth(scale_z->sizePolicy().hasHeightForWidth());
         scale_z->setSizePolicy(sizePolicy2);
+        scale_z->setStyleSheet(QString::fromUtf8("QLineEdit {	\n"
+"     border: 2px solid gray;\n"
+"     border-radius: 7px;\n"
+"     padding: 0 8px;\n"
+"     background: rgb(225, 248, 250);	\n"
+"	 border-color:rgb(16, 18, 12);\n"
+"\n"
+" }"));
 
-        gridLayout_3->addWidget(scale_z, 3, 0, 1, 1);
-
-        label_29 = new QLabel(sceneNodeGUI_4);
-        label_29->setObjectName(QString::fromUtf8("label_29"));
-        sizePolicy2.setHeightForWidth(label_29->sizePolicy().hasHeightForWidth());
-        label_29->setSizePolicy(sizePolicy2);
-
-        gridLayout_3->addWidget(label_29, 0, 2, 1, 1);
+        gridLayout_3->addWidget(scale_z, 3, 1, 1, 1);
 
         label_30 = new QLabel(sceneNodeGUI_4);
         label_30->setObjectName(QString::fromUtf8("label_30"));
         sizePolicy2.setHeightForWidth(label_30->sizePolicy().hasHeightForWidth());
         label_30->setSizePolicy(sizePolicy2);
+        label_30->setAlignment(Qt::AlignCenter);
 
-        gridLayout_3->addWidget(label_30, 0, 1, 1, 1);
+        gridLayout_3->addWidget(label_30, 0, 2, 1, 1);
+
+        label_29 = new QLabel(sceneNodeGUI_4);
+        label_29->setObjectName(QString::fromUtf8("label_29"));
+        sizePolicy2.setHeightForWidth(label_29->sizePolicy().hasHeightForWidth());
+        label_29->setSizePolicy(sizePolicy2);
+        label_29->setAlignment(Qt::AlignCenter);
+
+        gridLayout_3->addWidget(label_29, 0, 1, 1, 1);
 
         label_31 = new QLabel(sceneNodeGUI_4);
         label_31->setObjectName(QString::fromUtf8("label_31"));
         sizePolicy2.setHeightForWidth(label_31->sizePolicy().hasHeightForWidth());
         label_31->setSizePolicy(sizePolicy2);
+        label_31->setAlignment(Qt::AlignCenter);
 
-        gridLayout_3->addWidget(label_31, 0, 0, 1, 1);
+        gridLayout_3->addWidget(label_31, 0, 3, 1, 1);
+
+        label = new QLabel(sceneNodeGUI_4);
+        label->setObjectName(QString::fromUtf8("label"));
+        QSizePolicy sizePolicy3(QSizePolicy::Fixed, QSizePolicy::Fixed);
+        sizePolicy3.setHorizontalStretch(0);
+        sizePolicy3.setVerticalStretch(0);
+        sizePolicy3.setHeightForWidth(label->sizePolicy().hasHeightForWidth());
+        label->setSizePolicy(sizePolicy3);
+
+        gridLayout_3->addWidget(label, 1, 0, 1, 1);
+
+        label_2 = new QLabel(sceneNodeGUI_4);
+        label_2->setObjectName(QString::fromUtf8("label_2"));
+        sizePolicy3.setHeightForWidth(label_2->sizePolicy().hasHeightForWidth());
+        label_2->setSizePolicy(sizePolicy3);
+
+        gridLayout_3->addWidget(label_2, 2, 0, 1, 1);
+
+        label_3 = new QLabel(sceneNodeGUI_4);
+        label_3->setObjectName(QString::fromUtf8("label_3"));
+        sizePolicy3.setHeightForWidth(label_3->sizePolicy().hasHeightForWidth());
+        label_3->setSizePolicy(sizePolicy3);
+
+        gridLayout_3->addWidget(label_3, 3, 0, 1, 1);
 
 
         gridLayout_4->addLayout(gridLayout_3, 0, 0, 1, 1);
@@ -311,12 +414,20 @@ public:
         gridLayout_6 = new QGridLayout(enitityGUI_4);
         gridLayout_6->setObjectName(QString::fromUtf8("gridLayout_6"));
         gridLayout_5 = new QGridLayout();
+        gridLayout_5->setSpacing(12);
         gridLayout_5->setObjectName(QString::fromUtf8("gridLayout_5"));
-        gridLayout_5->setHorizontalSpacing(20);
         mesh_edit = new QLineEdit(enitityGUI_4);
         mesh_edit->setObjectName(QString::fromUtf8("mesh_edit"));
         sizePolicy2.setHeightForWidth(mesh_edit->sizePolicy().hasHeightForWidth());
         mesh_edit->setSizePolicy(sizePolicy2);
+        mesh_edit->setStyleSheet(QString::fromUtf8("QLineEdit {	\n"
+"     border: 2px solid gray;\n"
+"     border-radius: 7px;\n"
+"     padding: 0 8px;\n"
+"     background: rgb(225, 248, 250);	\n"
+"	 border-color:rgb(16, 18, 12);\n"
+"\n"
+" }"));
 
         gridLayout_5->addWidget(mesh_edit, 0, 1, 1, 1);
 
@@ -324,14 +435,19 @@ public:
         texture_edit->setObjectName(QString::fromUtf8("texture_edit"));
         sizePolicy2.setHeightForWidth(texture_edit->sizePolicy().hasHeightForWidth());
         texture_edit->setSizePolicy(sizePolicy2);
+        texture_edit->setStyleSheet(QString::fromUtf8("QLineEdit {	\n"
+"     border: 2px solid gray;\n"
+"     border-radius: 7px;\n"
+"     padding: 0 8px;\n"
+"     background: rgb(225, 248, 250);	\n"
+"	 border-color:rgb(16, 18, 12);\n"
+"\n"
+" }"));
 
         gridLayout_5->addWidget(texture_edit, 1, 1, 1, 1);
 
         label_34 = new QLabel(enitityGUI_4);
         label_34->setObjectName(QString::fromUtf8("label_34"));
-        QSizePolicy sizePolicy3(QSizePolicy::Fixed, QSizePolicy::Fixed);
-        sizePolicy3.setHorizontalStretch(0);
-        sizePolicy3.setVerticalStretch(0);
         sizePolicy3.setHeightForWidth(label_34->sizePolicy().hasHeightForWidth());
         label_34->setSizePolicy(sizePolicy3);
 
@@ -341,6 +457,24 @@ public:
         pushButton_11->setObjectName(QString::fromUtf8("pushButton_11"));
         sizePolicy2.setHeightForWidth(pushButton_11->sizePolicy().hasHeightForWidth());
         pushButton_11->setSizePolicy(sizePolicy2);
+        pushButton_11->setStyleSheet(QString::fromUtf8("QPushButton {\n"
+"     border: 2px solid #8f8f91;\n"
+"     border-radius: 7px;\n"
+"    border: 2px solid #8f8f91;\n"
+"     border-radius: 6px;\n"
+"     background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,\n"
+"                                       stop: 0 #f6f7fa, stop: 1 #dadbde);\n"
+"     min-width: 80px;   \n"
+"	padding: 2 8px;\n"
+" }\n"
+"\n"
+" QPushButton:pressed {\n"
+"     background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,\n"
+"                                       stop: 0 #dadbde, stop: 1 #f6f7fa);\n"
+" }\n"
+"\n"
+"\n"
+""));
 
         gridLayout_5->addWidget(pushButton_11, 0, 2, 1, 1);
 
@@ -348,6 +482,24 @@ public:
         pushButton_10->setObjectName(QString::fromUtf8("pushButton_10"));
         sizePolicy2.setHeightForWidth(pushButton_10->sizePolicy().hasHeightForWidth());
         pushButton_10->setSizePolicy(sizePolicy2);
+        pushButton_10->setStyleSheet(QString::fromUtf8("QPushButton {\n"
+"     border: 2px solid #8f8f91;\n"
+"     border-radius: 7px;\n"
+"    border: 2px solid #8f8f91;\n"
+"     border-radius: 6px;\n"
+"     background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,\n"
+"                                       stop: 0 #f6f7fa, stop: 1 #dadbde);\n"
+"     min-width: 80px;   \n"
+"	padding: 2 8px;\n"
+" }\n"
+"\n"
+" QPushButton:pressed {\n"
+"     background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,\n"
+"                                       stop: 0 #dadbde, stop: 1 #f6f7fa);\n"
+" }\n"
+"\n"
+"\n"
+""));
 
         gridLayout_5->addWidget(pushButton_10, 1, 2, 1, 1);
 
@@ -373,18 +525,16 @@ public:
         gridLayout_8 = new QGridLayout(material_4);
         gridLayout_8->setObjectName(QString::fromUtf8("gridLayout_8"));
         gridLayout_7 = new QGridLayout();
+        gridLayout_7->setSpacing(0);
         gridLayout_7->setObjectName(QString::fromUtf8("gridLayout_7"));
-        gridLayout_7->setHorizontalSpacing(50);
         graphicsView_4 = new QGraphicsView(material_4);
         graphicsView_4->setObjectName(QString::fromUtf8("graphicsView_4"));
         graphicsView_4->setEnabled(true);
-        QSizePolicy sizePolicy4(QSizePolicy::Maximum, QSizePolicy::Maximum);
-        sizePolicy4.setHorizontalStretch(0);
-        sizePolicy4.setVerticalStretch(0);
-        sizePolicy4.setHeightForWidth(graphicsView_4->sizePolicy().hasHeightForWidth());
-        graphicsView_4->setSizePolicy(sizePolicy4);
+        sizePolicy3.setHeightForWidth(graphicsView_4->sizePolicy().hasHeightForWidth());
+        graphicsView_4->setSizePolicy(sizePolicy3);
         graphicsView_4->setMinimumSize(QSize(100, 100));
         graphicsView_4->setMaximumSize(QSize(100, 100));
+        graphicsView_4->setAlignment(Qt::AlignCenter);
 
         gridLayout_7->addWidget(graphicsView_4, 1, 0, 1, 1);
 
@@ -415,9 +565,12 @@ public:
         MainWindow->setWindowTitle(QApplication::translate("MainWindow", "MainWindow", 0, QApplication::UnicodeUTF8));
         projExplorerGUI->setWindowTitle(QApplication::translate("MainWindow", "Project Explorer", 0, QApplication::UnicodeUTF8));
         sceneNodeGUI_4->setTitle(QApplication::translate("MainWindow", "Scene Node", 0, QApplication::UnicodeUTF8));
-        label_29->setText(QApplication::translate("MainWindow", "X", 0, QApplication::UnicodeUTF8));
         label_30->setText(QApplication::translate("MainWindow", "\320\243", 0, QApplication::UnicodeUTF8));
+        label_29->setText(QApplication::translate("MainWindow", "X", 0, QApplication::UnicodeUTF8));
         label_31->setText(QApplication::translate("MainWindow", "Z", 0, QApplication::UnicodeUTF8));
+        label->setText(QApplication::translate("MainWindow", "Position", 0, QApplication::UnicodeUTF8));
+        label_2->setText(QApplication::translate("MainWindow", "Rotation", 0, QApplication::UnicodeUTF8));
+        label_3->setText(QApplication::translate("MainWindow", "Scale", 0, QApplication::UnicodeUTF8));
         enitityGUI_4->setTitle(QApplication::translate("MainWindow", "Entity", 0, QApplication::UnicodeUTF8));
         label_34->setText(QApplication::translate("MainWindow", "Mesh:", 0, QApplication::UnicodeUTF8));
         pushButton_11->setText(QApplication::translate("MainWindow", "Pick", 0, QApplication::UnicodeUTF8));

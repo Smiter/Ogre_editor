@@ -198,7 +198,7 @@
           <x>0</x>
           <y>0</y>
           <width>436</width>
-          <height>446</height>
+          <height>466</height>
          </rect>
         </property>
         <property name="sizePolicy">
@@ -245,7 +245,10 @@
                 <property name="sizeConstraint">
                  <enum>QLayout::SetDefaultConstraint</enum>
                 </property>
-                <item row="1" column="0">
+                <property name="spacing">
+                 <number>12</number>
+                </property>
+                <item row="1" column="1">
                  <widget class="QLineEdit" name="position_z">
                   <property name="sizePolicy">
                    <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
@@ -253,9 +256,19 @@
                     <verstretch>0</verstretch>
                    </sizepolicy>
                   </property>
+                  <property name="styleSheet">
+                   <string notr="true">QLineEdit {	
+     border: 2px solid gray;
+     border-radius: 7px;
+     padding: 0 8px;
+     background: rgb(225, 248, 250);	
+	 border-color:rgb(16, 18, 12);
+
+ }</string>
+                  </property>
                  </widget>
                 </item>
-                <item row="1" column="2">
+                <item row="1" column="3">
                  <widget class="QLineEdit" name="position_x">
                   <property name="sizePolicy">
                    <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
@@ -263,9 +276,19 @@
                     <verstretch>0</verstretch>
                    </sizepolicy>
                   </property>
+                  <property name="styleSheet">
+                   <string notr="true">QLineEdit {	
+     border: 2px solid gray;
+     border-radius: 7px;
+     padding: 0 8px;
+     background: rgb(225, 248, 250);	
+	 border-color:rgb(16, 18, 12);
+
+ }</string>
+                  </property>
                  </widget>
                 </item>
-                <item row="1" column="1">
+                <item row="1" column="2">
                  <widget class="QLineEdit" name="position_y">
                   <property name="sizePolicy">
                    <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
@@ -273,9 +296,19 @@
                     <verstretch>0</verstretch>
                    </sizepolicy>
                   </property>
+                  <property name="styleSheet">
+                   <string notr="true">QLineEdit {	
+     border: 2px solid gray;
+     border-radius: 7px;
+     padding: 0 8px;
+     background: rgb(225, 248, 250);	
+	 border-color:rgb(16, 18, 12);
+
+ }</string>
+                  </property>
                  </widget>
                 </item>
-                <item row="2" column="2">
+                <item row="2" column="3">
                  <widget class="QLineEdit" name="rotation_x">
                   <property name="sizePolicy">
                    <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
@@ -283,9 +316,19 @@
                     <verstretch>0</verstretch>
                    </sizepolicy>
                   </property>
+                  <property name="styleSheet">
+                   <string notr="true">QLineEdit {	
+     border: 2px solid gray;
+     border-radius: 7px;
+     padding: 0 8px;
+     background: rgb(225, 248, 250);	
+	 border-color:rgb(16, 18, 12);
+
+ }</string>
+                  </property>
                  </widget>
                 </item>
-                <item row="2" column="1">
+                <item row="2" column="2">
                  <widget class="QLineEdit" name="rotation_y">
                   <property name="sizePolicy">
                    <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
@@ -293,9 +336,19 @@
                     <verstretch>0</verstretch>
                    </sizepolicy>
                   </property>
+                  <property name="styleSheet">
+                   <string notr="true">QLineEdit {	
+     border: 2px solid gray;
+     border-radius: 7px;
+     padding: 0 8px;
+     background: rgb(225, 248, 250);	
+	 border-color:rgb(16, 18, 12);
+
+ }</string>
+                  </property>
                  </widget>
                 </item>
-                <item row="2" column="0">
+                <item row="2" column="1">
                  <widget class="QLineEdit" name="rotation_z">
                   <property name="sizePolicy">
                    <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
@@ -303,9 +356,19 @@
                     <verstretch>0</verstretch>
                    </sizepolicy>
                   </property>
+                  <property name="styleSheet">
+                   <string notr="true">QLineEdit {	
+     border: 2px solid gray;
+     border-radius: 7px;
+     padding: 0 8px;
+     background: rgb(225, 248, 250);	
+	 border-color:rgb(16, 18, 12);
+
+ }</string>
+                  </property>
                  </widget>
                 </item>
-                <item row="3" column="2">
+                <item row="3" column="3">
                  <widget class="QLineEdit" name="scale_x">
                   <property name="sizePolicy">
                    <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
@@ -313,9 +376,19 @@
                     <verstretch>0</verstretch>
                    </sizepolicy>
                   </property>
+                  <property name="styleSheet">
+                   <string notr="true">QLineEdit {	
+     border: 2px solid gray;
+     border-radius: 7px;
+     padding: 0 8px;
+     background: rgb(225, 248, 250);	
+	 border-color:rgb(16, 18, 12);
+
+ }</string>
+                  </property>
                  </widget>
                 </item>
-                <item row="3" column="1">
+                <item row="3" column="2">
                  <widget class="QLineEdit" name="scale_y">
                   <property name="sizePolicy">
                    <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
@@ -323,9 +396,19 @@
                     <verstretch>0</verstretch>
                    </sizepolicy>
                   </property>
+                  <property name="styleSheet">
+                   <string notr="true">QLineEdit {	
+     border: 2px solid gray;
+     border-radius: 7px;
+     padding: 0 8px;
+     background: rgb(225, 248, 250);	
+	 border-color:rgb(16, 18, 12);
+
+ }</string>
+                  </property>
                  </widget>
                 </item>
-                <item row="3" column="0">
+                <item row="3" column="1">
                  <widget class="QLineEdit" name="scale_z">
                   <property name="sizePolicy">
                    <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
@@ -333,22 +416,19 @@
                     <verstretch>0</verstretch>
                    </sizepolicy>
                   </property>
+                  <property name="styleSheet">
+                   <string notr="true">QLineEdit {	
+     border: 2px solid gray;
+     border-radius: 7px;
+     padding: 0 8px;
+     background: rgb(225, 248, 250);	
+	 border-color:rgb(16, 18, 12);
+
+ }</string>
+                  </property>
                  </widget>
                 </item>
                 <item row="0" column="2">
-                 <widget class="QLabel" name="label_29">
-                  <property name="sizePolicy">
-                   <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-                    <horstretch>0</horstretch>
-                    <verstretch>0</verstretch>
-                   </sizepolicy>
-                  </property>
-                  <property name="text">
-                   <string>X</string>
-                  </property>
-                 </widget>
-                </item>
-                <item row="0" column="1">
                  <widget class="QLabel" name="label_30">
                   <property name="sizePolicy">
                    <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
@@ -359,9 +439,28 @@
                   <property name="text">
                    <string>У</string>
                   </property>
+                  <property name="alignment">
+                   <set>Qt::AlignCenter</set>
+                  </property>
                  </widget>
                 </item>
-                <item row="0" column="0">
+                <item row="0" column="1">
+                 <widget class="QLabel" name="label_29">
+                  <property name="sizePolicy">
+                   <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                   </sizepolicy>
+                  </property>
+                  <property name="text">
+                   <string>X</string>
+                  </property>
+                  <property name="alignment">
+                   <set>Qt::AlignCenter</set>
+                  </property>
+                 </widget>
+                </item>
+                <item row="0" column="3">
                  <widget class="QLabel" name="label_31">
                   <property name="sizePolicy">
                    <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
@@ -371,6 +470,48 @@
                   </property>
                   <property name="text">
                    <string>Z</string>
+                  </property>
+                  <property name="alignment">
+                   <set>Qt::AlignCenter</set>
+                  </property>
+                 </widget>
+                </item>
+                <item row="1" column="0">
+                 <widget class="QLabel" name="label">
+                  <property name="sizePolicy">
+                   <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                   </sizepolicy>
+                  </property>
+                  <property name="text">
+                   <string>Position</string>
+                  </property>
+                 </widget>
+                </item>
+                <item row="2" column="0">
+                 <widget class="QLabel" name="label_2">
+                  <property name="sizePolicy">
+                   <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                   </sizepolicy>
+                  </property>
+                  <property name="text">
+                   <string>Rotation</string>
+                  </property>
+                 </widget>
+                </item>
+                <item row="3" column="0">
+                 <widget class="QLabel" name="label_3">
+                  <property name="sizePolicy">
+                   <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                   </sizepolicy>
+                  </property>
+                  <property name="text">
+                   <string>Scale</string>
                   </property>
                  </widget>
                 </item>
@@ -399,8 +540,8 @@
              <layout class="QGridLayout" name="gridLayout_6">
               <item row="0" column="0">
                <layout class="QGridLayout" name="gridLayout_5">
-                <property name="horizontalSpacing">
-                 <number>20</number>
+                <property name="spacing">
+                 <number>12</number>
                 </property>
                 <item row="0" column="1">
                  <widget class="QLineEdit" name="mesh_edit">
@@ -409,6 +550,16 @@
                     <horstretch>0</horstretch>
                     <verstretch>0</verstretch>
                    </sizepolicy>
+                  </property>
+                  <property name="styleSheet">
+                   <string notr="true">QLineEdit {	
+     border: 2px solid gray;
+     border-radius: 7px;
+     padding: 0 8px;
+     background: rgb(225, 248, 250);	
+	 border-color:rgb(16, 18, 12);
+
+ }</string>
                   </property>
                  </widget>
                 </item>
@@ -419,6 +570,16 @@
                     <horstretch>0</horstretch>
                     <verstretch>0</verstretch>
                    </sizepolicy>
+                  </property>
+                  <property name="styleSheet">
+                   <string notr="true">QLineEdit {	
+     border: 2px solid gray;
+     border-radius: 7px;
+     padding: 0 8px;
+     background: rgb(225, 248, 250);	
+	 border-color:rgb(16, 18, 12);
+
+ }</string>
                   </property>
                  </widget>
                 </item>
@@ -443,6 +604,26 @@
                     <verstretch>0</verstretch>
                    </sizepolicy>
                   </property>
+                  <property name="styleSheet">
+                   <string notr="true">QPushButton {
+     border: 2px solid #8f8f91;
+     border-radius: 7px;
+    border: 2px solid #8f8f91;
+     border-radius: 6px;
+     background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
+                                       stop: 0 #f6f7fa, stop: 1 #dadbde);
+     min-width: 80px;   
+	padding: 2 8px;
+ }
+
+ QPushButton:pressed {
+     background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
+                                       stop: 0 #dadbde, stop: 1 #f6f7fa);
+ }
+
+
+</string>
+                  </property>
                   <property name="text">
                    <string>Pick</string>
                   </property>
@@ -455,6 +636,26 @@
                     <horstretch>0</horstretch>
                     <verstretch>0</verstretch>
                    </sizepolicy>
+                  </property>
+                  <property name="styleSheet">
+                   <string notr="true">QPushButton {
+     border: 2px solid #8f8f91;
+     border-radius: 7px;
+    border: 2px solid #8f8f91;
+     border-radius: 6px;
+     background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
+                                       stop: 0 #f6f7fa, stop: 1 #dadbde);
+     min-width: 80px;   
+	padding: 2 8px;
+ }
+
+ QPushButton:pressed {
+     background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
+                                       stop: 0 #dadbde, stop: 1 #f6f7fa);
+ }
+
+
+</string>
                   </property>
                   <property name="text">
                    <string>Pick</string>
@@ -499,8 +700,8 @@
              <layout class="QGridLayout" name="gridLayout_8">
               <item row="0" column="0">
                <layout class="QGridLayout" name="gridLayout_7">
-                <property name="horizontalSpacing">
-                 <number>50</number>
+                <property name="spacing">
+                 <number>0</number>
                 </property>
                 <item row="1" column="0">
                  <widget class="QGraphicsView" name="graphicsView_4">
@@ -508,7 +709,7 @@
                    <bool>true</bool>
                   </property>
                   <property name="sizePolicy">
-                   <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
+                   <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
                     <horstretch>0</horstretch>
                     <verstretch>0</verstretch>
                    </sizepolicy>
@@ -524,6 +725,9 @@
                     <width>100</width>
                     <height>100</height>
                    </size>
+                  </property>
+                  <property name="alignment">
+                   <set>Qt::AlignCenter</set>
                   </property>
                  </widget>
                 </item>
