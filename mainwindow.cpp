@@ -1,11 +1,7 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
-#include <QGridLayout>
-#include <QTreeWidgetItem>
-
-//#include <OgreSceneNode.h>
-//#include <OgreSceneManager.h>
+#include <QTreeWidgetItemIterator>
 
 MainWindow * MainWindow::instance = 0;
 int MainWindow::objectsCount = 0;
@@ -21,6 +17,10 @@ MainWindow::MainWindow(QWidget *parent) :  QMainWindow(parent),  ui(new Ui::Main
     tab->addTab(wi,"Game");
     this->setCentralWidget(tab);
     initProjectExplorer();
+
+    // Slot connection
+    QObject::connect(ui->sceneNodesTree, SIGNAL(itemSelectionChanged()),
+            this,    SLOT(OnSceneNodeClicked()) );
 
 }
 
@@ -50,9 +50,10 @@ void MainWindow::initProjectExplorer()
 
     ui->prExplorerTree->setRootIndex(fileSystemModel->index(QDir::currentPath()));
     ui->prExplorerTree->show();  
+
 }
 
- void MainWindow::updateTransform(Ogre::SceneNode* sceneNode,Ogre::Entity * entity)
+ void MainWindow::UpdateComponents(Ogre::SceneNode* sceneNode,Ogre::Entity * entity)
  {
 
      ui->position_x->setText(QString::number( sceneNode->getPosition().x));
@@ -70,27 +71,58 @@ void MainWindow::initProjectExplorer()
  }  
 
 
-void MainWindow::createRobot(Ogre::Vector3 pos)
+void MainWindow::createMesh(Ogre::Vector3 pos, Ogre::String meshName, Ogre::String materialName)
 {
     objectsCount++;
 
     Ogre::Entity * myEntity =
-            ogreWindow->getSceneManager()->createEntity("robot" +
+            ogreWindow->getSceneManager()->createEntity(meshName +
                            QString::number(objectsCount).toStdString(),
-                                                            "robot.mesh");
+                                                      meshName +".mesh");
     Ogre::SceneNode * mynode =
-            ogreWindow->getSceneManager()->getRootSceneNode()->createChildSceneNode("robot" +
+            ogreWindow->getSceneManager()->getRootSceneNode()->createChildSceneNode(meshName +
                                        QString::number(objectsCount).toStdString());
 
     mynode->attachObject( myEntity );
-    myEntity->setMaterialName("RobotMaterial");
+    myEntity->setMaterialName(materialName);
     mynode->setPosition(pos);
     mynode->scale(1.1, 1.1, 1.1);
 
     QStringList lst;
-    lst << QString::fromStdString(mynode->getName());
+    lst << "Object";
     QTreeWidgetItem* pItem = new QTreeWidgetItem(lst, 0);
+    pItem->setData(0, Qt::UserRole, QString::fromStdString(mynode->getName()));
 
     ui->sceneNodesTree->addTopLevelItem(pItem);
+
+}
+
+void MainWindow::OnSceneNodeClicked()
+{
+      QTreeWidgetItem *item = ui->sceneNodesTree->selectedItems()[0];
+      Ogre::SceneNode *node = ogreWindow->getSceneManager()->getSceneNode(item->data(0, Qt::UserRole).toString().toStdString());
+      ogreWindow->setCurrentNode(node);
+
+      Ogre::Entity *entity = static_cast<Ogre::Entity*>(node->getAttachedObject(item->data(0, Qt::UserRole).toString().toStdString()));
+      UpdateComponents(node, entity);
+}
+
+void MainWindow::UpdateSceneNodesList(QString nodeName)
+{
+
+    QTreeWidgetItemIterator it(MainWindow::getInstance()->ui->sceneNodesTree);
+
+    while (*it)
+    {
+       (*it)->setSelected(false);
+       ++it;
+    }
+
+    while (*it)
+    {
+        if ((*it)->data(0, Qt::UserRole).toString() == nodeName)
+           (*it)->setSelected(true);
+       --it;
+    }
 
 }

@@ -3,7 +3,6 @@
 
 #include <QtOpenGL/QGLWidget>
 #include <QDir>
-//#include <QStringList>
 
 
 class OgreWidget : public QGLWidget
@@ -33,12 +32,13 @@ private:
   Ogre::Camera  *mCamera;
   Ogre::Viewport    *mViewport;
   Ogre::SceneManager    *mSceneMgr;
-  Ogre::SceneNode   *CurrentNode;
+  Ogre::SceneNode   *mCurrentNode;
   Ogre::RaySceneQuery   *mRaySceneQuery;  
 
- public:
+public:
 
   Ogre::SceneManager *getSceneManager();
+  void setCurrentNode(Ogre::SceneNode*);
   
  };
 

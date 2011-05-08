@@ -3,6 +3,7 @@
 
 #include <QMainWindow>
 #include <QFileSystemModel>
+#include <QTreeWidgetItem>
 
 #include "QtWidget.h"
 
@@ -30,9 +31,17 @@ public:
     Ui::MainWindow *ui;
     OgreWidget *ogreWindow;
 
-    void updateTransform(Ogre::SceneNode*, Ogre::Entity *);
-    void createRobot(Ogre::Vector3);
+    void UpdateComponents(Ogre::SceneNode*, Ogre::Entity *);
+    void createMesh(Ogre::Vector3, Ogre::String, Ogre::String);
+    void UpdateSceneNodesList(QString);
+
     static int objectsCount;
+
+public slots:
+    // SLOTS
+    //
+    // On item clicked in hierarchy list
+    void OnSceneNodeClicked();
 
 
 private:

@@ -50,7 +50,7 @@ void OgreWidget::initializeGL()
   mViewport->setBackgroundColour( Ogre::ColourValue( 0.2,0.2,0.2 ) );
 
   mRaySceneQuery = new Ogre::DefaultRaySceneQuery(mSceneMgr);
-  CurrentNode=0;
+  mCurrentNode=0;
 }
 
 void OgreWidget::paintGL()
@@ -72,11 +72,12 @@ Ogre::RenderSystem* OgreWidget::chooseRenderer( Ogre::RenderSystemList *renderer
 
 void OgreWidget::initResourses()
 {
-  Ogre::ResourceGroupManager::getSingleton().addResourceLocation("d:/Qtcreator/projects/OGRE_EDITOR/media/materials/textures", std::string("FileSystem"), "MyGroup", false);
-  Ogre::ResourceGroupManager::getSingleton().addResourceLocation("d:/Qtcreator/projects/OGRE_EDITOR/media/models",std::string("FileSystem"), "MyGroup", false);
-  Ogre::ResourceGroupManager::getSingleton().addResourceLocation("d:/Qtcreator/projects/OGRE_EDITOR/media/materials",std::string("FileSystem"), "MyGroup", false);
-  Ogre::ResourceGroupManager::getSingleton().addResourceLocation("d:/Qtcreator/projects/OGRE_EDITOR/media/myGUI",std::string("FileSystem"), "MyGroup", false);
-  Ogre::ResourceGroupManager::getSingleton().addResourceLocation("d:/Qtcreator/projects/OGRE_EDITOR/media/scenes",std::string("FileSystem"), "MyGroup", false);
+  Ogre::String path = QDir::currentPath().toStdString();
+  Ogre::ResourceGroupManager::getSingleton().addResourceLocation(path + "/media/materials/textures", std::string("FileSystem"), "MyGroup", false);
+  Ogre::ResourceGroupManager::getSingleton().addResourceLocation(path + "/media/models",std::string("FileSystem"), "MyGroup", false);
+  Ogre::ResourceGroupManager::getSingleton().addResourceLocation(path + "/media/materials",std::string("FileSystem"), "MyGroup", false);
+  Ogre::ResourceGroupManager::getSingleton().addResourceLocation(path + "/media/myGUI",std::string("FileSystem"), "MyGroup", false);
+  Ogre::ResourceGroupManager::getSingleton().addResourceLocation(path + "/media/scenes",std::string("FileSystem"), "MyGroup", false);
   Ogre::ResourceGroupManager::getSingleton().initialiseAllResourceGroups();
 }
 
@@ -91,9 +92,11 @@ void OgreWidget::mousePressEvent ( QMouseEvent * event )
 {
     if(event->button() == Qt::LeftButton) {
 
-        if( (CurrentNode = raycastOnScene(event->x() ,   event->y() )) != 0 ){
-            qDebug()<< QString::fromStdString(CurrentNode->getName());
-            MainWindow::getInstance()->updateTransform(CurrentNode,mSceneMgr->getEntity(CurrentNode->getName()));
+        if( (mCurrentNode = raycastOnScene(event->x() ,   event->y() )) != 0 ){
+
+            MainWindow::getInstance()->UpdateComponents(mCurrentNode,mSceneMgr->getEntity(mCurrentNode->getName()));
+
+            MainWindow::getInstance()->UpdateSceneNodesList(QString::fromStdString(mCurrentNode->getName()));
         }
     }
 }
@@ -280,4 +283,9 @@ void OgreWidget::GetMeshInformation(const Ogre::MeshPtr mesh, size_t &vertex_cou
 Ogre::SceneManager *OgreWidget::getSceneManager()
 {
     return mSceneMgr;
+}
+
+void OgreWidget::setCurrentNode(Ogre::SceneNode* node)
+{
+    this->mCurrentNode = node;
 }
