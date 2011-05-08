@@ -118,27 +118,23 @@ void MainWindow::OnSceneNodeClicked()
       Ogre::SceneNode *node = ogreWindow->getSceneManager()->getSceneNode(item->data(0, Qt::UserRole).toString().toStdString());
       ogreWindow->setCurrentNode(node);
 
-      Ogre::Entity *entity = static_cast<Ogre::Entity*>(node->getAttachedObject(item->data(0, Qt::UserRole).toString().toStdString()));
-      UpdateComponents(node, entity);
+      Ogre::Entity *entity = ogreWindow->getSceneManager()->getEntity(item->data(0, Qt::UserRole).toString().toStdString());
+
+      UpdateComponents(node, entity);     
 }
 
 void MainWindow::UpdateSceneNodesList(QString nodeName)
 {
-
-    QTreeWidgetItemIterator it(MainWindow::getInstance()->ui->sceneNodesTree);
-
-    while (*it)
-    {
-       (*it)->setSelected(false);
-       ++it;
-    }
-
-    while (*it)
-    {
-        if ((*it)->data(0, Qt::UserRole).toString() == nodeName)
-           (*it)->setSelected(true);
-       --it;
-    }
+    QTreeWidgetItemIterator it(ui->sceneNodesTree);
+       while (*it)
+       {
+           if ((*it)->data(0, Qt::UserRole).toString() == nodeName)
+           {
+               ui->sceneNodesTree->setCurrentItem((*it));
+               break;
+           }
+          ++it;
+       }
 }
 
 void MainWindow::OnPositionChanged(const QString & str)

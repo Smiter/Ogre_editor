@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'mainwindow.ui'
 **
-** Created: Sat 7. May 18:07:48 2011
+** Created: Sun 8. May 14:30:35 2011
 **      by: Qt User Interface Compiler version 4.7.2
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -190,7 +190,7 @@ public:
         scrollArea->setWidgetResizable(true);
         scrollAreaWidgetContents_3 = new QWidget();
         scrollAreaWidgetContents_3->setObjectName(QString::fromUtf8("scrollAreaWidgetContents_3"));
-        scrollAreaWidgetContents_3->setGeometry(QRect(0, -66, 385, 472));
+        scrollAreaWidgetContents_3->setGeometry(QRect(0, -104, 436, 380));
         verticalLayout_2 = new QVBoxLayout(scrollAreaWidgetContents_3);
         verticalLayout_2->setObjectName(QString::fromUtf8("verticalLayout_2"));
         gridLayout = new QGridLayout();
@@ -367,8 +367,13 @@ public:
         graphicsView_4 = new QGraphicsView(material_4);
         graphicsView_4->setObjectName(QString::fromUtf8("graphicsView_4"));
         graphicsView_4->setEnabled(true);
-        sizePolicy2.setHeightForWidth(graphicsView_4->sizePolicy().hasHeightForWidth());
-        graphicsView_4->setSizePolicy(sizePolicy2);
+        QSizePolicy sizePolicy4(QSizePolicy::Maximum, QSizePolicy::Maximum);
+        sizePolicy4.setHorizontalStretch(0);
+        sizePolicy4.setVerticalStretch(0);
+        sizePolicy4.setHeightForWidth(graphicsView_4->sizePolicy().hasHeightForWidth());
+        graphicsView_4->setSizePolicy(sizePolicy4);
+        graphicsView_4->setMinimumSize(QSize(100, 100));
+        graphicsView_4->setMaximumSize(QSize(100, 100));
 
         gridLayout_7->addWidget(graphicsView_4, 1, 0, 1, 1);
 
@@ -387,7 +392,6 @@ public:
 
         componentsGUI->setWidget(dockWidgetContents);
         MainWindow->addDockWidget(static_cast<Qt::DockWidgetArea>(2), componentsGUI);
-        componentsGUI->raise();
         componentsGUI->raise();
 
         retranslateUi(MainWindow);
