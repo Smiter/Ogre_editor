@@ -18,9 +18,21 @@ MainWindow::MainWindow(QWidget *parent) :  QMainWindow(parent),  ui(new Ui::Main
     this->setCentralWidget(tab);
     initProjectExplorer();
 
+
     // Slot connection
     QObject::connect(ui->sceneNodesTree, SIGNAL(itemSelectionChanged()),
             this,    SLOT(OnSceneNodeClicked()) );
+
+    QObject::connect(ui->position_x, SIGNAL(textChanged(const QString &)), this, SLOT(OnPositionChanged(const QString &)) );
+    QObject::connect(ui->position_y, SIGNAL(textChanged(const QString &)), this, SLOT(OnPositionChanged(const QString &)) );
+    QObject::connect(ui->position_z, SIGNAL(textChanged(const QString &)), this, SLOT(OnPositionChanged(const QString &)) );
+    QObject::connect(ui->rotation_x, SIGNAL(textChanged(const QString &)), this, SLOT(OnPositionChanged(const QString &)) );
+    QObject::connect(ui->rotation_y, SIGNAL(textChanged(const QString &)), this, SLOT(OnPositionChanged(const QString &)) );
+    QObject::connect(ui->rotation_z, SIGNAL(textChanged(const QString &)), this, SLOT(OnPositionChanged(const QString &)) );
+    QObject::connect(ui->scale_x, SIGNAL(textChanged(const QString &)), this, SLOT(OnPositionChanged(const QString &)) );
+    QObject::connect(ui->scale_y, SIGNAL(textChanged(const QString &)), this, SLOT(OnPositionChanged(const QString &)) );
+    QObject::connect(ui->scale_z, SIGNAL(textChanged(const QString &)), this, SLOT(OnPositionChanged(const QString &)) );
+
 
 }
 
@@ -55,7 +67,9 @@ void MainWindow::initProjectExplorer()
 
  void MainWindow::UpdateComponents(Ogre::SceneNode* sceneNode,Ogre::Entity * entity)
  {
-
+     ui->position_x->clearFocus(); ui->position_y->clearFocus(); ui->position_z->clearFocus();
+     ui->rotation_x->clearFocus(); ui->rotation_y->clearFocus(); ui->rotation_z->clearFocus();
+     ui->scale_x->clearFocus(); ui->scale_y->clearFocus(); ui->scale_z->clearFocus();
      ui->position_x->setText(QString::number( sceneNode->getPosition().x));
      ui->position_y->setText(QString::number(sceneNode->getPosition().y));
      ui->position_z->setText(QString::number(sceneNode->getPosition().z));
@@ -97,6 +111,7 @@ void MainWindow::createMesh(Ogre::Vector3 pos, Ogre::String meshName, Ogre::Stri
 
 }
 
+
 void MainWindow::OnSceneNodeClicked()
 {
       QTreeWidgetItem *item = ui->sceneNodesTree->selectedItems()[0];
@@ -124,5 +139,39 @@ void MainWindow::UpdateSceneNodesList(QString nodeName)
            (*it)->setSelected(true);
        --it;
     }
-
 }
+
+void MainWindow::OnPositionChanged(const QString & str)
+{
+    if (ogreWindow->getCurrentNode())
+    {
+
+if (ui->position_x->hasFocus() || ui->position_x->hasFocus()|| ui->position_y->hasFocus() || ui->position_z->hasFocus() || ui->rotation_x->hasFocus()||
+        ui->rotation_y->hasFocus() || ui->rotation_z->hasFocus() || ui->scale_x->hasFocus() || ui->scale_y->hasFocus() || ui->scale_z->hasFocus())
+{
+
+   float x=ui->position_x->text().toFloat();
+   float y=ui->position_y->text().toFloat();
+   float z=ui->position_z->text().toFloat();
+   float scalex=ui->scale_x->text().toFloat();
+   float scaley=ui->scale_y->text().toFloat();
+   float scalez=ui->scale_z->text().toFloat();
+   float rotatex=ui->rotation_x->text().toFloat();
+   float rotatey=ui->rotation_y->text().toFloat();
+   float rotatez=ui->rotation_z->text().toFloat();
+
+   qDebug()<<"str= "<<str;
+   ogreWindow->getCurrentNode()->setOrientation(ogreWindow->getCurrentNode()->getOrientation().w,0,ogreWindow->getCurrentNode()->getOrientation().y,ogreWindow->getCurrentNode()->getOrientation().z);
+   ogreWindow->getCurrentNode()->pitch(Ogre::Degree(rotatex));
+   ogreWindow->getCurrentNode()->setOrientation(ogreWindow->getCurrentNode()->getOrientation().w,ogreWindow->getCurrentNode()->getOrientation().x,0,ogreWindow->getCurrentNode()->getOrientation().z);
+   ogreWindow->getCurrentNode()->yaw(Ogre::Degree(rotatey));
+   ogreWindow->getCurrentNode()->setOrientation(ogreWindow->getCurrentNode()->getOrientation().w,ogreWindow->getCurrentNode()->getOrientation().x,ogreWindow->getCurrentNode()->getOrientation().y,0);
+   ogreWindow->getCurrentNode()->roll(Ogre::Degree(rotatez));
+   ogreWindow->getCurrentNode()->setScale(scalex,scaley,scalez);
+   ogreWindow->getCurrentNode()->setPosition(x,y,z);
+   }
+
+  }
+}
+
+

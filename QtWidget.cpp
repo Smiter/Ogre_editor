@@ -50,7 +50,14 @@ void OgreWidget::initializeGL()
   mViewport->setBackgroundColour( Ogre::ColourValue( 0.2,0.2,0.2 ) );
 
   mRaySceneQuery = new Ogre::DefaultRaySceneQuery(mSceneMgr);
+
   mCurrentNode=0;
+
+  timer = new QTimer;
+  QObject::connect(timer, SIGNAL(timeout()), this,SLOT(OnRenderTimer()));
+  timer->setInterval(10);
+  timer->start();
+
 }
 
 void OgreWidget::paintGL()
@@ -72,6 +79,7 @@ Ogre::RenderSystem* OgreWidget::chooseRenderer( Ogre::RenderSystemList *renderer
 
 void OgreWidget::initResourses()
 {
+
   Ogre::String path = QDir::currentPath().toStdString();
   Ogre::ResourceGroupManager::getSingleton().addResourceLocation(path + "/media/materials/textures", std::string("FileSystem"), "MyGroup", false);
   Ogre::ResourceGroupManager::getSingleton().addResourceLocation(path + "/media/models",std::string("FileSystem"), "MyGroup", false);
@@ -79,6 +87,7 @@ void OgreWidget::initResourses()
   Ogre::ResourceGroupManager::getSingleton().addResourceLocation(path + "/media/myGUI",std::string("FileSystem"), "MyGroup", false);
   Ogre::ResourceGroupManager::getSingleton().addResourceLocation(path + "/media/scenes",std::string("FileSystem"), "MyGroup", false);
   Ogre::ResourceGroupManager::getSingleton().initialiseAllResourceGroups();
+
 }
 
 OgreWidget::~OgreWidget()
@@ -87,16 +96,22 @@ OgreWidget::~OgreWidget()
     delete mOgreRoot;
     destroy();
 }
+void OgreWidget::OnRenderTimer()
+{
+    Ogre::Root::getSingleton().renderOneFrame();
+}
 
 void OgreWidget::mousePressEvent ( QMouseEvent * event )
 {
     if(event->button() == Qt::LeftButton) {
+
 
         if( (mCurrentNode = raycastOnScene(event->x() ,   event->y() )) != 0 ){
 
             MainWindow::getInstance()->UpdateComponents(mCurrentNode,mSceneMgr->getEntity(mCurrentNode->getName()));
 
             MainWindow::getInstance()->UpdateSceneNodesList(QString::fromStdString(mCurrentNode->getName()));
+
         }
     }
 }
@@ -287,5 +302,10 @@ Ogre::SceneManager *OgreWidget::getSceneManager()
 
 void OgreWidget::setCurrentNode(Ogre::SceneNode* node)
 {
-    this->mCurrentNode = node;
+    mCurrentNode = node;
+}
+
+Ogre::SceneNode* OgreWidget::getCurrentNode()
+{
+    return mCurrentNode;
 }

@@ -32,6 +32,7 @@ public:
     OgreWidget *ogreWindow;
 
     void UpdateComponents(Ogre::SceneNode*, Ogre::Entity *);
+
     void createMesh(Ogre::Vector3, Ogre::String, Ogre::String);
     void UpdateSceneNodesList(QString);
 
@@ -44,11 +45,14 @@ public slots:
     void OnSceneNodeClicked();
 
 
+
 private:
 
     void initSceneNodesList();
     void initProjectExplorer();
 
+public slots:
+    void OnPositionChanged(const QString &);
 
 };
 
