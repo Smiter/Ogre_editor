@@ -13,7 +13,17 @@
   <property name="windowTitle">
    <string>MainWindow</string>
   </property>
-  <widget class="QWidget" name="centralwidget"/>
+  <property name="autoFillBackground">
+   <bool>false</bool>
+  </property>
+  <property name="dockOptions">
+   <set>QMainWindow::AllowNestedDocks|QMainWindow::AllowTabbedDocks|QMainWindow::AnimatedDocks</set>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <property name="autoFillBackground">
+    <bool>false</bool>
+   </property>
+  </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
     <rect>
@@ -47,11 +57,14 @@
    <property name="features">
     <set>QDockWidget::DockWidgetMovable</set>
    </property>
+   <property name="allowedAreas">
+    <set>Qt::BottomDockWidgetArea|Qt::LeftDockWidgetArea|Qt::RightDockWidgetArea</set>
+   </property>
    <property name="windowTitle">
-    <string>Project Explorer</string>
+    <string notr="true">Project Explorer</string>
    </property>
    <attribute name="dockWidgetArea">
-    <number>8</number>
+    <number>1</number>
    </attribute>
    <widget class="QWidget" name="dockWidgetContents_15">
     <layout class="QHBoxLayout" name="horizontalLayout_3">
@@ -102,7 +115,7 @@
    </property>
    <property name="minimumSize">
     <size>
-     <width>82</width>
+     <width>103</width>
      <height>103</height>
     </size>
    </property>
@@ -112,11 +125,14 @@
    <property name="features">
     <set>QDockWidget::DockWidgetMovable</set>
    </property>
+   <property name="allowedAreas">
+    <set>Qt::BottomDockWidgetArea|Qt::LeftDockWidgetArea|Qt::RightDockWidgetArea</set>
+   </property>
    <property name="windowTitle">
     <string notr="true">Scene Nodes</string>
    </property>
    <attribute name="dockWidgetArea">
-    <number>8</number>
+    <number>2</number>
    </attribute>
    <widget class="QWidget" name="dockWidgetContents_14">
     <layout class="QHBoxLayout" name="horizontalLayout_4">
@@ -141,15 +157,15 @@
   </widget>
   <widget class="QDockWidget" name="componentsGUI">
    <property name="sizePolicy">
-    <sizepolicy hsizetype="Preferred" vsizetype="Ignored">
+    <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
      <horstretch>0</horstretch>
      <verstretch>0</verstretch>
     </sizepolicy>
    </property>
    <property name="minimumSize">
     <size>
-     <width>370</width>
-     <height>370</height>
+     <width>270</width>
+     <height>270</height>
     </size>
    </property>
    <property name="maximumSize">
@@ -160,6 +176,12 @@
    </property>
    <property name="features">
     <set>QDockWidget::DockWidgetMovable</set>
+   </property>
+   <property name="allowedAreas">
+    <set>Qt::BottomDockWidgetArea|Qt::LeftDockWidgetArea|Qt::RightDockWidgetArea</set>
+   </property>
+   <property name="windowTitle">
+    <string>Inspector</string>
    </property>
    <attribute name="dockWidgetArea">
     <number>2</number>
@@ -187,7 +209,7 @@
         <enum>Qt::ScrollBarAsNeeded</enum>
        </property>
        <property name="horizontalScrollBarPolicy">
-        <enum>Qt::ScrollBarAlwaysOff</enum>
+        <enum>Qt::ScrollBarAsNeeded</enum>
        </property>
        <property name="widgetResizable">
         <bool>true</bool>
@@ -197,7 +219,7 @@
          <rect>
           <x>0</x>
           <y>0</y>
-          <width>436</width>
+          <width>333</width>
           <height>466</height>
          </rect>
         </property>
@@ -745,6 +767,40 @@
     </layout>
    </widget>
   </widget>
+  <widget class="QDockWidget" name="dockWidget">
+   <property name="sizePolicy">
+    <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+     <horstretch>0</horstretch>
+     <verstretch>0</verstretch>
+    </sizepolicy>
+   </property>
+   <property name="minimumSize">
+    <size>
+     <width>200</width>
+     <height>200</height>
+    </size>
+   </property>
+   <property name="features">
+    <set>QDockWidget::DockWidgetMovable</set>
+   </property>
+   <property name="allowedAreas">
+    <set>Qt::BottomDockWidgetArea|Qt::LeftDockWidgetArea|Qt::RightDockWidgetArea</set>
+   </property>
+   <attribute name="dockWidgetArea">
+    <number>1</number>
+   </attribute>
+   <widget class="QWidget" name="dockWidgetContents_2">
+    <property name="autoFillBackground">
+     <bool>false</bool>
+    </property>
+    <layout class="QGridLayout" name="gridLayout_10">
+     <item row="0" column="0">
+      <layout class="QGridLayout" name="gridLayout_9"/>
+     </item>
+    </layout>
+   </widget>
+  </widget>
+  <zorder>dockWidget</zorder>
   <zorder>componentsGUI</zorder>
  </widget>
  <resources/>

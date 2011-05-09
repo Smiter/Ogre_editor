@@ -9,15 +9,18 @@ int MainWindow::objectsCount = 0;
 MainWindow::MainWindow(QWidget *parent) :  QMainWindow(parent),  ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    ogreWindow = new OgreWidget();
+    ogreWindow = new OgreWidget(ui->dockWidgetContents_2);
     ogreWindow->setMouseTracking(true);
-    QTabWidget *tab = new QTabWidget;
-    QWidget *wi = new QWidget;
-    tab->addTab(ogreWindow,"Scene");
-    tab->addTab(wi,"Game");
-    this->setCentralWidget(tab);
+    ui->gridLayout_9->addWidget(ogreWindow);
+   // QTabWidget *tab = new QTabWidget;
+   // QWidget *wi = new QWidget;
+   // tab->addTab(ogreWindow,"Scene");
+   // tab->addTab(wi,"Game");
+   // this->setCentralWidget(tab);
+    this->setCentralWidget(0);
     initProjectExplorer();
-
+    this->addDockWidget(static_cast<Qt::DockWidgetArea>(2), ui->sceneNodesGUI);
+    this->addDockWidget(static_cast<Qt::DockWidgetArea>(1), ui->projExplorerGUI);
 
     // Slot connection
     QObject::connect(ui->sceneNodesTree, SIGNAL(itemSelectionChanged()),

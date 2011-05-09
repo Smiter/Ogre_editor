@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'mainwindow.ui'
 **
-** Created: Sun 8. May 17:09:01 2011
+** Created: Mon 9. May 17:28:52 2011
 **      by: Qt User Interface Compiler version 4.7.2
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -88,14 +88,21 @@ public:
     QGridLayout *gridLayout_8;
     QGridLayout *gridLayout_7;
     QGraphicsView *graphicsView_4;
+    QDockWidget *dockWidget;
+    QWidget *dockWidgetContents_2;
+    QGridLayout *gridLayout_10;
+    QGridLayout *gridLayout_9;
 
     void setupUi(QMainWindow *MainWindow)
     {
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName(QString::fromUtf8("MainWindow"));
         MainWindow->resize(762, 589);
+        MainWindow->setAutoFillBackground(false);
+        MainWindow->setDockOptions(QMainWindow::AllowNestedDocks|QMainWindow::AllowTabbedDocks|QMainWindow::AnimatedDocks);
         centralwidget = new QWidget(MainWindow);
         centralwidget->setObjectName(QString::fromUtf8("centralwidget"));
+        centralwidget->setAutoFillBackground(false);
         MainWindow->setCentralWidget(centralwidget);
         menubar = new QMenuBar(MainWindow);
         menubar->setObjectName(QString::fromUtf8("menubar"));
@@ -114,6 +121,8 @@ public:
         projExplorerGUI->setMinimumSize(QSize(82, 103));
         projExplorerGUI->setMaximumSize(QSize(5000, 5000));
         projExplorerGUI->setFeatures(QDockWidget::DockWidgetMovable);
+        projExplorerGUI->setAllowedAreas(Qt::BottomDockWidgetArea|Qt::LeftDockWidgetArea|Qt::RightDockWidgetArea);
+        projExplorerGUI->setWindowTitle(QString::fromUtf8("Project Explorer"));
         dockWidgetContents_15 = new QWidget();
         dockWidgetContents_15->setObjectName(QString::fromUtf8("dockWidgetContents_15"));
         horizontalLayout_3 = new QHBoxLayout(dockWidgetContents_15);
@@ -135,14 +144,15 @@ public:
         horizontalLayout_3->addLayout(horizontalLayout);
 
         projExplorerGUI->setWidget(dockWidgetContents_15);
-        MainWindow->addDockWidget(static_cast<Qt::DockWidgetArea>(8), projExplorerGUI);
+        MainWindow->addDockWidget(static_cast<Qt::DockWidgetArea>(1), projExplorerGUI);
         sceneNodesGUI = new QDockWidget(MainWindow);
         sceneNodesGUI->setObjectName(QString::fromUtf8("sceneNodesGUI"));
         sizePolicy.setHeightForWidth(sceneNodesGUI->sizePolicy().hasHeightForWidth());
         sceneNodesGUI->setSizePolicy(sizePolicy);
-        sceneNodesGUI->setMinimumSize(QSize(82, 103));
+        sceneNodesGUI->setMinimumSize(QSize(103, 103));
         sceneNodesGUI->setFloating(false);
         sceneNodesGUI->setFeatures(QDockWidget::DockWidgetMovable);
+        sceneNodesGUI->setAllowedAreas(Qt::BottomDockWidgetArea|Qt::LeftDockWidgetArea|Qt::RightDockWidgetArea);
         sceneNodesGUI->setWindowTitle(QString::fromUtf8("Scene Nodes"));
         dockWidgetContents_14 = new QWidget();
         dockWidgetContents_14->setObjectName(QString::fromUtf8("dockWidgetContents_14"));
@@ -163,19 +173,20 @@ public:
         horizontalLayout_4->addLayout(horizontalLayout_2);
 
         sceneNodesGUI->setWidget(dockWidgetContents_14);
-        MainWindow->addDockWidget(static_cast<Qt::DockWidgetArea>(8), sceneNodesGUI);
+        MainWindow->addDockWidget(static_cast<Qt::DockWidgetArea>(2), sceneNodesGUI);
         componentsGUI = new QDockWidget(MainWindow);
         componentsGUI->setObjectName(QString::fromUtf8("componentsGUI"));
+        sizePolicy.setHeightForWidth(componentsGUI->sizePolicy().hasHeightForWidth());
+        componentsGUI->setSizePolicy(sizePolicy);
+        componentsGUI->setMinimumSize(QSize(270, 270));
+        componentsGUI->setMaximumSize(QSize(700, 700));
+        componentsGUI->setFeatures(QDockWidget::DockWidgetMovable);
+        componentsGUI->setAllowedAreas(Qt::BottomDockWidgetArea|Qt::LeftDockWidgetArea|Qt::RightDockWidgetArea);
+        dockWidgetContents = new QWidget();
+        dockWidgetContents->setObjectName(QString::fromUtf8("dockWidgetContents"));
         QSizePolicy sizePolicy1(QSizePolicy::Preferred, QSizePolicy::Ignored);
         sizePolicy1.setHorizontalStretch(0);
         sizePolicy1.setVerticalStretch(0);
-        sizePolicy1.setHeightForWidth(componentsGUI->sizePolicy().hasHeightForWidth());
-        componentsGUI->setSizePolicy(sizePolicy1);
-        componentsGUI->setMinimumSize(QSize(370, 370));
-        componentsGUI->setMaximumSize(QSize(700, 700));
-        componentsGUI->setFeatures(QDockWidget::DockWidgetMovable);
-        dockWidgetContents = new QWidget();
-        dockWidgetContents->setObjectName(QString::fromUtf8("dockWidgetContents"));
         sizePolicy1.setHeightForWidth(dockWidgetContents->sizePolicy().hasHeightForWidth());
         dockWidgetContents->setSizePolicy(sizePolicy1);
         verticalLayout = new QVBoxLayout(dockWidgetContents);
@@ -186,11 +197,11 @@ public:
         scrollArea->setSizePolicy(sizePolicy);
         scrollArea->setAutoFillBackground(true);
         scrollArea->setVerticalScrollBarPolicy(Qt::ScrollBarAsNeeded);
-        scrollArea->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+        scrollArea->setHorizontalScrollBarPolicy(Qt::ScrollBarAsNeeded);
         scrollArea->setWidgetResizable(true);
         scrollAreaWidgetContents_3 = new QWidget();
         scrollAreaWidgetContents_3->setObjectName(QString::fromUtf8("scrollAreaWidgetContents_3"));
-        scrollAreaWidgetContents_3->setGeometry(QRect(0, 0, 436, 466));
+        scrollAreaWidgetContents_3->setGeometry(QRect(0, 0, 333, 466));
         QSizePolicy sizePolicy2(QSizePolicy::Preferred, QSizePolicy::Fixed);
         sizePolicy2.setHorizontalStretch(0);
         sizePolicy2.setVerticalStretch(0);
@@ -553,6 +564,26 @@ public:
 
         componentsGUI->setWidget(dockWidgetContents);
         MainWindow->addDockWidget(static_cast<Qt::DockWidgetArea>(2), componentsGUI);
+        dockWidget = new QDockWidget(MainWindow);
+        dockWidget->setObjectName(QString::fromUtf8("dockWidget"));
+        sizePolicy.setHeightForWidth(dockWidget->sizePolicy().hasHeightForWidth());
+        dockWidget->setSizePolicy(sizePolicy);
+        dockWidget->setMinimumSize(QSize(200, 200));
+        dockWidget->setFeatures(QDockWidget::DockWidgetMovable);
+        dockWidget->setAllowedAreas(Qt::BottomDockWidgetArea|Qt::LeftDockWidgetArea|Qt::RightDockWidgetArea);
+        dockWidgetContents_2 = new QWidget();
+        dockWidgetContents_2->setObjectName(QString::fromUtf8("dockWidgetContents_2"));
+        dockWidgetContents_2->setAutoFillBackground(false);
+        gridLayout_10 = new QGridLayout(dockWidgetContents_2);
+        gridLayout_10->setObjectName(QString::fromUtf8("gridLayout_10"));
+        gridLayout_9 = new QGridLayout();
+        gridLayout_9->setObjectName(QString::fromUtf8("gridLayout_9"));
+
+        gridLayout_10->addLayout(gridLayout_9, 0, 0, 1, 1);
+
+        dockWidget->setWidget(dockWidgetContents_2);
+        MainWindow->addDockWidget(static_cast<Qt::DockWidgetArea>(1), dockWidget);
+        dockWidget->raise();
         componentsGUI->raise();
 
         retranslateUi(MainWindow);
@@ -563,7 +594,7 @@ public:
     void retranslateUi(QMainWindow *MainWindow)
     {
         MainWindow->setWindowTitle(QApplication::translate("MainWindow", "MainWindow", 0, QApplication::UnicodeUTF8));
-        projExplorerGUI->setWindowTitle(QApplication::translate("MainWindow", "Project Explorer", 0, QApplication::UnicodeUTF8));
+        componentsGUI->setWindowTitle(QApplication::translate("MainWindow", "Inspector", 0, QApplication::UnicodeUTF8));
         sceneNodeGUI_4->setTitle(QApplication::translate("MainWindow", "Scene Node", 0, QApplication::UnicodeUTF8));
         label_30->setText(QApplication::translate("MainWindow", "\320\243", 0, QApplication::UnicodeUTF8));
         label_29->setText(QApplication::translate("MainWindow", "X", 0, QApplication::UnicodeUTF8));
