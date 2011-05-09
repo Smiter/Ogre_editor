@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'mainwindow.ui'
 **
-** Created: Mon 9. May 17:28:52 2011
+** Created: Mon 9. May 17:51:45 2011
 **      by: Qt User Interface Compiler version 4.7.2
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -190,6 +190,10 @@ public:
         sizePolicy1.setHeightForWidth(dockWidgetContents->sizePolicy().hasHeightForWidth());
         dockWidgetContents->setSizePolicy(sizePolicy1);
         verticalLayout = new QVBoxLayout(dockWidgetContents);
+#ifndef Q_OS_MAC
+        verticalLayout->setSpacing(6);
+#endif
+        verticalLayout->setContentsMargins(0, 0, 0, 0);
         verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
         scrollArea = new QScrollArea(dockWidgetContents);
         scrollArea->setObjectName(QString::fromUtf8("scrollArea"));
@@ -201,7 +205,7 @@ public:
         scrollArea->setWidgetResizable(true);
         scrollAreaWidgetContents_3 = new QWidget();
         scrollAreaWidgetContents_3->setObjectName(QString::fromUtf8("scrollAreaWidgetContents_3"));
-        scrollAreaWidgetContents_3->setGeometry(QRect(0, 0, 333, 466));
+        scrollAreaWidgetContents_3->setGeometry(QRect(0, 0, 368, 375));
         QSizePolicy sizePolicy2(QSizePolicy::Preferred, QSizePolicy::Fixed);
         sizePolicy2.setHorizontalStretch(0);
         sizePolicy2.setVerticalStretch(0);
@@ -210,11 +214,11 @@ public:
         gridLayout_2 = new QGridLayout(scrollAreaWidgetContents_3);
         gridLayout_2->setObjectName(QString::fromUtf8("gridLayout_2"));
         gridLayout = new QGridLayout();
-        gridLayout->setContentsMargins(20, 20, 20, 20);
         gridLayout->setObjectName(QString::fromUtf8("gridLayout"));
         gridLayout->setSizeConstraint(QLayout::SetNoConstraint);
         gridLayout->setHorizontalSpacing(0);
-        gridLayout->setVerticalSpacing(20);
+        gridLayout->setVerticalSpacing(5);
+        gridLayout->setContentsMargins(2, 0, 2, 2);
         sceneNodeGUI_4 = new QGroupBox(scrollAreaWidgetContents_3);
         sceneNodeGUI_4->setObjectName(QString::fromUtf8("sceneNodeGUI_4"));
         sizePolicy2.setHeightForWidth(sceneNodeGUI_4->sizePolicy().hasHeightForWidth());
@@ -224,7 +228,7 @@ public:
         gridLayout_4 = new QGridLayout(sceneNodeGUI_4);
         gridLayout_4->setObjectName(QString::fromUtf8("gridLayout_4"));
         gridLayout_3 = new QGridLayout();
-        gridLayout_3->setSpacing(12);
+        gridLayout_3->setSpacing(6);
         gridLayout_3->setObjectName(QString::fromUtf8("gridLayout_3"));
         gridLayout_3->setSizeConstraint(QLayout::SetDefaultConstraint);
         position_z = new QLineEdit(sceneNodeGUI_4);
@@ -425,7 +429,7 @@ public:
         gridLayout_6 = new QGridLayout(enitityGUI_4);
         gridLayout_6->setObjectName(QString::fromUtf8("gridLayout_6"));
         gridLayout_5 = new QGridLayout();
-        gridLayout_5->setSpacing(12);
+        gridLayout_5->setSpacing(6);
         gridLayout_5->setObjectName(QString::fromUtf8("gridLayout_5"));
         mesh_edit = new QLineEdit(enitityGUI_4);
         mesh_edit->setObjectName(QString::fromUtf8("mesh_edit"));
@@ -594,7 +598,7 @@ public:
     void retranslateUi(QMainWindow *MainWindow)
     {
         MainWindow->setWindowTitle(QApplication::translate("MainWindow", "MainWindow", 0, QApplication::UnicodeUTF8));
-        componentsGUI->setWindowTitle(QApplication::translate("MainWindow", "Inspector", 0, QApplication::UnicodeUTF8));
+        componentsGUI->setWindowTitle(QApplication::translate("MainWindow", "Components", 0, QApplication::UnicodeUTF8));
         sceneNodeGUI_4->setTitle(QApplication::translate("MainWindow", "Scene Node", 0, QApplication::UnicodeUTF8));
         label_30->setText(QApplication::translate("MainWindow", "\320\243", 0, QApplication::UnicodeUTF8));
         label_29->setText(QApplication::translate("MainWindow", "X", 0, QApplication::UnicodeUTF8));

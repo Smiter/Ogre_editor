@@ -181,7 +181,7 @@
     <set>Qt::BottomDockWidgetArea|Qt::LeftDockWidgetArea|Qt::RightDockWidgetArea</set>
    </property>
    <property name="windowTitle">
-    <string>Inspector</string>
+    <string>Components</string>
    </property>
    <attribute name="dockWidgetArea">
     <number>2</number>
@@ -194,6 +194,12 @@
      </sizepolicy>
     </property>
     <layout class="QVBoxLayout" name="verticalLayout">
+     <property name="spacing">
+      <number>6</number>
+     </property>
+     <property name="margin">
+      <number>0</number>
+     </property>
      <item>
       <widget class="QScrollArea" name="scrollArea">
        <property name="sizePolicy">
@@ -219,8 +225,8 @@
          <rect>
           <x>0</x>
           <y>0</y>
-          <width>333</width>
-          <height>466</height>
+          <width>368</width>
+          <height>375</height>
          </rect>
         </property>
         <property name="sizePolicy">
@@ -235,14 +241,23 @@
            <property name="sizeConstraint">
             <enum>QLayout::SetNoConstraint</enum>
            </property>
+           <property name="leftMargin">
+            <number>2</number>
+           </property>
+           <property name="topMargin">
+            <number>0</number>
+           </property>
+           <property name="rightMargin">
+            <number>2</number>
+           </property>
+           <property name="bottomMargin">
+            <number>2</number>
+           </property>
            <property name="horizontalSpacing">
             <number>0</number>
            </property>
            <property name="verticalSpacing">
-            <number>20</number>
-           </property>
-           <property name="margin">
-            <number>20</number>
+            <number>5</number>
            </property>
            <item row="0" column="0">
             <widget class="QGroupBox" name="sceneNodeGUI_4">
@@ -268,7 +283,7 @@
                  <enum>QLayout::SetDefaultConstraint</enum>
                 </property>
                 <property name="spacing">
-                 <number>12</number>
+                 <number>6</number>
                 </property>
                 <item row="1" column="1">
                  <widget class="QLineEdit" name="position_z">
@@ -563,7 +578,7 @@
               <item row="0" column="0">
                <layout class="QGridLayout" name="gridLayout_5">
                 <property name="spacing">
-                 <number>12</number>
+                 <number>6</number>
                 </property>
                 <item row="0" column="1">
                  <widget class="QLineEdit" name="mesh_edit">
