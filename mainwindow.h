@@ -17,42 +17,66 @@ class MainWindow : public QMainWindow
 
 public:
 
-    static MainWindow * instance;
-        static MainWindow * getInstance()
-        {
-            if (instance == 0)
-                instance = new MainWindow;
-            return instance;
-        }
-
-
+    // CTOR and DTOR
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
+
+    // Main Frame Parts
+    //
+    // The FORMS object
     Ui::MainWindow *ui;
+    // The Ogre window
     OgreWidget *ogreWindow;
 
+    // Components GUI functions
+    //
+    // Updating SceneNode and Entity components
     void UpdateComponents(Ogre::SceneNode*, Ogre::Entity *);
 
-    void createMesh(Ogre::Vector3, Ogre::String, Ogre::String);
-    void UpdateSceneNodesList(QString);
+    // Update the Image View in material viwer
+    void UpdateMaterialView(Ogre::Entity *);
 
-    static int objectsCount;
+    // SceneNodesList functions
+    //
+    // Update is called while objects Raycasting on scene
+    void UpdateSceneNodesList(QString);
+    // Add is called when a new object is created. It pulls it into list
+    void AddItemToSceneList(Ogre::String);
+
+
+    // Other functions
+    //
+    // Singleton getInstance implementation
+    static MainWindow * getInstance()
+    {
+        if (instance == 0)
+            instance = new MainWindow;
+        return instance;
+    }
+    static MainWindow * instance;
+
+
+
 
 public slots:
     // SLOTS
     //
-    // On item clicked in hierarchy list
+    // Is called when user clicked on an item in SceneNodesList
     void OnSceneNodeClicked();
-
+    // When object's position is changed via ComponentsGUI
+    void OnPositionChanged(const QString &);
+    // When object's material is picking
+    void OnMaterialButtonDown();
+    // When object's mesh is picking
+    void OnMeshButtonDown();
 
 
 private:
-
-    void initSceneNodesList();
+    // Initialization Form's components
+    //
+    // File system tree's initialization
     void initProjectExplorer();
 
-public slots:
-    void OnPositionChanged(const QString &);
 
 };
 

@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'mainwindow.ui'
 **
-** Created: Mon 9. May 17:51:45 2011
+** Created: Thu 12. May 21:19:18 2011
 **      by: Qt User Interface Compiler version 4.7.2
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -23,6 +23,7 @@
 #include <QtGui/QLabel>
 #include <QtGui/QLineEdit>
 #include <QtGui/QMainWindow>
+#include <QtGui/QMenu>
 #include <QtGui/QMenuBar>
 #include <QtGui/QPushButton>
 #include <QtGui/QScrollArea>
@@ -37,8 +38,14 @@ QT_BEGIN_NAMESPACE
 class Ui_MainWindow
 {
 public:
+    QAction *actionCreate_default_mesh;
     QWidget *centralwidget;
     QMenuBar *menubar;
+    QMenu *menuFile;
+    QMenu *menuEdit;
+    QMenu *menuCreate;
+    QMenu *menuComponent;
+    QMenu *menuHelp;
     QStatusBar *statusbar;
     QDockWidget *projExplorerGUI;
     QWidget *dockWidgetContents_15;
@@ -81,13 +88,13 @@ public:
     QLineEdit *mesh_edit;
     QLineEdit *texture_edit;
     QLabel *label_34;
-    QPushButton *pushButton_11;
-    QPushButton *pushButton_10;
+    QPushButton *meshPickButton;
+    QPushButton *materialPickButton;
     QLabel *label_36;
     QGroupBox *material_4;
     QGridLayout *gridLayout_8;
     QGridLayout *gridLayout_7;
-    QGraphicsView *graphicsView_4;
+    QGraphicsView *materialViwer;
     QDockWidget *dockWidget;
     QWidget *dockWidgetContents_2;
     QGridLayout *gridLayout_10;
@@ -100,13 +107,25 @@ public:
         MainWindow->resize(762, 589);
         MainWindow->setAutoFillBackground(false);
         MainWindow->setDockOptions(QMainWindow::AllowNestedDocks|QMainWindow::AllowTabbedDocks|QMainWindow::AnimatedDocks);
+        actionCreate_default_mesh = new QAction(MainWindow);
+        actionCreate_default_mesh->setObjectName(QString::fromUtf8("actionCreate_default_mesh"));
         centralwidget = new QWidget(MainWindow);
         centralwidget->setObjectName(QString::fromUtf8("centralwidget"));
         centralwidget->setAutoFillBackground(false);
         MainWindow->setCentralWidget(centralwidget);
         menubar = new QMenuBar(MainWindow);
         menubar->setObjectName(QString::fromUtf8("menubar"));
-        menubar->setGeometry(QRect(0, 0, 762, 20));
+        menubar->setGeometry(QRect(0, 0, 762, 21));
+        menuFile = new QMenu(menubar);
+        menuFile->setObjectName(QString::fromUtf8("menuFile"));
+        menuEdit = new QMenu(menubar);
+        menuEdit->setObjectName(QString::fromUtf8("menuEdit"));
+        menuCreate = new QMenu(menubar);
+        menuCreate->setObjectName(QString::fromUtf8("menuCreate"));
+        menuComponent = new QMenu(menubar);
+        menuComponent->setObjectName(QString::fromUtf8("menuComponent"));
+        menuHelp = new QMenu(menubar);
+        menuHelp->setObjectName(QString::fromUtf8("menuHelp"));
         MainWindow->setMenuBar(menubar);
         statusbar = new QStatusBar(MainWindow);
         statusbar->setObjectName(QString::fromUtf8("statusbar"));
@@ -118,7 +137,7 @@ public:
         sizePolicy.setVerticalStretch(0);
         sizePolicy.setHeightForWidth(projExplorerGUI->sizePolicy().hasHeightForWidth());
         projExplorerGUI->setSizePolicy(sizePolicy);
-        projExplorerGUI->setMinimumSize(QSize(82, 103));
+        projExplorerGUI->setMinimumSize(QSize(91, 113));
         projExplorerGUI->setMaximumSize(QSize(5000, 5000));
         projExplorerGUI->setFeatures(QDockWidget::DockWidgetMovable);
         projExplorerGUI->setAllowedAreas(Qt::BottomDockWidgetArea|Qt::LeftDockWidgetArea|Qt::RightDockWidgetArea);
@@ -149,7 +168,7 @@ public:
         sceneNodesGUI->setObjectName(QString::fromUtf8("sceneNodesGUI"));
         sizePolicy.setHeightForWidth(sceneNodesGUI->sizePolicy().hasHeightForWidth());
         sceneNodesGUI->setSizePolicy(sizePolicy);
-        sceneNodesGUI->setMinimumSize(QSize(103, 103));
+        sceneNodesGUI->setMinimumSize(QSize(103, 113));
         sceneNodesGUI->setFloating(false);
         sceneNodesGUI->setFeatures(QDockWidget::DockWidgetMovable);
         sceneNodesGUI->setAllowedAreas(Qt::BottomDockWidgetArea|Qt::LeftDockWidgetArea|Qt::RightDockWidgetArea);
@@ -205,7 +224,7 @@ public:
         scrollArea->setWidgetResizable(true);
         scrollAreaWidgetContents_3 = new QWidget();
         scrollAreaWidgetContents_3->setObjectName(QString::fromUtf8("scrollAreaWidgetContents_3"));
-        scrollAreaWidgetContents_3->setGeometry(QRect(0, 0, 368, 375));
+        scrollAreaWidgetContents_3->setGeometry(QRect(0, 0, 449, 375));
         QSizePolicy sizePolicy2(QSizePolicy::Preferred, QSizePolicy::Fixed);
         sizePolicy2.setHorizontalStretch(0);
         sizePolicy2.setVerticalStretch(0);
@@ -468,11 +487,11 @@ public:
 
         gridLayout_5->addWidget(label_34, 0, 0, 1, 1);
 
-        pushButton_11 = new QPushButton(enitityGUI_4);
-        pushButton_11->setObjectName(QString::fromUtf8("pushButton_11"));
-        sizePolicy2.setHeightForWidth(pushButton_11->sizePolicy().hasHeightForWidth());
-        pushButton_11->setSizePolicy(sizePolicy2);
-        pushButton_11->setStyleSheet(QString::fromUtf8("QPushButton {\n"
+        meshPickButton = new QPushButton(enitityGUI_4);
+        meshPickButton->setObjectName(QString::fromUtf8("meshPickButton"));
+        sizePolicy2.setHeightForWidth(meshPickButton->sizePolicy().hasHeightForWidth());
+        meshPickButton->setSizePolicy(sizePolicy2);
+        meshPickButton->setStyleSheet(QString::fromUtf8("QPushButton {\n"
 "     border: 2px solid #8f8f91;\n"
 "     border-radius: 7px;\n"
 "    border: 2px solid #8f8f91;\n"
@@ -491,13 +510,13 @@ public:
 "\n"
 ""));
 
-        gridLayout_5->addWidget(pushButton_11, 0, 2, 1, 1);
+        gridLayout_5->addWidget(meshPickButton, 0, 2, 1, 1);
 
-        pushButton_10 = new QPushButton(enitityGUI_4);
-        pushButton_10->setObjectName(QString::fromUtf8("pushButton_10"));
-        sizePolicy2.setHeightForWidth(pushButton_10->sizePolicy().hasHeightForWidth());
-        pushButton_10->setSizePolicy(sizePolicy2);
-        pushButton_10->setStyleSheet(QString::fromUtf8("QPushButton {\n"
+        materialPickButton = new QPushButton(enitityGUI_4);
+        materialPickButton->setObjectName(QString::fromUtf8("materialPickButton"));
+        sizePolicy2.setHeightForWidth(materialPickButton->sizePolicy().hasHeightForWidth());
+        materialPickButton->setSizePolicy(sizePolicy2);
+        materialPickButton->setStyleSheet(QString::fromUtf8("QPushButton {\n"
 "     border: 2px solid #8f8f91;\n"
 "     border-radius: 7px;\n"
 "    border: 2px solid #8f8f91;\n"
@@ -516,7 +535,7 @@ public:
 "\n"
 ""));
 
-        gridLayout_5->addWidget(pushButton_10, 1, 2, 1, 1);
+        gridLayout_5->addWidget(materialPickButton, 1, 2, 1, 1);
 
         label_36 = new QLabel(enitityGUI_4);
         label_36->setObjectName(QString::fromUtf8("label_36"));
@@ -542,16 +561,18 @@ public:
         gridLayout_7 = new QGridLayout();
         gridLayout_7->setSpacing(0);
         gridLayout_7->setObjectName(QString::fromUtf8("gridLayout_7"));
-        graphicsView_4 = new QGraphicsView(material_4);
-        graphicsView_4->setObjectName(QString::fromUtf8("graphicsView_4"));
-        graphicsView_4->setEnabled(true);
-        sizePolicy3.setHeightForWidth(graphicsView_4->sizePolicy().hasHeightForWidth());
-        graphicsView_4->setSizePolicy(sizePolicy3);
-        graphicsView_4->setMinimumSize(QSize(100, 100));
-        graphicsView_4->setMaximumSize(QSize(100, 100));
-        graphicsView_4->setAlignment(Qt::AlignCenter);
+        materialViwer = new QGraphicsView(material_4);
+        materialViwer->setObjectName(QString::fromUtf8("materialViwer"));
+        materialViwer->setEnabled(true);
+        sizePolicy3.setHeightForWidth(materialViwer->sizePolicy().hasHeightForWidth());
+        materialViwer->setSizePolicy(sizePolicy3);
+        materialViwer->setMinimumSize(QSize(100, 100));
+        materialViwer->setMaximumSize(QSize(100, 100));
+        materialViwer->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+        materialViwer->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+        materialViwer->setAlignment(Qt::AlignCenter);
 
-        gridLayout_7->addWidget(graphicsView_4, 1, 0, 1, 1);
+        gridLayout_7->addWidget(materialViwer, 1, 0, 1, 1);
 
 
         gridLayout_8->addLayout(gridLayout_7, 0, 0, 1, 1);
@@ -590,6 +611,13 @@ public:
         dockWidget->raise();
         componentsGUI->raise();
 
+        menubar->addAction(menuFile->menuAction());
+        menubar->addAction(menuEdit->menuAction());
+        menubar->addAction(menuCreate->menuAction());
+        menubar->addAction(menuComponent->menuAction());
+        menubar->addAction(menuHelp->menuAction());
+        menuCreate->addAction(actionCreate_default_mesh);
+
         retranslateUi(MainWindow);
 
         QMetaObject::connectSlotsByName(MainWindow);
@@ -598,6 +626,12 @@ public:
     void retranslateUi(QMainWindow *MainWindow)
     {
         MainWindow->setWindowTitle(QApplication::translate("MainWindow", "MainWindow", 0, QApplication::UnicodeUTF8));
+        actionCreate_default_mesh->setText(QApplication::translate("MainWindow", "Create default mesh", 0, QApplication::UnicodeUTF8));
+        menuFile->setTitle(QApplication::translate("MainWindow", "File", 0, QApplication::UnicodeUTF8));
+        menuEdit->setTitle(QApplication::translate("MainWindow", "Edit", 0, QApplication::UnicodeUTF8));
+        menuCreate->setTitle(QApplication::translate("MainWindow", "Create", 0, QApplication::UnicodeUTF8));
+        menuComponent->setTitle(QApplication::translate("MainWindow", "Component", 0, QApplication::UnicodeUTF8));
+        menuHelp->setTitle(QApplication::translate("MainWindow", "Help", 0, QApplication::UnicodeUTF8));
         componentsGUI->setWindowTitle(QApplication::translate("MainWindow", "Components", 0, QApplication::UnicodeUTF8));
         sceneNodeGUI_4->setTitle(QApplication::translate("MainWindow", "Scene Node", 0, QApplication::UnicodeUTF8));
         label_30->setText(QApplication::translate("MainWindow", "\320\243", 0, QApplication::UnicodeUTF8));
@@ -608,10 +642,11 @@ public:
         label_3->setText(QApplication::translate("MainWindow", "Scale", 0, QApplication::UnicodeUTF8));
         enitityGUI_4->setTitle(QApplication::translate("MainWindow", "Entity", 0, QApplication::UnicodeUTF8));
         label_34->setText(QApplication::translate("MainWindow", "Mesh:", 0, QApplication::UnicodeUTF8));
-        pushButton_11->setText(QApplication::translate("MainWindow", "Pick", 0, QApplication::UnicodeUTF8));
-        pushButton_10->setText(QApplication::translate("MainWindow", "Pick", 0, QApplication::UnicodeUTF8));
+        meshPickButton->setText(QApplication::translate("MainWindow", "Pick", 0, QApplication::UnicodeUTF8));
+        materialPickButton->setText(QApplication::translate("MainWindow", "Pick", 0, QApplication::UnicodeUTF8));
         label_36->setText(QApplication::translate("MainWindow", "Material:", 0, QApplication::UnicodeUTF8));
         material_4->setTitle(QApplication::translate("MainWindow", "Material", 0, QApplication::UnicodeUTF8));
+        dockWidget->setWindowTitle(QApplication::translate("MainWindow", "Scene", 0, QApplication::UnicodeUTF8));
     } // retranslateUi
 
 };

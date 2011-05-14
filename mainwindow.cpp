@@ -2,9 +2,11 @@
 #include "ui_mainwindow.h"
 
 #include <QTreeWidgetItemIterator>
+#include <QFileDialog>
+
+#include <OgreMaterial.h>
 
 MainWindow * MainWindow::instance = 0;
-int MainWindow::objectsCount = 0;
 
 MainWindow::MainWindow(QWidget *parent) :  QMainWindow(parent),  ui(new Ui::MainWindow)
 {
@@ -12,17 +14,13 @@ MainWindow::MainWindow(QWidget *parent) :  QMainWindow(parent),  ui(new Ui::Main
     ogreWindow = new OgreWidget(ui->dockWidgetContents_2);
     ogreWindow->setMouseTracking(true);
     ui->gridLayout_9->addWidget(ogreWindow);
-   // QTabWidget *tab = new QTabWidget;
-   // QWidget *wi = new QWidget;
-   // tab->addTab(ogreWindow,"Scene");
-   // tab->addTab(wi,"Game");
-   // this->setCentralWidget(tab);
+
     this->setCentralWidget(0);
     initProjectExplorer();
     this->addDockWidget(static_cast<Qt::DockWidgetArea>(2), ui->sceneNodesGUI);
     this->addDockWidget(static_cast<Qt::DockWidgetArea>(1), ui->projExplorerGUI);
 
-    // Slot connection
+    // Slot connections
     QObject::connect(ui->sceneNodesTree, SIGNAL(itemSelectionChanged()),
             this,    SLOT(OnSceneNodeClicked()) );
 
@@ -36,6 +34,14 @@ MainWindow::MainWindow(QWidget *parent) :  QMainWindow(parent),  ui(new Ui::Main
     QObject::connect(ui->scale_y, SIGNAL(textChanged(const QString &)), this, SLOT(OnPositionChanged(const QString &)) );
     QObject::connect(ui->scale_z, SIGNAL(textChanged(const QString &)), this, SLOT(OnPositionChanged(const QString &)) );
 
+
+    QObject::connect(ui->materialPickButton, SIGNAL(pressed()), this, SLOT(OnMaterialButtonDown()));
+    QObject::connect(ui->meshPickButton, SIGNAL(pressed()), this, SLOT(OnMeshButtonDown()));
+
+    ////////////
+    // MaterialViwer initialize
+    QGraphicsScene *scn = new QGraphicsScene(ui->materialViwer);
+    ui->materialViwer->setScene( scn );
 
 }
 
@@ -87,34 +93,6 @@ void MainWindow::initProjectExplorer()
 
  }  
 
-
-void MainWindow::createMesh(Ogre::Vector3 pos, Ogre::String meshName, Ogre::String materialName)
-{
-    objectsCount++;
-
-    Ogre::Entity * myEntity =
-            ogreWindow->getSceneManager()->createEntity(meshName +
-                           QString::number(objectsCount).toStdString(),
-                                                      meshName +".mesh");
-    Ogre::SceneNode * mynode =
-            ogreWindow->getSceneManager()->getRootSceneNode()->createChildSceneNode(meshName +
-                                       QString::number(objectsCount).toStdString());
-
-    mynode->attachObject( myEntity );
-    myEntity->setMaterialName(materialName);
-    mynode->setPosition(pos);
-    mynode->scale(1.1, 1.1, 1.1);
-
-    QStringList lst;
-    lst << "Object";
-    QTreeWidgetItem* pItem = new QTreeWidgetItem(lst, 0);
-    pItem->setData(0, Qt::UserRole, QString::fromStdString(mynode->getName()));
-
-    ui->sceneNodesTree->addTopLevelItem(pItem);
-
-}
-
-
 void MainWindow::OnSceneNodeClicked()
 {
       QTreeWidgetItem *item = ui->sceneNodesTree->selectedItems()[0];
@@ -123,7 +101,8 @@ void MainWindow::OnSceneNodeClicked()
 
       Ogre::Entity *entity = ogreWindow->getSceneManager()->getEntity(item->data(0, Qt::UserRole).toString().toStdString());
 
-      UpdateComponents(node, entity);     
+      UpdateComponents(node, entity);
+      UpdateMaterialView(entity);
 }
 
 void MainWindow::UpdateSceneNodesList(QString nodeName)
@@ -138,6 +117,32 @@ void MainWindow::UpdateSceneNodesList(QString nodeName)
            }
           ++it;
        }
+}
+
+void MainWindow::UpdateMaterialView(Ogre::Entity *entity)
+{
+    // Get Texture file name
+     Ogre::Material *mat = static_cast<Ogre::Material*>
+             (Ogre::MaterialManager::getSingletonPtr()->getByName(entity->getSubEntity(0)->getMaterialName()).get());
+
+     Ogre::String str = mat->getTechnique(0)->getPass(0)->getTextureUnitState(0)->getTextureName();
+
+
+     // Image Rendering
+     QPixmap pix( QDir::currentPath() + "/media/materials/textures/" + QString::fromStdString(str) );
+     ui->materialViwer->scene()->addPixmap (pix.scaled(ui->materialViwer->width(),
+                                                        ui->materialViwer->height()) );
+
+}
+
+void MainWindow::AddItemToSceneList(Ogre::String name)
+{
+    QStringList lst;
+    lst << QString::fromStdString("Object");
+    QTreeWidgetItem* pItem = new QTreeWidgetItem(lst, 0);
+    pItem->setData(0, Qt::UserRole, QString::fromStdString(name));
+
+    ui->sceneNodesTree->addTopLevelItem(pItem);
 }
 
 void MainWindow::OnPositionChanged(const QString & str)
@@ -173,4 +178,43 @@ if (ui->position_x->hasFocus() || ui->position_x->hasFocus()|| ui->position_y->h
   }
 }
 
+void MainWindow::OnMaterialButtonDown()
+{
 
+    QString fileName = QFileInfo((QFileDialog::getOpenFileName(this, "Load Material",
+                                              QDir::currentPath() + "/media",
+                                              "Materials (*.material)"))).baseName();
+    Ogre::SceneNode *node;
+    Ogre::Entity *entity;
+    if ((node = ogreWindow->getCurrentNode())  && (fileName != ""))
+    {
+        entity = static_cast<Ogre::Entity*>(node->getAttachedObject(node->getName()));
+        entity->setMaterialName(fileName.toStdString());
+
+        UpdateMaterialView(entity);
+        ui->texture_edit->setText(fileName);
+    }
+}
+
+void MainWindow::OnMeshButtonDown()
+{
+
+    QString fileName = QFileInfo((QFileDialog::getOpenFileName(this, "Load Mesh",
+                                              QDir::currentPath() + "/media",
+                                              "Models (*.mesh)"))).fileName();
+    Ogre::SceneNode *node;
+    if ((node = ogreWindow->getCurrentNode()) && (fileName != ""))
+    {
+        Ogre::Entity *entity = static_cast<Ogre::Entity*>(node->getAttachedObject(node->getName()));
+        Ogre::String materialName = entity->getSubEntity(0)->getMaterialName();
+
+        ogreWindow->getSceneManager()->destroyEntity(entity);
+
+        entity = ogreWindow->getSceneManager()->createEntity(node->getName(), fileName.toStdString());
+        entity->setMaterialName(materialName);
+
+        node->attachObject( entity );
+
+        ui->mesh_edit->setText(fileName);
+    }
+}
