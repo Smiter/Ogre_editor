@@ -33,6 +33,9 @@
      <height>20</height>
     </rect>
    </property>
+   <property name="defaultUp">
+    <bool>false</bool>
+   </property>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
   <widget class="QDockWidget" name="projExplorerGUI">
@@ -225,7 +228,7 @@
          <rect>
           <x>0</x>
           <y>0</y>
-          <width>368</width>
+          <width>449</width>
           <height>375</height>
          </rect>
         </property>
@@ -285,68 +288,8 @@
                 <property name="spacing">
                  <number>6</number>
                 </property>
-                <item row="1" column="1">
-                 <widget class="QLineEdit" name="position_z">
-                  <property name="sizePolicy">
-                   <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-                    <horstretch>0</horstretch>
-                    <verstretch>0</verstretch>
-                   </sizepolicy>
-                  </property>
-                  <property name="styleSheet">
-                   <string notr="true">QLineEdit {	
-     border: 2px solid gray;
-     border-radius: 7px;
-     padding: 0 8px;
-     background: rgb(225, 248, 250);	
-	 border-color:rgb(16, 18, 12);
-
- }</string>
-                  </property>
-                 </widget>
-                </item>
-                <item row="1" column="3">
-                 <widget class="QLineEdit" name="position_x">
-                  <property name="sizePolicy">
-                   <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-                    <horstretch>0</horstretch>
-                    <verstretch>0</verstretch>
-                   </sizepolicy>
-                  </property>
-                  <property name="styleSheet">
-                   <string notr="true">QLineEdit {	
-     border: 2px solid gray;
-     border-radius: 7px;
-     padding: 0 8px;
-     background: rgb(225, 248, 250);	
-	 border-color:rgb(16, 18, 12);
-
- }</string>
-                  </property>
-                 </widget>
-                </item>
                 <item row="1" column="2">
                  <widget class="QLineEdit" name="position_y">
-                  <property name="sizePolicy">
-                   <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-                    <horstretch>0</horstretch>
-                    <verstretch>0</verstretch>
-                   </sizepolicy>
-                  </property>
-                  <property name="styleSheet">
-                   <string notr="true">QLineEdit {	
-     border: 2px solid gray;
-     border-radius: 7px;
-     padding: 0 8px;
-     background: rgb(225, 248, 250);	
-	 border-color:rgb(16, 18, 12);
-
- }</string>
-                  </property>
-                 </widget>
-                </item>
-                <item row="2" column="3">
-                 <widget class="QLineEdit" name="rotation_x">
                   <property name="sizePolicy">
                    <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
                     <horstretch>0</horstretch>
@@ -385,68 +328,8 @@
                   </property>
                  </widget>
                 </item>
-                <item row="2" column="1">
-                 <widget class="QLineEdit" name="rotation_z">
-                  <property name="sizePolicy">
-                   <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-                    <horstretch>0</horstretch>
-                    <verstretch>0</verstretch>
-                   </sizepolicy>
-                  </property>
-                  <property name="styleSheet">
-                   <string notr="true">QLineEdit {	
-     border: 2px solid gray;
-     border-radius: 7px;
-     padding: 0 8px;
-     background: rgb(225, 248, 250);	
-	 border-color:rgb(16, 18, 12);
-
- }</string>
-                  </property>
-                 </widget>
-                </item>
-                <item row="3" column="3">
-                 <widget class="QLineEdit" name="scale_x">
-                  <property name="sizePolicy">
-                   <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-                    <horstretch>0</horstretch>
-                    <verstretch>0</verstretch>
-                   </sizepolicy>
-                  </property>
-                  <property name="styleSheet">
-                   <string notr="true">QLineEdit {	
-     border: 2px solid gray;
-     border-radius: 7px;
-     padding: 0 8px;
-     background: rgb(225, 248, 250);	
-	 border-color:rgb(16, 18, 12);
-
- }</string>
-                  </property>
-                 </widget>
-                </item>
                 <item row="3" column="2">
                  <widget class="QLineEdit" name="scale_y">
-                  <property name="sizePolicy">
-                   <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-                    <horstretch>0</horstretch>
-                    <verstretch>0</verstretch>
-                   </sizepolicy>
-                  </property>
-                  <property name="styleSheet">
-                   <string notr="true">QLineEdit {	
-     border: 2px solid gray;
-     border-radius: 7px;
-     padding: 0 8px;
-     background: rgb(225, 248, 250);	
-	 border-color:rgb(16, 18, 12);
-
- }</string>
-                  </property>
-                 </widget>
-                </item>
-                <item row="3" column="1">
-                 <widget class="QLineEdit" name="scale_z">
                   <property name="sizePolicy">
                    <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
                     <horstretch>0</horstretch>
@@ -549,6 +432,126 @@
                   </property>
                   <property name="text">
                    <string>Scale</string>
+                  </property>
+                 </widget>
+                </item>
+                <item row="1" column="1">
+                 <widget class="QLineEdit" name="position_x">
+                  <property name="sizePolicy">
+                   <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                   </sizepolicy>
+                  </property>
+                  <property name="styleSheet">
+                   <string notr="true">QLineEdit {	
+     border: 2px solid gray;
+     border-radius: 7px;
+     padding: 0 8px;
+     background: rgb(225, 248, 250);	
+	 border-color:rgb(16, 18, 12);
+
+ }</string>
+                  </property>
+                 </widget>
+                </item>
+                <item row="1" column="3">
+                 <widget class="QLineEdit" name="position_z">
+                  <property name="sizePolicy">
+                   <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                   </sizepolicy>
+                  </property>
+                  <property name="styleSheet">
+                   <string notr="true">QLineEdit {	
+     border: 2px solid gray;
+     border-radius: 7px;
+     padding: 0 8px;
+     background: rgb(225, 248, 250);	
+	 border-color:rgb(16, 18, 12);
+
+ }</string>
+                  </property>
+                 </widget>
+                </item>
+                <item row="2" column="1">
+                 <widget class="QLineEdit" name="rotation_x">
+                  <property name="sizePolicy">
+                   <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                   </sizepolicy>
+                  </property>
+                  <property name="styleSheet">
+                   <string notr="true">QLineEdit {	
+     border: 2px solid gray;
+     border-radius: 7px;
+     padding: 0 8px;
+     background: rgb(225, 248, 250);	
+	 border-color:rgb(16, 18, 12);
+
+ }</string>
+                  </property>
+                 </widget>
+                </item>
+                <item row="2" column="3">
+                 <widget class="QLineEdit" name="rotation_z">
+                  <property name="sizePolicy">
+                   <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                   </sizepolicy>
+                  </property>
+                  <property name="styleSheet">
+                   <string notr="true">QLineEdit {	
+     border: 2px solid gray;
+     border-radius: 7px;
+     padding: 0 8px;
+     background: rgb(225, 248, 250);	
+	 border-color:rgb(16, 18, 12);
+
+ }</string>
+                  </property>
+                 </widget>
+                </item>
+                <item row="3" column="1">
+                 <widget class="QLineEdit" name="scale_x">
+                  <property name="sizePolicy">
+                   <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                   </sizepolicy>
+                  </property>
+                  <property name="styleSheet">
+                   <string notr="true">QLineEdit {	
+     border: 2px solid gray;
+     border-radius: 7px;
+     padding: 0 8px;
+     background: rgb(225, 248, 250);	
+	 border-color:rgb(16, 18, 12);
+
+ }</string>
+                  </property>
+                 </widget>
+                </item>
+                <item row="3" column="3">
+                 <widget class="QLineEdit" name="scale_z">
+                  <property name="sizePolicy">
+                   <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                   </sizepolicy>
+                  </property>
+                  <property name="styleSheet">
+                   <string notr="true">QLineEdit {	
+     border: 2px solid gray;
+     border-radius: 7px;
+     padding: 0 8px;
+     background: rgb(225, 248, 250);	
+	 border-color:rgb(16, 18, 12);
+
+ }</string>
                   </property>
                  </widget>
                 </item>
@@ -815,6 +818,94 @@
     </layout>
    </widget>
   </widget>
+  <widget class="QToolBar" name="toolBar">
+   <property name="sizePolicy">
+    <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+     <horstretch>0</horstretch>
+     <verstretch>0</verstretch>
+    </sizepolicy>
+   </property>
+   <property name="minimumSize">
+    <size>
+     <width>0</width>
+     <height>60</height>
+    </size>
+   </property>
+   <property name="windowTitle">
+    <string>toolBar</string>
+   </property>
+   <property name="movable">
+    <bool>false</bool>
+   </property>
+   <attribute name="toolBarArea">
+    <enum>TopToolBarArea</enum>
+   </attribute>
+   <attribute name="toolBarBreak">
+    <bool>false</bool>
+   </attribute>
+   <addaction name="actionTranslate"/>
+   <addaction name="actionRotate"/>
+   <addaction name="actionScale"/>
+   <addaction name="separator"/>
+   <addaction name="actionLocal"/>
+   <addaction name="actionGlobal"/>
+   <addaction name="separator"/>
+  </widget>
+  <action name="actionTranslate">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Translate</string>
+   </property>
+   <property name="autoRepeat">
+    <bool>true</bool>
+   </property>
+   <property name="visible">
+    <bool>true</bool>
+   </property>
+   <property name="menuRole">
+    <enum>QAction::TextHeuristicRole</enum>
+   </property>
+   <property name="softKeyRole">
+    <enum>QAction::NoSoftKey</enum>
+   </property>
+   <property name="priority">
+    <enum>QAction::NormalPriority</enum>
+   </property>
+  </action>
+  <action name="actionRotate">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Rotate</string>
+   </property>
+  </action>
+  <action name="actionScale">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Scale</string>
+   </property>
+  </action>
+  <action name="actionLocal">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>local</string>
+   </property>
+  </action>
+  <action name="actionGlobal">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>global</string>
+   </property>
+  </action>
   <zorder>dockWidget</zorder>
   <zorder>componentsGUI</zorder>
  </widget>

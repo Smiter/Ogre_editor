@@ -1,9 +1,13 @@
 #ifndef __OGREWIDGET_H__
 #define __OGREWIDGET_H__
+class TranslateGizmo;
+class RayManager;
 
 #include <QtOpenGL/QGLWidget>
 #include <QDir>
-
+#include "raymanager.h"
+#include "gizmomanager.h"
+#include "ui_mainwindow.h"
 
 class OgreWidget : public QGLWidget
 {
@@ -25,28 +29,53 @@ private:
   void initResourses();
   virtual Ogre::RenderSystem* chooseRenderer( Ogre::RenderSystemList* );
   virtual  void mousePressEvent ( QMouseEvent * event );
-  void GetMeshInformation(const Ogre::MeshPtr , size_t &, Ogre::Vector3 *&, size_t &, unsigned long *&, const Ogre::Vector3 &, const Ogre::Quaternion &, const Ogre::Vector3 &);
-  Ogre::SceneNode   *raycastOnScene(float,float);
+  virtual  void mouseMoveEvent ( QMouseEvent * event );
+  virtual  void keyPressEvent ( QKeyEvent * event );
+  virtual  void wheelEvent ( QWheelEvent * event );
+  virtual  void keyReleaseEvent ( QKeyEvent * event );
+
+  void CreateGizmo();
+  void CameraLooking(float,float,float,float);
+  void SphereCameraRotating(float,float,float,float);
+
 
   Ogre::Root    *mOgreRoot;
   Ogre::RenderWindow    *mOgreWindow;
   Ogre::Camera  *mCamera;
   Ogre::Viewport    *mViewport;
   Ogre::SceneManager    *mSceneMgr;
-
   Ogre::SceneNode   *mCurrentNode;
+  Ogre::Entity   *mCurrentEntity;
+  Ogre::RaySceneQuery   *mRaySceneQuery;
 
 
-  Ogre::RaySceneQuery   *mRaySceneQuery;  
-  QTimer*  timer;
-
+  bool altClick;
 
 public:
 
   Ogre::SceneManager *getSceneManager();
+  Ogre::Viewport *getViewPort();
   void setCurrentNode(Ogre::SceneNode*);
   Ogre::SceneNode* getCurrentNode();
+  Ogre::Camera* getCamera();
+  Ogre::RenderWindow* getRenderWidnow();
+  Ogre::RaySceneQuery* getRaySceneQuery();  
+  QTimer*  timer;
 
+  enum QueryFlags
+  {
+         AXIS_MASK_X = 1 <<0,
+         AXIS_MASK_Y = 1<<1 ,
+         AXIS_MASK_Z = 1<<2 ,
+         AXIS_MASK_XYZ = AXIS_MASK_X | AXIS_MASK_Y | AXIS_MASK_Z,
+         AXIS_ROTATION =1<<6 ,
+         OTHER_MASK = 1<<7 ,
+         PLANE_XY_MASK = 1<<8,
+         PLANE_XZ_MASK = 1<<9,
+         PLANE_Z_MASK = 1<<10,
+         NONE_MASK = 1<<11,
+         AXIS_MASK_SCALE = 1<<12,
+  };
 
  public slots:
    void OnRenderTimer();

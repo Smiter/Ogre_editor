@@ -43,6 +43,7 @@ public slots:
     //
     // On item clicked in hierarchy list
     void OnSceneNodeClicked();
+    void ProcessToolBar();
 
 
 

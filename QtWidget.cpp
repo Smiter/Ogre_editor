@@ -3,7 +3,7 @@
 
 OgreWidget::OgreWidget( QWidget *parent ): QGLWidget( parent ), mOgreWindow(NULL)
 {
-  init( "plugins.cfg", "ogre.cfg", "ogre.log" );
+  init( "plugins.cfg", "ogre.cfg", "ogre.log" );  
 }
 
 void OgreWidget::init( std::string plugins_file,  std::string ogre_cfg_file, std::string ogre_log )
@@ -24,6 +24,7 @@ void OgreWidget::init( std::string plugins_file,  std::string ogre_cfg_file, std
 
 void OgreWidget::initializeGL()
 {
+
   // Get the parameters of the window QT created
   Ogre::String winHandle = Ogre::StringConverter::toString((unsigned int)(winId()));
   Ogre::NameValuePairList params;
@@ -40,13 +41,13 @@ void OgreWidget::initializeGL()
   Ogre::SceneType scene_manager_type = Ogre::ST_GENERIC;
   mSceneMgr = mOgreRoot->createSceneManager( scene_manager_type );
   mCamera = mSceneMgr->createCamera( "QOgreWidget_Cam" );
-  mCamera->setNearClipDistance(0.1f);
-  mCamera->setFarClipDistance(1000.0f);
-  mCamera->setPosition(Ogre::Vector3(-201.0f, 200.0f, 0.0f));
+  mCamera->setNearClipDistance(1.0f);
+  mCamera->setFarClipDistance(10000.0f);
+  mCamera->setPosition(Ogre::Vector3(-500.0f, 300.0f, 0.0f));
   mCamera->setOrientation(Ogre::Quaternion(1,-0.27,-0.95,-0.27));
   mCamera->setAutoAspectRatio(true);
 
-  Ogre::Viewport *mViewport = mOgreWindow->addViewport( mCamera );
+  mViewport = mOgreWindow->addViewport( mCamera );
   mViewport->setBackgroundColour( Ogre::ColourValue( 0.2,0.2,0.2 ) );
 
   mRaySceneQuery = new Ogre::DefaultRaySceneQuery(mSceneMgr);
@@ -57,19 +58,33 @@ void OgreWidget::initializeGL()
   QObject::connect(timer, SIGNAL(timeout()), this,SLOT(OnRenderTimer()));
   timer->setInterval(10);
   timer->start();
+  GizmoManager::CreateGizmo(this);
+  altClick=false; 
 
+ // mCamera->setPolygonMode(Ogre::PM_SOLID);
+ // mCamera->setPolygonMode(Ogre::PM_WIREFRAME);
+  mCamera->setFOVy(Ogre::Radian(0.3));
+  //mSceneMgr->showBoundingBoxes(true);
 }
 
 void OgreWidget::paintGL()
 {
   assert( mOgreWindow );
   mOgreRoot->renderOneFrame();
+
 }
 
 void OgreWidget::resizeGL( int width, int height )
 {
   assert( mOgreWindow );
+
   mOgreWindow->windowMovedOrResized();
+  if(mCurrentNode)
+  {
+      GizmoManager::UpdateAxisSize(this,GizmoManager::getTranslateGizmo(),mCurrentNode);
+      GizmoManager::UpdateAxisSize(this,GizmoManager::getRotateGizmo(),mCurrentNode);
+      GizmoManager::UpdateAxisSize(this,GizmoManager::getScaleGizmo(),mCurrentNode);
+  }
 }
 
 Ogre::RenderSystem* OgreWidget::chooseRenderer( Ogre::RenderSystemList *renderers )
@@ -103,197 +118,235 @@ void OgreWidget::OnRenderTimer()
 
 void OgreWidget::mousePressEvent ( QMouseEvent * event )
 {
-    if(event->button() == Qt::LeftButton) {
+    Ogre::Vector3 startMousePosition;
 
+    if(event->button() == Qt::LeftButton &&  !altClick )
+    {
 
-        if( (mCurrentNode = raycastOnScene(event->x() ,   event->y() )) != 0 ){
+       if( (startMousePosition = RayManager::raycastIntersectionOnScene(this,event->x() ,   event->y(), AXIS_MASK_XYZ,true )) != Ogre::Vector3::ZERO )
+       {
+           GizmoManager::SetStartPoint(startMousePosition);
+           return;
+       }
 
+       if( (mCurrentNode = RayManager::raycastNodeOnScene(this,event->x() ,   event->y(), NONE_MASK )) != 0 )
+        {
             MainWindow::getInstance()->UpdateComponents(mCurrentNode,mSceneMgr->getEntity(mCurrentNode->getName()));
 
-            MainWindow::getInstance()->UpdateSceneNodesList(QString::fromStdString(mCurrentNode->getName()));
+            MainWindow::getInstance()->UpdateSceneNodesList(QString::fromStdString(mCurrentNode->getName()));            
+            GizmoManager::cameraNode->setPosition(mCurrentNode->getPosition());
+
+            if( MainWindow::getInstance()->ui->actionTranslate->isChecked())
+            {
+                 GizmoManager::Show(GizmoManager::getTranslateGizmo());
+                 GizmoManager::SetGizmoPosition(GizmoManager::getTranslateGizmo(),mCurrentNode->getPosition());
+                 GizmoManager::UpdateAxisSize(this,GizmoManager::getTranslateGizmo(),mCurrentNode);
+
+                 if(MainWindow::getInstance()->ui->actionGlobal->isChecked())
+                     GizmoManager::ConvertGizmo(false,true,mCurrentNode);
+                 if(MainWindow::getInstance()->ui->actionLocal->isChecked())
+                     GizmoManager::ConvertGizmo(true,false,mCurrentNode);
+
+            }
+            if( MainWindow::getInstance()->ui->actionRotate->isChecked())
+            {
+                 GizmoManager::Show(GizmoManager::getRotateGizmo());
+                 GizmoManager::SetGizmoPosition(GizmoManager::getRotateGizmo(),mCurrentNode->getPosition());
+                 GizmoManager::UpdateAxisSize(this,GizmoManager::getRotateGizmo(),mCurrentNode);
+            }
+            if( MainWindow::getInstance()->ui->actionScale->isChecked())
+            {
+                 GizmoManager::Show(GizmoManager::getScaleGizmo());
+                 GizmoManager::SetGizmoPosition(GizmoManager::getScaleGizmo(),mCurrentNode->getPosition());
+                 GizmoManager::UpdateAxisSize(this,GizmoManager::getScaleGizmo(),mCurrentNode);
+            }
+
+
 
         }
+       else
+       {
+            GizmoManager::Hide(GizmoManager::getTranslateGizmo());
+            GizmoManager::Hide(GizmoManager::getRotateGizmo());
+            GizmoManager::Hide(GizmoManager::getScaleGizmo());
+       }
+
     }
 }
 
-Ogre::SceneNode * OgreWidget::raycastOnScene(float _x, float _y)
+
+void OgreWidget::mouseMoveEvent (QMouseEvent * event)
 {
-    mViewport = mSceneMgr->getCurrentViewport();
-    float WindowWidth=mViewport->getActualWidth();
-    float WindowHeight=mViewport->getActualHeight();
+    static float currentX;
+    static float currentY;
 
-            //ќбъ€вим массив из 3-х точек, в который будем записывать треугольнк, который пересек луч.
-            Ogre::Vector3 Face[3];
+    if(event->buttons() == Qt::LeftButton && mCurrentEntity && mCurrentNode &&  !altClick)
+    {
+        if( MainWindow::getInstance()->ui->actionGlobal->isChecked())
+        {
+             GizmoManager::ManipulationWithGizmo(mCurrentEntity->getName(),this,mCurrentNode,event->x(),event->y(),false,true);
+        }
+        if( MainWindow::getInstance()->ui->actionLocal->isChecked())
+        {
+             GizmoManager::ManipulationWithGizmo(mCurrentEntity->getName(),this,mCurrentNode,event->x(),event->y(),true,false);
+        }
 
-            Ogre::Ray _ray = mCamera->getCameraToViewportRay(_x / WindowWidth , _y / WindowHeight); /// стрел€ем лучом из курсора
-            Ogre::Vector3 inters = Ogre::Vector3::ZERO;
-            Ogre::Entity* ent = 0;
-            Ogre::Vector3 singleRes;
+        MainWindow::getInstance()->UpdateComponents(mCurrentNode,mSceneMgr->getEntity(mCurrentNode->getName()));             
+        return;
+    }
 
-            if ( mRaySceneQuery != NULL ) {
-                    mRaySceneQuery->clearResults( );
-                  //  mRaySceneQuery->setQueryTypeMask(Ogre::SceneManager::ENTITY_TYPE_MASK);
-                  //  mRaySceneQuery->setQueryMask( _mask );
-                    mRaySceneQuery->setRay( _ray );
-                    mRaySceneQuery->setSortByDistance(true);
-                    if ( mRaySceneQuery->execute().size() <= 0 ) {
-                           // if (myEnt._distance !=0)
-                          //  {
-                          //          myEnt._intersection=_ray.getPoint(myEnt._distance);
-                           // }
-                                       return 0;
-                      }
-            } else {
-                    Ogre::LogManager::getSingleton().logMessage("...Cannot raycast without RaySceneQuery instance...");
-                    return 0;
-            }
-            Ogre::Real closest_distance = -1.0f;
-            Ogre::Vector3 closest_result;
-            Ogre::RaySceneQueryResult &query_result = mRaySceneQuery->getLastResults();
-            Ogre::RaySceneQueryResult::iterator itr = query_result.begin( );
+    if( (mCurrentEntity = RayManager::raycastEntityOnScene(this,event->x() ,   event->y(), AXIS_MASK_XYZ )) != 0 &&  !altClick )
+    {
+        GizmoManager::SetLightOn(GizmoManager::getTranslateGizmo(),mCurrentEntity->getName());
+        GizmoManager::SetLightOn(GizmoManager::getRotateGizmo(),mCurrentEntity->getName());
+        GizmoManager::SetLightOn(GizmoManager::getScaleGizmo(),mCurrentEntity->getName());
+    }
+    else
+    {
+         GizmoManager::SetLightOff(GizmoManager::getRotateGizmo());
+         GizmoManager::SetLightOff(GizmoManager::getTranslateGizmo());
+         GizmoManager::SetLightOff(GizmoManager::getScaleGizmo());
+    }
 
-            /// перебор всех объектов, в которые попал луч
-            for (size_t qr_idx = 0; qr_idx < query_result.size( ); qr_idx++, itr++ ) {
-                    if ((closest_distance >= 0.0f) && (closest_distance < query_result[qr_idx].distance)) {
-                            break;
-                    }
-                    if (query_result[qr_idx].movable != NULL) {
-                            ent = static_cast< Ogre::Entity * >(query_result[ qr_idx ].movable);
-                            if ( ent ) {
-                                    //if(ent->getName() == "GizmoT") continue;
+    if(event->buttons() == Qt::RightButton)
+    {
+        CameraLooking(event->x(),event->y(),currentX,currentY);
+    }
 
-                                  //  if (checkBounds)
-                                   // {
-                                   //         myEnt._entName=ent->getName();
-                                   //         closest_result = _ray.getPoint((*itr).distance);
-                                   //         myEnt._intersection=closest_result;
-                                   //         myEnt._distance = (*itr).distance;
-                                   //         return 0;
-                                   // }
-                                    size_t vertex_count = 0;
-                                    size_t index_count = 0;
-                                    Ogre::Vector3 *vertices = new Ogre::Vector3(Ogre::Vector3::ZERO);
-                                    unsigned long *indices = new unsigned long(0);
-                                    if ( ! ent->getMesh( ).isNull( ) ) {
-                                            if ( ent->getMesh( )->getNumSubMeshes( ) > 10000 ) continue;
-                                            GetMeshInformation(ent->getMesh(), vertex_count, vertices, index_count, indices,
-                                                                                    ent->getParentNode()->_getDerivedPosition(),
-                                                                                    ent->getParentNode()->_getDerivedOrientation(),
-                                                                                    ent->getParentNode()->_getDerivedScale());
-                                            bool new_closest_found = false;
-                                            for (int i = 0; i < static_cast<int>(index_count); i += 3)
-                                            {
-                                                    std::pair<bool, Ogre::Real> hit = Ogre::Math::intersects(_ray, vertices[indices[i]],
-                         vertices[indices[i+1]], vertices[indices[i+2]], true, true);
+    if(event->buttons() == Qt::LeftButton &&  altClick )
+    {      
+       SphereCameraRotating(event->x(),event->y(),currentX,currentY);
+    }
 
-                                                    if (hit.first)
-                                                    {
-                                                            if ((closest_distance < 0.5f) || (hit.second < closest_distance))
-                                                            {
-                                                                    //---------------
-                                                                    //—обственно запоминаем координаты треугольника
-                                                                    Face[0] = vertices[indices[i]];
-                                                                    Face[1] = vertices[indices[i+1]];
-                                                                    Face[2] = vertices[indices[i+2]];
-                                                                    //---------------
-                                                                    closest_distance = hit.second;
-                                                                    new_closest_found = true;
 
-                                                            }
-                                                    }
-                                            }
-                                            delete[] vertices;
-                                            delete[] indices;
-                                            if (new_closest_found) {
-                                                    //closest_result = _ray.getPoint(closest_distance);
-                                                   // myEnt._ent = ent;
-                                                  //  myEnt._entName=ent->getName();
-                                                  //  myEnt._intersection=closest_result;
-                                                  //  myEnt._distance = closest_distance;
-                                                   // myEnt._localSpace=planeNode->convertWorldToLocalPosition(closest_result);
-                                            }
-                                    }
-                            }
-                    }
-            }
-            if (closest_distance >= 0.0f && ent)
-            {
-                   // return 1;
-                    //qDebug()<<QString::fromStdString(mSceneMgr->getSceneNode(ent->getName())->getName());
-                    return mSceneMgr->getSceneNode(ent->getName());
 
-            }
-            return 0;
+    currentX = event->x();
+    currentY = event->y();
+
 }
 
 
-void OgreWidget::GetMeshInformation(const Ogre::MeshPtr mesh, size_t &vertex_count, Ogre::Vector3 *&vertices, size_t &index_count, unsigned long *&indices, const Ogre::Vector3 &position, const Ogre::Quaternion &orient, const Ogre::Vector3 &scale) {
-        bool added_shared = false;
-        size_t current_offset = 0;
-        size_t shared_offset = 0;
-        size_t next_offset = 0;
-        size_t index_offset = 0;
-        vertex_count = index_count = 0;
-        for (unsigned short i = 0; i < mesh->getNumSubMeshes(); ++i) {
-                Ogre::SubMesh* submesh = mesh->getSubMesh( i );
-                if ( !submesh ) continue;
-                if(submesh->useSharedVertices) {
-                        if( !added_shared ) {
-                                          vertex_count += mesh->sharedVertexData->vertexCount;
-                                          added_shared = true;
-                        }
-                } else {
-                        vertex_count += submesh->vertexData->vertexCount;
-                }
-                index_count += submesh->indexData->indexCount;
-        }
-        if ( vertices ) delete vertices;
-        if ( indices ) delete indices;
-        vertices = new Ogre::Vector3[vertex_count];
-        indices = new unsigned long[index_count];
-        added_shared = false;
-        for ( unsigned short i = 0; i < mesh->getNumSubMeshes(); ++i) {
-                Ogre::SubMesh* submesh = mesh->getSubMesh(i);
-                if ( !submesh ) continue;
-                Ogre::VertexData* vertex_data = submesh->useSharedVertices ? mesh->sharedVertexData : submesh->vertexData;
-                if((!submesh->useSharedVertices)||(submesh->useSharedVertices && !added_shared)) {
-                        if(submesh->useSharedVertices) {
-                                added_shared = true;
-                                shared_offset = current_offset;
-                        }
-                        const Ogre::VertexElement* posElem = vertex_data->vertexDeclaration->findElementBySemantic(Ogre::VES_POSITION);
-                        Ogre::HardwareVertexBufferSharedPtr vbuf = vertex_data->vertexBufferBinding->getBuffer(posElem->getSource());
-                        unsigned char* vertex = static_cast<unsigned char*>(vbuf->lock(Ogre::HardwareBuffer::HBL_READ_ONLY));
-                        float* pReal;
-                        for( size_t j = 0; j < vertex_data->vertexCount; ++j, vertex += vbuf->getVertexSize()) {
-                                posElem->baseVertexPointerToElement(vertex, &pReal);
-                                Ogre::Vector3 pt(pReal[0], pReal[1], pReal[2]);
-                                vertices[current_offset + j] = (orient * (pt * scale)) + position;
-                        }
-                        vbuf->unlock();
-                        next_offset += vertex_data->vertexCount;
-                }
-                Ogre::IndexData* index_data = submesh->indexData;
-                size_t numTris = index_data->indexCount / 3;
-                Ogre::HardwareIndexBufferSharedPtr ibuf = index_data->indexBuffer;
-                bool use32bitindexes = (ibuf->getType() == Ogre::HardwareIndexBuffer::IT_32BIT);
-                unsigned long*  pLong = static_cast<unsigned long*>(ibuf->lock(Ogre::HardwareBuffer::HBL_READ_ONLY));
-                unsigned short* pShort = reinterpret_cast<unsigned short*>(pLong);
-                size_t offset = (submesh->useSharedVertices)? shared_offset : current_offset;
-                if ( use32bitindexes ) {
-                        for ( size_t k = 0; k < numTris*3; ++k) {
-                                indices[index_offset++] = pLong[k] + static_cast<unsigned long>(offset);
-                        }
-                } else {
-                        for ( size_t k = 0; k < numTris*3; ++k) {
-                                indices[index_offset++] = static_cast<unsigned long>(pShort[k]) +
-                                          static_cast<unsigned long>(offset);
-                        }
-                }
-                ibuf->unlock();
-                current_offset = next_offset;
-        }
- }
+void OgreWidget::keyPressEvent( QKeyEvent * event )
+{
+    float cameraSpeed=10;
+    switch(event->key())
+    {
+        case Qt::Key_Up:
+
+        GizmoManager::cameraNode->setPosition((GizmoManager::cameraNode->getPosition() + Ogre::Vector3(mCamera->getRealDirection().x*cameraSpeed, 0,mCamera->getRealDirection().z*cameraSpeed )) );
+                 break;
+        case Qt::Key_Down:
+
+        GizmoManager::cameraNode->setPosition((GizmoManager::cameraNode->getPosition() + Ogre::Vector3(mCamera->getRealDirection().x*-cameraSpeed, 0,mCamera->getRealDirection().z*-cameraSpeed )));
+                 break;
+        case Qt::Key_Left:
+
+        GizmoManager::cameraNode->translate(mCamera->getRealOrientation() * Ogre::Vector3( -cameraSpeed, 0, 0 ));
+                 break;
+        case Qt::Key_Right:
+
+        GizmoManager::cameraNode->translate(mCamera->getRealOrientation() * Ogre::Vector3( cameraSpeed, 0, 0 ));
+                 break;
+        case Qt::Key_Alt:
+        altClick=true;
+            break;
+    }
+    if(mCurrentNode)
+    {
+          GizmoManager::UpdateAxisSize(this,GizmoManager::getTranslateGizmo(),mCurrentNode);
+          GizmoManager::UpdateAxisSize(this,GizmoManager::getRotateGizmo(),mCurrentNode);
+          GizmoManager::UpdateAxisSize(this,GizmoManager::getScaleGizmo(),mCurrentNode);
+    }
+
+}
+
+void OgreWidget::keyReleaseEvent ( QKeyEvent * event )
+{
+    switch(event->key())
+    {
+    case Qt::Key_Alt:
+    altClick=false;
+    if(mCurrentNode)
+    {
+        if(MainWindow::getInstance()->ui->actionGlobal->isChecked())
+            GizmoManager::ConvertGizmo(false,true,mCurrentNode);
+        if(MainWindow::getInstance()->ui->actionLocal->isChecked())
+            GizmoManager::ConvertGizmo(true,false,mCurrentNode);
+    }
+
+        break;
+    }
+}
+
+
+void OgreWidget::wheelEvent( QWheelEvent * event )
+{
+    mOgreWindow->getViewport(0)->getCamera()->moveRelative(Ogre::Vector3(0.0f,0.0f,event->delta() * -0.1f));
+    if(mCurrentNode)
+    {
+        GizmoManager::UpdateAxisSize(this,GizmoManager::getTranslateGizmo(),mCurrentNode);
+        GizmoManager::UpdateAxisSize(this,GizmoManager::getRotateGizmo(),mCurrentNode);
+        GizmoManager::UpdateAxisSize(this,GizmoManager::getScaleGizmo(),mCurrentNode);
+    }  
+}
+
+void OgreWidget::CameraLooking(float x, float y, float currentX, float currentY)
+{
+    float deltaX=currentX-x;
+    float deltaY=currentY-y;
+
+    if(x<currentX)
+    {
+            mCamera->yaw(Ogre::Radian(deltaX) * 0.006f);
+    }
+    else
+    {
+            mCamera->yaw(Ogre::Radian(deltaX) * 0.006f);
+    }
+
+    if(y<currentY)
+    {
+            mCamera->pitch(Ogre::Radian(deltaY) * 0.006f);
+    }
+    else
+    {
+            mCamera->pitch(Ogre::Radian(deltaY) * 0.006f);
+    }
+}
+void OgreWidget::SphereCameraRotating(float x, float y, float currentX, float currentY)
+{
+    Ogre::Radian theta;
+    Ogre::Radian phi;
+    float deltaX=currentX-x;
+    float deltaY=currentY-y;
+    if(x<currentX)
+    {
+            theta = Ogre::Radian(static_cast<float>(deltaX) / 350.0f);
+            GizmoManager::cameraNode->rotate( Ogre::Vector3::UNIT_Y , theta, Ogre::Node::TS_PARENT);
+            GizmoManager::planeNode->rotate(Ogre::Vector3::UNIT_Y , theta,Ogre::Node::TS_LOCAL);    }
+    else
+    {
+            theta = Ogre::Radian(static_cast<float>(-deltaX) / 350.0f);
+            GizmoManager::cameraNode->rotate( Ogre::Vector3::UNIT_Y, -theta, Ogre::Node::TS_PARENT);
+            GizmoManager::planeNode->rotate(Ogre::Vector3::UNIT_Y, -theta,Ogre::Node::TS_LOCAL);
+
+    }
+
+    if(y<currentY)
+    {
+            phi = Ogre::Radian(static_cast<float>(deltaY) / 50.0f);
+            GizmoManager::cameraNode->rotate( Ogre::Vector3::UNIT_Z, phi, Ogre::Node::TS_LOCAL);
+    }
+    else
+    {
+            phi = Ogre::Radian(static_cast<float>(deltaY) / 50.0f);
+            GizmoManager::cameraNode->rotate( Ogre::Vector3::UNIT_Z, phi, Ogre::Node::TS_LOCAL);
+    }   
+
+}
+
+
+
 
 Ogre::SceneManager *OgreWidget::getSceneManager()
 {
@@ -309,3 +362,25 @@ Ogre::SceneNode* OgreWidget::getCurrentNode()
 {
     return mCurrentNode;
 }
+
+Ogre::Viewport * OgreWidget::getViewPort()
+{
+    return mViewport;
+}
+
+Ogre::Camera * OgreWidget::getCamera()
+{
+    return mCamera;
+}
+
+Ogre::RaySceneQuery * OgreWidget::getRaySceneQuery()
+{
+    return mRaySceneQuery;
+}
+Ogre::RenderWindow* OgreWidget::getRenderWidnow()
+{
+    return mOgreWindow;
+}
+
+
+

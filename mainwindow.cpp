@@ -11,12 +11,8 @@ MainWindow::MainWindow(QWidget *parent) :  QMainWindow(parent),  ui(new Ui::Main
     ui->setupUi(this);
     ogreWindow = new OgreWidget(ui->dockWidgetContents_2);
     ogreWindow->setMouseTracking(true);
+    ogreWindow->setFocusPolicy(Qt::ClickFocus);
     ui->gridLayout_9->addWidget(ogreWindow);
-   // QTabWidget *tab = new QTabWidget;
-   // QWidget *wi = new QWidget;
-   // tab->addTab(ogreWindow,"Scene");
-   // tab->addTab(wi,"Game");
-   // this->setCentralWidget(tab);
     this->setCentralWidget(0);
     initProjectExplorer();
     this->addDockWidget(static_cast<Qt::DockWidgetArea>(2), ui->sceneNodesGUI);
@@ -37,6 +33,17 @@ MainWindow::MainWindow(QWidget *parent) :  QMainWindow(parent),  ui(new Ui::Main
     QObject::connect(ui->scale_z, SIGNAL(textChanged(const QString &)), this, SLOT(OnPositionChanged(const QString &)) );
 
 
+    connect(ui->actionTranslate, SIGNAL(triggered()), this, SLOT(ProcessToolBar()));
+    connect(ui->actionRotate, SIGNAL(triggered()), this, SLOT(ProcessToolBar()));
+    connect(ui->actionScale, SIGNAL(triggered()), this, SLOT(ProcessToolBar()));
+    connect(ui->actionLocal, SIGNAL(triggered()), this, SLOT(ProcessToolBar()));
+    connect(ui->actionGlobal, SIGNAL(triggered()), this, SLOT(ProcessToolBar()));
+
+
+    ui->actionTranslate->toggle();
+    ui->actionGlobal->toggle();
+
+
 }
 
 MainWindow::~MainWindow()
@@ -44,6 +51,74 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
+void MainWindow::ProcessToolBar()
+{
+
+   if (QObject::sender() == ui->actionTranslate)
+   {
+       ui->actionRotate->setChecked(false);
+       ui->actionScale->setChecked(false);
+       ui->actionTranslate->setChecked(true);
+       if(ogreWindow->getCurrentNode())
+       {
+       GizmoManager::Hide(GizmoManager::getScaleGizmo());
+       GizmoManager::Hide(GizmoManager::getRotateGizmo());
+       GizmoManager::Show(GizmoManager::getTranslateGizmo());
+       GizmoManager::SetGizmoPosition(GizmoManager::getTranslateGizmo(),ogreWindow->getCurrentNode()->getPosition());
+       GizmoManager::UpdateAxisSize(ogreWindow,GizmoManager::getTranslateGizmo(),ogreWindow->getCurrentNode());
+       if(ui->actionGlobal->isChecked())
+           GizmoManager::ConvertGizmo(false,true,ogreWindow->getCurrentNode());
+       if(ui->actionLocal->isChecked())
+           GizmoManager::ConvertGizmo(true,false,ogreWindow->getCurrentNode());
+       }
+   }
+   if (QObject::sender() == ui->actionRotate)
+   {      
+       ui->actionScale->setChecked(false);
+       ui->actionTranslate->setChecked(false);
+       ui->actionRotate->setChecked(true);
+       if(ogreWindow->getCurrentNode())
+       {
+       GizmoManager::Hide(GizmoManager::getScaleGizmo());
+       GizmoManager::Hide(GizmoManager::getTranslateGizmo());
+       GizmoManager::Show(GizmoManager::getRotateGizmo());
+       GizmoManager::SetGizmoPosition(GizmoManager::getRotateGizmo(),ogreWindow->getCurrentNode()->getPosition());
+       GizmoManager::UpdateAxisSize(ogreWindow,GizmoManager::getRotateGizmo(),ogreWindow->getCurrentNode());
+       }
+   }
+   if (QObject::sender() == ui->actionScale)
+   {
+       ui->actionRotate->setChecked(false);
+       ui->actionTranslate->setChecked(false);
+       ui->actionScale->setChecked(true);
+       if(ogreWindow->getCurrentNode())
+       {
+       GizmoManager::Hide(GizmoManager::getRotateGizmo());
+       GizmoManager::Hide(GizmoManager::getTranslateGizmo());
+       GizmoManager::Show(GizmoManager::getScaleGizmo());
+       GizmoManager::SetGizmoPosition(GizmoManager::getScaleGizmo(),ogreWindow->getCurrentNode()->getPosition());
+       GizmoManager::UpdateAxisSize(ogreWindow,GizmoManager::getScaleGizmo(),ogreWindow->getCurrentNode());
+       }
+   }
+   if (QObject::sender() == ui->actionLocal)
+   {
+        ui->actionLocal->setChecked(true);
+        ui->actionGlobal->setChecked(false);
+        if(ogreWindow->getCurrentNode())
+        {
+        GizmoManager::ConvertGizmo(true,false,ogreWindow->getCurrentNode());
+        }
+   }
+   if (QObject::sender() == ui->actionGlobal)
+   {
+       ui->actionLocal->setChecked(false);
+       ui->actionGlobal->setChecked(true);
+       if(ogreWindow->getCurrentNode())
+       {
+       GizmoManager::ConvertGizmo(false,true,ogreWindow->getCurrentNode());
+       }
+   }
+}
 
 void MainWindow::initProjectExplorer()
 {
@@ -102,8 +177,9 @@ void MainWindow::createMesh(Ogre::Vector3 pos, Ogre::String meshName, Ogre::Stri
 
     mynode->attachObject( myEntity );
     myEntity->setMaterialName(materialName);
+    myEntity->setQueryFlags(ogreWindow->NONE_MASK);
     mynode->setPosition(pos);
-    mynode->scale(1.1, 1.1, 1.1);
+    mynode->scale(1, 1, 1);
 
     QStringList lst;
     lst << "Object";
@@ -123,7 +199,32 @@ void MainWindow::OnSceneNodeClicked()
 
       Ogre::Entity *entity = ogreWindow->getSceneManager()->getEntity(item->data(0, Qt::UserRole).toString().toStdString());
 
-      UpdateComponents(node, entity);     
+      UpdateComponents(node, entity);
+      GizmoManager::cameraNode->setPosition(node->getPosition());
+      if( ui->actionTranslate->isChecked())
+      {
+           GizmoManager::Show(GizmoManager::getTranslateGizmo());
+           GizmoManager::SetGizmoPosition(GizmoManager::getTranslateGizmo(),node->getPosition());
+           GizmoManager::UpdateAxisSize(ogreWindow,GizmoManager::getTranslateGizmo(),node);
+
+           if(ui->actionGlobal->isChecked())
+               GizmoManager::ConvertGizmo(false,true,node);
+           if(ui->actionLocal->isChecked())
+               GizmoManager::ConvertGizmo(true,false,node);
+
+      }
+      if( ui->actionRotate->isChecked())
+      {
+           GizmoManager::Show(GizmoManager::getRotateGizmo());
+           GizmoManager::SetGizmoPosition(GizmoManager::getRotateGizmo(),node->getPosition());
+           GizmoManager::UpdateAxisSize(ogreWindow,GizmoManager::getRotateGizmo(),node);
+      }
+      if(ui->actionScale->isChecked())
+      {
+           GizmoManager::Show(GizmoManager::getScaleGizmo());
+           GizmoManager::SetGizmoPosition(GizmoManager::getScaleGizmo(),node->getPosition());
+           GizmoManager::UpdateAxisSize(ogreWindow,GizmoManager::getScaleGizmo(),node);
+      }
 }
 
 void MainWindow::UpdateSceneNodesList(QString nodeName)
@@ -141,7 +242,7 @@ void MainWindow::UpdateSceneNodesList(QString nodeName)
 }
 
 void MainWindow::OnPositionChanged(const QString & str)
-{
+{   
     if (ogreWindow->getCurrentNode())
     {
 
