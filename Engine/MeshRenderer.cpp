@@ -11,6 +11,7 @@
 #include <OgreMeshManager.h>
 
 #include "mainwindow.h"
+#include "QtWidget.h"
 
 MeshRenderer::MeshRenderer(){
 	
@@ -20,6 +21,7 @@ MeshRenderer::MeshRenderer(Ogre::String name, Ogre::String mesh, Ogre::String ma
 
     entity = MainWindow::getInstance()->ogreWindow->getSceneManager()->createEntity(name, mesh);
     entity->setMaterialName(material);
+    entity->setQueryFlags(OgreWidget::NONE_MASK);
 }
 
 MeshRenderer::~MeshRenderer(){

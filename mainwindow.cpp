@@ -168,32 +168,7 @@ void MainWindow::initProjectExplorer()
  }  
 
 
-void MainWindow::createMesh(Ogre::Vector3 pos, Ogre::String meshName, Ogre::String materialName)
-{
-    objectsCount++;
 
-    Ogre::Entity * myEntity =
-            ogreWindow->getSceneManager()->createEntity(meshName +
-                           QString::number(objectsCount).toStdString(),
-                                                      meshName +".mesh");
-    Ogre::SceneNode * mynode =
-            ogreWindow->getSceneManager()->getRootSceneNode()->createChildSceneNode(meshName +
-                                       QString::number(objectsCount).toStdString());
-
-    mynode->attachObject( myEntity );
-    myEntity->setMaterialName(materialName);
-    myEntity->setQueryFlags(ogreWindow->NONE_MASK);
-    mynode->setPosition(pos);
-    mynode->scale(1, 1, 1);
-
-    QStringList lst;
-    lst << "Object";
-    QTreeWidgetItem* pItem = new QTreeWidgetItem(lst, 0);
-    pItem->setData(0, Qt::UserRole, QString::fromStdString(mynode->getName()));
-
-    ui->sceneNodesTree->addTopLevelItem(pItem);
-
-}
 
 void MainWindow::OnSceneNodeClicked()
 {

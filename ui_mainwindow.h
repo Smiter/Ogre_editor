@@ -1,11 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'mainwindow.ui'
 **
-<<<<<<< HEAD
-** Created: Thu 19. May 18:42:53 2011
-=======
-** Created: Thu 19. May 01:06:21 2011
->>>>>>> c7fb95d0208afc3d195f343a9fb39320aa60fdf6
+** Created: Sat 21. May 23:13:03 2011
 **      by: Qt User Interface Compiler version 4.7.2
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -32,10 +28,7 @@
 #include <QtGui/QPushButton>
 #include <QtGui/QScrollArea>
 #include <QtGui/QStatusBar>
-
 #include <QtGui/QToolBar>
-#include <QtGui/QTreeView>
-
 #include <QtGui/QTreeWidget>
 #include <QtGui/QVBoxLayout>
 #include <QtGui/QWidget>
@@ -144,11 +137,8 @@ public:
         MainWindow->setCentralWidget(centralwidget);
         menubar = new QMenuBar(MainWindow);
         menubar->setObjectName(QString::fromUtf8("menubar"));
-
-        menubar->setGeometry(QRect(0, 0, 762, 20));
-        menubar->setDefaultUp(false);
-
         menubar->setGeometry(QRect(0, 0, 762, 21));
+        menubar->setDefaultUp(false);
         menuFile = new QMenu(menubar);
         menuFile->setObjectName(QString::fromUtf8("menuFile"));
         menuEdit = new QMenu(menubar);
@@ -159,7 +149,6 @@ public:
         menuComponent->setObjectName(QString::fromUtf8("menuComponent"));
         menuHelp = new QMenu(menubar);
         menuHelp->setObjectName(QString::fromUtf8("menuHelp"));
-
         MainWindow->setMenuBar(menubar);
         statusbar = new QStatusBar(MainWindow);
         statusbar->setObjectName(QString::fromUtf8("statusbar"));
@@ -250,11 +239,7 @@ public:
         scrollArea->setWidgetResizable(true);
         scrollAreaWidgetContents_3 = new QWidget();
         scrollAreaWidgetContents_3->setObjectName(QString::fromUtf8("scrollAreaWidgetContents_3"));
-
-        scrollAreaWidgetContents_3->setGeometry(QRect(0, 0, 449, 375));
-
         scrollAreaWidgetContents_3->setGeometry(QRect(0, -106, 449, 375));
-
         QSizePolicy sizePolicy2(QSizePolicy::Preferred, QSizePolicy::Fixed);
         sizePolicy2.setHorizontalStretch(0);
         sizePolicy2.setVerticalStretch(0);
@@ -648,6 +633,11 @@ public:
         dockWidget->raise();
         componentsGUI->raise();
 
+        menubar->addAction(menuFile->menuAction());
+        menubar->addAction(menuEdit->menuAction());
+        menubar->addAction(menuCreate->menuAction());
+        menubar->addAction(menuComponent->menuAction());
+        menubar->addAction(menuHelp->menuAction());
         toolBar->addAction(actionTranslate);
         toolBar->addAction(actionRotate);
         toolBar->addAction(actionScale);
@@ -655,12 +645,6 @@ public:
         toolBar->addAction(actionLocal);
         toolBar->addAction(actionGlobal);
         toolBar->addSeparator();
-
-        menubar->addAction(menuFile->menuAction());
-        menubar->addAction(menuEdit->menuAction());
-        menubar->addAction(menuCreate->menuAction());
-        menubar->addAction(menuComponent->menuAction());
-        menubar->addAction(menuHelp->menuAction());
 
         retranslateUi(MainWindow);
 
@@ -670,19 +654,16 @@ public:
     void retranslateUi(QMainWindow *MainWindow)
     {
         MainWindow->setWindowTitle(QApplication::translate("MainWindow", "MainWindow", 0, QApplication::UnicodeUTF8));
-
         actionTranslate->setText(QApplication::translate("MainWindow", "Translate", 0, QApplication::UnicodeUTF8));
         actionRotate->setText(QApplication::translate("MainWindow", "Rotate", 0, QApplication::UnicodeUTF8));
         actionScale->setText(QApplication::translate("MainWindow", "Scale", 0, QApplication::UnicodeUTF8));
         actionLocal->setText(QApplication::translate("MainWindow", "local", 0, QApplication::UnicodeUTF8));
         actionGlobal->setText(QApplication::translate("MainWindow", "global", 0, QApplication::UnicodeUTF8));
-
         menuFile->setTitle(QApplication::translate("MainWindow", "File", 0, QApplication::UnicodeUTF8));
         menuEdit->setTitle(QApplication::translate("MainWindow", "Edit", 0, QApplication::UnicodeUTF8));
         menuCreate->setTitle(QApplication::translate("MainWindow", "Create", 0, QApplication::UnicodeUTF8));
         menuComponent->setTitle(QApplication::translate("MainWindow", "Component", 0, QApplication::UnicodeUTF8));
         menuHelp->setTitle(QApplication::translate("MainWindow", "Help", 0, QApplication::UnicodeUTF8));
-
         componentsGUI->setWindowTitle(QApplication::translate("MainWindow", "Components", 0, QApplication::UnicodeUTF8));
         sceneNodeGUI_4->setTitle(QApplication::translate("MainWindow", "Scene Node", 0, QApplication::UnicodeUTF8));
         label_30->setText(QApplication::translate("MainWindow", "\320\243", 0, QApplication::UnicodeUTF8));
@@ -697,11 +678,8 @@ public:
         materialPickButton->setText(QApplication::translate("MainWindow", "Pick", 0, QApplication::UnicodeUTF8));
         label_36->setText(QApplication::translate("MainWindow", "Material:", 0, QApplication::UnicodeUTF8));
         material_4->setTitle(QApplication::translate("MainWindow", "Material", 0, QApplication::UnicodeUTF8));
-
-        toolBar->setWindowTitle(QApplication::translate("MainWindow", "toolBar", 0, QApplication::UnicodeUTF8));
-
         dockWidget->setWindowTitle(QApplication::translate("MainWindow", "Scene", 0, QApplication::UnicodeUTF8));
-
+        toolBar->setWindowTitle(QApplication::translate("MainWindow", "toolBar", 0, QApplication::UnicodeUTF8));
     } // retranslateUi
 
 };
