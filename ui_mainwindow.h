@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'mainwindow.ui'
 **
-** Created: Thu 12. May 21:19:18 2011
+** Created: Thu 19. May 01:06:21 2011
 **      by: Qt User Interface Compiler version 4.7.2
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -28,7 +28,6 @@
 #include <QtGui/QPushButton>
 #include <QtGui/QScrollArea>
 #include <QtGui/QStatusBar>
-#include <QtGui/QTreeView>
 #include <QtGui/QTreeWidget>
 #include <QtGui/QVBoxLayout>
 #include <QtGui/QWidget>
@@ -38,7 +37,6 @@ QT_BEGIN_NAMESPACE
 class Ui_MainWindow
 {
 public:
-    QAction *actionCreate_default_mesh;
     QWidget *centralwidget;
     QMenuBar *menubar;
     QMenu *menuFile;
@@ -51,7 +49,6 @@ public:
     QWidget *dockWidgetContents_15;
     QHBoxLayout *horizontalLayout_3;
     QHBoxLayout *horizontalLayout;
-    QTreeView *prExplorerTree;
     QDockWidget *sceneNodesGUI;
     QWidget *dockWidgetContents_14;
     QHBoxLayout *horizontalLayout_4;
@@ -107,8 +104,6 @@ public:
         MainWindow->resize(762, 589);
         MainWindow->setAutoFillBackground(false);
         MainWindow->setDockOptions(QMainWindow::AllowNestedDocks|QMainWindow::AllowTabbedDocks|QMainWindow::AnimatedDocks);
-        actionCreate_default_mesh = new QAction(MainWindow);
-        actionCreate_default_mesh->setObjectName(QString::fromUtf8("actionCreate_default_mesh"));
         centralwidget = new QWidget(MainWindow);
         centralwidget->setObjectName(QString::fromUtf8("centralwidget"));
         centralwidget->setAutoFillBackground(false);
@@ -148,17 +143,6 @@ public:
         horizontalLayout_3->setObjectName(QString::fromUtf8("horizontalLayout_3"));
         horizontalLayout = new QHBoxLayout();
         horizontalLayout->setObjectName(QString::fromUtf8("horizontalLayout"));
-        prExplorerTree = new QTreeView(dockWidgetContents_15);
-        prExplorerTree->setObjectName(QString::fromUtf8("prExplorerTree"));
-        sizePolicy.setHeightForWidth(prExplorerTree->sizePolicy().hasHeightForWidth());
-        prExplorerTree->setSizePolicy(sizePolicy);
-        prExplorerTree->setMinimumSize(QSize(0, 0));
-        prExplorerTree->setMaximumSize(QSize(65656, 76767));
-        prExplorerTree->setSizeIncrement(QSize(0, 0));
-        prExplorerTree->setAnimated(true);
-
-        horizontalLayout->addWidget(prExplorerTree);
-
 
         horizontalLayout_3->addLayout(horizontalLayout);
 
@@ -184,6 +168,9 @@ public:
         __qtreewidgetitem->setText(0, QString::fromUtf8("1"));
         sceneNodesTree->setHeaderItem(__qtreewidgetitem);
         sceneNodesTree->setObjectName(QString::fromUtf8("sceneNodesTree"));
+        sceneNodesTree->setDragDropOverwriteMode(false);
+        sceneNodesTree->setDragDropMode(QAbstractItemView::NoDragDrop);
+        sceneNodesTree->setDefaultDropAction(Qt::IgnoreAction);
         sceneNodesTree->header()->setVisible(false);
 
         horizontalLayout_2->addWidget(sceneNodesTree);
@@ -224,7 +211,7 @@ public:
         scrollArea->setWidgetResizable(true);
         scrollAreaWidgetContents_3 = new QWidget();
         scrollAreaWidgetContents_3->setObjectName(QString::fromUtf8("scrollAreaWidgetContents_3"));
-        scrollAreaWidgetContents_3->setGeometry(QRect(0, 0, 449, 375));
+        scrollAreaWidgetContents_3->setGeometry(QRect(0, -106, 449, 375));
         QSizePolicy sizePolicy2(QSizePolicy::Preferred, QSizePolicy::Fixed);
         sizePolicy2.setHorizontalStretch(0);
         sizePolicy2.setVerticalStretch(0);
@@ -616,7 +603,6 @@ public:
         menubar->addAction(menuCreate->menuAction());
         menubar->addAction(menuComponent->menuAction());
         menubar->addAction(menuHelp->menuAction());
-        menuCreate->addAction(actionCreate_default_mesh);
 
         retranslateUi(MainWindow);
 
@@ -626,7 +612,6 @@ public:
     void retranslateUi(QMainWindow *MainWindow)
     {
         MainWindow->setWindowTitle(QApplication::translate("MainWindow", "MainWindow", 0, QApplication::UnicodeUTF8));
-        actionCreate_default_mesh->setText(QApplication::translate("MainWindow", "Create default mesh", 0, QApplication::UnicodeUTF8));
         menuFile->setTitle(QApplication::translate("MainWindow", "File", 0, QApplication::UnicodeUTF8));
         menuEdit->setTitle(QApplication::translate("MainWindow", "Edit", 0, QApplication::UnicodeUTF8));
         menuCreate->setTitle(QApplication::translate("MainWindow", "Create", 0, QApplication::UnicodeUTF8));

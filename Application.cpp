@@ -15,7 +15,7 @@ int main(int argc, char **argv)
 
     QApplication app(argc, argv);
     MainWindow::getInstance()->show();
-
+/*
     GameObject go("object");
     go.AddComponent(new MeshRenderer(go.name, "robot.mesh", "Robot"));
 
@@ -24,6 +24,6 @@ int main(int argc, char **argv)
 
     GameObject go3("object3");
     go3.AddComponent(new MeshRenderer(go3.name, "penguin.mesh", "Penguin"));
-
+*/
     return app.exec();
 }

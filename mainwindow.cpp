@@ -15,8 +15,9 @@ MainWindow::MainWindow(QWidget *parent) :  QMainWindow(parent),  ui(new Ui::Main
     ogreWindow->setMouseTracking(true);
     ui->gridLayout_9->addWidget(ogreWindow);
 
-    this->setCentralWidget(0);
     initProjectExplorer();
+
+    this->setCentralWidget(0);
     this->addDockWidget(static_cast<Qt::DockWidgetArea>(2), ui->sceneNodesGUI);
     this->addDockWidget(static_cast<Qt::DockWidgetArea>(1), ui->projExplorerGUI);
 
@@ -53,24 +54,17 @@ MainWindow::~MainWindow()
 
 void MainWindow::initProjectExplorer()
 {
-    QFileSystemModel *fileSystemModel = new QFileSystemModel();
-    fileSystemModel->setRootPath(QDir::currentPath());
+    // Project Explorer
+    prExplorerTree = new ProjectExplorerTree(ui->dockWidgetContents_15);
 
-    QStringList filters;
-    filters.append("*.jpg");
-    filters.append("*.png");
-    filters.append("*.mesh");
-    filters.append("*.material");
-    fileSystemModel->setNameFilters(filters);
-    fileSystemModel->setNameFilterDisables(false);
+    QSizePolicy sizePolicy(QSizePolicy::Preferred, QSizePolicy::Preferred);
+    sizePolicy.setHorizontalStretch(0);
+    sizePolicy.setVerticalStretch(0);
+    sizePolicy.setHeightForWidth(ui->projExplorerGUI->sizePolicy().hasHeightForWidth());
+    sizePolicy.setHeightForWidth(prExplorerTree->sizePolicy().hasHeightForWidth());
+    prExplorerTree->setSizePolicy(sizePolicy);
 
-    ui->prExplorerTree->setModel(fileSystemModel);
-    ui->prExplorerTree->setColumnHidden(1, true);
-    ui->prExplorerTree->setColumnHidden(2, true);
-    ui->prExplorerTree->setColumnHidden(3, true);
-
-    ui->prExplorerTree->setRootIndex(fileSystemModel->index(QDir::currentPath()));
-    ui->prExplorerTree->show();  
+    ui->horizontalLayout->addWidget(prExplorerTree);
 
 }
 

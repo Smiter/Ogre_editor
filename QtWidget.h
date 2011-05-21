@@ -4,7 +4,6 @@
 #include <QtOpenGL/QGLWidget>
 #include <QDir>
 
-
 class OgreWidget : public QGLWidget
 {
 
@@ -47,7 +46,15 @@ public:
   void setCurrentNode(Ogre::SceneNode*);
   Ogre::SceneNode* getCurrentNode();
 
+  // Temporary
+  int counter;
 
+
+// Events
+  void dropEvent(QDropEvent *event);
+  void dragEnterEvent(QDragEnterEvent *event);
+
+// Slots
  public slots:
    void OnRenderTimer();
 

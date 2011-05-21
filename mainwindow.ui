@@ -47,7 +47,6 @@
     <property name="title">
      <string>Create</string>
     </property>
-    <addaction name="actionCreate_default_mesh"/>
    </widget>
    <widget class="QMenu" name="menuComponent">
     <property name="title">
@@ -100,39 +99,7 @@
    <widget class="QWidget" name="dockWidgetContents_15">
     <layout class="QHBoxLayout" name="horizontalLayout_3">
      <item>
-      <layout class="QHBoxLayout" name="horizontalLayout">
-       <item>
-        <widget class="QTreeView" name="prExplorerTree">
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
-         </property>
-         <property name="minimumSize">
-          <size>
-           <width>0</width>
-           <height>0</height>
-          </size>
-         </property>
-         <property name="maximumSize">
-          <size>
-           <width>65656</width>
-           <height>76767</height>
-          </size>
-         </property>
-         <property name="sizeIncrement">
-          <size>
-           <width>0</width>
-           <height>0</height>
-          </size>
-         </property>
-         <property name="animated">
-          <bool>true</bool>
-         </property>
-        </widget>
-       </item>
-      </layout>
+      <layout class="QHBoxLayout" name="horizontalLayout"/>
      </item>
     </layout>
    </widget>
@@ -171,6 +138,15 @@
       <layout class="QHBoxLayout" name="horizontalLayout_2">
        <item>
         <widget class="QTreeWidget" name="sceneNodesTree">
+         <property name="dragDropOverwriteMode">
+          <bool>false</bool>
+         </property>
+         <property name="dragDropMode">
+          <enum>QAbstractItemView::NoDragDrop</enum>
+         </property>
+         <property name="defaultDropAction">
+          <enum>Qt::IgnoreAction</enum>
+         </property>
          <attribute name="headerVisible">
           <bool>false</bool>
          </attribute>
@@ -255,7 +231,7 @@
         <property name="geometry">
          <rect>
           <x>0</x>
-          <y>0</y>
+          <y>-106</y>
           <width>449</width>
           <height>375</height>
          </rect>
@@ -855,11 +831,6 @@
     </layout>
    </widget>
   </widget>
-  <action name="actionCreate_default_mesh">
-   <property name="text">
-    <string>Create default mesh</string>
-   </property>
-  </action>
   <zorder>dockWidget</zorder>
   <zorder>componentsGUI</zorder>
  </widget>

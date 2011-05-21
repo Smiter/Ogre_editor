@@ -6,6 +6,7 @@
 #include <QTreeWidgetItem>
 
 #include "QtWidget.h"
+#include "projectexplorertree.h"
 
 namespace Ui {
     class MainWindow;
@@ -27,6 +28,7 @@ public:
     Ui::MainWindow *ui;
     // The Ogre window
     OgreWidget *ogreWindow;
+    ProjectExplorerTree  *prExplorerTree;
 
     // Components GUI functions
     //
