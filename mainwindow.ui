@@ -30,12 +30,45 @@
      <x>0</x>
      <y>0</y>
      <width>762</width>
-     <height>20</height>
+     <height>21</height>
     </rect>
    </property>
+<<<<<<< HEAD
    <property name="defaultUp">
     <bool>false</bool>
    </property>
+=======
+   <widget class="QMenu" name="menuFile">
+    <property name="title">
+     <string>File</string>
+    </property>
+   </widget>
+   <widget class="QMenu" name="menuEdit">
+    <property name="title">
+     <string>Edit</string>
+    </property>
+   </widget>
+   <widget class="QMenu" name="menuCreate">
+    <property name="title">
+     <string>Create</string>
+    </property>
+   </widget>
+   <widget class="QMenu" name="menuComponent">
+    <property name="title">
+     <string>Component</string>
+    </property>
+   </widget>
+   <widget class="QMenu" name="menuHelp">
+    <property name="title">
+     <string>Help</string>
+    </property>
+   </widget>
+   <addaction name="menuFile"/>
+   <addaction name="menuEdit"/>
+   <addaction name="menuCreate"/>
+   <addaction name="menuComponent"/>
+   <addaction name="menuHelp"/>
+>>>>>>> c7fb95d0208afc3d195f343a9fb39320aa60fdf6
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
   <widget class="QDockWidget" name="projExplorerGUI">
@@ -47,8 +80,8 @@
    </property>
    <property name="minimumSize">
     <size>
-     <width>82</width>
-     <height>103</height>
+     <width>91</width>
+     <height>113</height>
     </size>
    </property>
    <property name="maximumSize">
@@ -72,39 +105,7 @@
    <widget class="QWidget" name="dockWidgetContents_15">
     <layout class="QHBoxLayout" name="horizontalLayout_3">
      <item>
-      <layout class="QHBoxLayout" name="horizontalLayout">
-       <item>
-        <widget class="QTreeView" name="prExplorerTree">
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
-         </property>
-         <property name="minimumSize">
-          <size>
-           <width>0</width>
-           <height>0</height>
-          </size>
-         </property>
-         <property name="maximumSize">
-          <size>
-           <width>65656</width>
-           <height>76767</height>
-          </size>
-         </property>
-         <property name="sizeIncrement">
-          <size>
-           <width>0</width>
-           <height>0</height>
-          </size>
-         </property>
-         <property name="animated">
-          <bool>true</bool>
-         </property>
-        </widget>
-       </item>
-      </layout>
+      <layout class="QHBoxLayout" name="horizontalLayout"/>
      </item>
     </layout>
    </widget>
@@ -119,7 +120,7 @@
    <property name="minimumSize">
     <size>
      <width>103</width>
-     <height>103</height>
+     <height>113</height>
     </size>
    </property>
    <property name="floating">
@@ -143,6 +144,15 @@
       <layout class="QHBoxLayout" name="horizontalLayout_2">
        <item>
         <widget class="QTreeWidget" name="sceneNodesTree">
+         <property name="dragDropOverwriteMode">
+          <bool>false</bool>
+         </property>
+         <property name="dragDropMode">
+          <enum>QAbstractItemView::NoDragDrop</enum>
+         </property>
+         <property name="defaultDropAction">
+          <enum>Qt::IgnoreAction</enum>
+         </property>
          <attribute name="headerVisible">
           <bool>false</bool>
          </attribute>
@@ -227,7 +237,11 @@
         <property name="geometry">
          <rect>
           <x>0</x>
+<<<<<<< HEAD
           <y>0</y>
+=======
+          <y>-106</y>
+>>>>>>> c7fb95d0208afc3d195f343a9fb39320aa60fdf6
           <width>449</width>
           <height>375</height>
          </rect>
@@ -637,7 +651,7 @@
                  </widget>
                 </item>
                 <item row="0" column="2">
-                 <widget class="QPushButton" name="pushButton_11">
+                 <widget class="QPushButton" name="meshPickButton">
                   <property name="sizePolicy">
                    <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
                     <horstretch>0</horstretch>
@@ -670,7 +684,7 @@
                  </widget>
                 </item>
                 <item row="1" column="2">
-                 <widget class="QPushButton" name="pushButton_10">
+                 <widget class="QPushButton" name="materialPickButton">
                   <property name="sizePolicy">
                    <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
                     <horstretch>0</horstretch>
@@ -744,7 +758,7 @@
                  <number>0</number>
                 </property>
                 <item row="1" column="0">
-                 <widget class="QGraphicsView" name="graphicsView_4">
+                 <widget class="QGraphicsView" name="materialViwer">
                   <property name="enabled">
                    <bool>true</bool>
                   </property>
@@ -765,6 +779,12 @@
                     <width>100</width>
                     <height>100</height>
                    </size>
+                  </property>
+                  <property name="verticalScrollBarPolicy">
+                   <enum>Qt::ScrollBarAlwaysOff</enum>
+                  </property>
+                  <property name="horizontalScrollBarPolicy">
+                   <enum>Qt::ScrollBarAlwaysOff</enum>
                   </property>
                   <property name="alignment">
                    <set>Qt::AlignCenter</set>
@@ -803,6 +823,9 @@
    </property>
    <property name="allowedAreas">
     <set>Qt::BottomDockWidgetArea|Qt::LeftDockWidgetArea|Qt::RightDockWidgetArea</set>
+   </property>
+   <property name="windowTitle">
+    <string>Scene</string>
    </property>
    <attribute name="dockWidgetArea">
     <number>1</number>

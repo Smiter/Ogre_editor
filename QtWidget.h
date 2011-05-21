@@ -28,15 +28,20 @@ private:
   void init( std::string, std::string, std::string );
   void initResourses();
   virtual Ogre::RenderSystem* chooseRenderer( Ogre::RenderSystemList* );
+  // Events
   virtual  void mousePressEvent ( QMouseEvent * event );
   virtual  void mouseMoveEvent ( QMouseEvent * event );
   virtual  void keyPressEvent ( QKeyEvent * event );
   virtual  void wheelEvent ( QWheelEvent * event );
-  virtual  void keyReleaseEvent ( QKeyEvent * event );
-
+  virtual  void keyReleaseEvent ( QKeyEvent * event );  
+  void dropEvent(QDropEvent *event);
+  void dragEnterEvent(QDragEnterEvent *event);
+  
   void CreateGizmo();
   void CameraLooking(float,float,float,float);
   void SphereCameraRotating(float,float,float,float);
+  
+  
 
 
   Ogre::Root    *mOgreRoot;
@@ -47,7 +52,8 @@ private:
   Ogre::SceneNode   *mCurrentNode;
   Ogre::Entity   *mCurrentEntity;
   Ogre::RaySceneQuery   *mRaySceneQuery;
-
+  
+  int counter;
 
   bool altClick;
 
@@ -61,6 +67,7 @@ public:
   Ogre::RenderWindow* getRenderWidnow();
   Ogre::RaySceneQuery* getRaySceneQuery();  
   QTimer*  timer;
+
 
   enum QueryFlags
   {
@@ -77,6 +84,9 @@ public:
          AXIS_MASK_SCALE = 1<<12,
   };
 
+
+
+// Slots
  public slots:
    void OnRenderTimer();
 

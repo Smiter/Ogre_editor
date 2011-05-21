@@ -1,9 +1,13 @@
 #include "QtWidget.h"
 #include "mainwindow.h"
 
-OgreWidget::OgreWidget( QWidget *parent ): QGLWidget( parent ), mOgreWindow(NULL)
+#include "Engine/GameObject.h"
+#include "Engine/MeshRenderer.h"
+
+OgreWidget::OgreWidget( QWidget *parent ): QGLWidget( parent ), mOgreWindow(NULL), counter(0)
 {
   init( "plugins.cfg", "ogre.cfg", "ogre.log" );  
+  setAcceptDrops(true);
 }
 
 void OgreWidget::init( std::string plugins_file,  std::string ogre_cfg_file, std::string ogre_log )
@@ -382,5 +386,16 @@ Ogre::RenderWindow* OgreWidget::getRenderWidnow()
     return mOgreWindow;
 }
 
+void OgreWidget::dropEvent(QDropEvent *event)
+{
 
+}
 
+void OgreWidget::dragEnterEvent(QDragEnterEvent *event)
+{
+    counter++;
+    QString str = event->mimeData()->text();
+
+    GameObject *go = new GameObject("object" + QString::number(counter).toStdString());
+    go->AddComponent(new MeshRenderer(go->name, str.toStdString(), "Robot"));
+}

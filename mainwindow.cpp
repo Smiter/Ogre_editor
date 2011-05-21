@@ -2,9 +2,11 @@
 #include "ui_mainwindow.h"
 
 #include <QTreeWidgetItemIterator>
+#include <QFileDialog>
+
+#include <OgreMaterial.h>
 
 MainWindow * MainWindow::instance = 0;
-int MainWindow::objectsCount = 0;
 
 MainWindow::MainWindow(QWidget *parent) :  QMainWindow(parent),  ui(new Ui::MainWindow)
 {
@@ -15,10 +17,12 @@ MainWindow::MainWindow(QWidget *parent) :  QMainWindow(parent),  ui(new Ui::Main
     ui->gridLayout_9->addWidget(ogreWindow);
     this->setCentralWidget(0);
     initProjectExplorer();
+
+    this->setCentralWidget(0);
     this->addDockWidget(static_cast<Qt::DockWidgetArea>(2), ui->sceneNodesGUI);
     this->addDockWidget(static_cast<Qt::DockWidgetArea>(1), ui->projExplorerGUI);
 
-    // Slot connection
+    // Slot connections
     QObject::connect(ui->sceneNodesTree, SIGNAL(itemSelectionChanged()),
             this,    SLOT(OnSceneNodeClicked()) );
 
@@ -33,6 +37,7 @@ MainWindow::MainWindow(QWidget *parent) :  QMainWindow(parent),  ui(new Ui::Main
     QObject::connect(ui->scale_z, SIGNAL(textChanged(const QString &)), this, SLOT(OnPositionChanged(const QString &)) );
 
 
+
     connect(ui->actionTranslate, SIGNAL(triggered()), this, SLOT(ProcessToolBar()));
     connect(ui->actionRotate, SIGNAL(triggered()), this, SLOT(ProcessToolBar()));
     connect(ui->actionScale, SIGNAL(triggered()), this, SLOT(ProcessToolBar()));
@@ -43,6 +48,13 @@ MainWindow::MainWindow(QWidget *parent) :  QMainWindow(parent),  ui(new Ui::Main
     ui->actionTranslate->toggle();
     ui->actionGlobal->toggle();
 
+    QObject::connect(ui->materialPickButton, SIGNAL(pressed()), this, SLOT(OnMaterialButtonDown()));
+    QObject::connect(ui->meshPickButton, SIGNAL(pressed()), this, SLOT(OnMeshButtonDown()));
+
+    ////////////
+    // MaterialViwer initialize
+    QGraphicsScene *scn = new QGraphicsScene(ui->materialViwer);
+    ui->materialViwer->setScene( scn );
 
 }
 
@@ -122,24 +134,17 @@ void MainWindow::ProcessToolBar()
 
 void MainWindow::initProjectExplorer()
 {
-    QFileSystemModel *fileSystemModel = new QFileSystemModel();
-    fileSystemModel->setRootPath(QDir::currentPath());
+    // Project Explorer
+    prExplorerTree = new ProjectExplorerTree(ui->dockWidgetContents_15);
 
-    QStringList filters;
-    filters.append("*.jpg");
-    filters.append("*.png");
-    filters.append("*.mesh");
-    filters.append("*.material");
-    fileSystemModel->setNameFilters(filters);
-    fileSystemModel->setNameFilterDisables(false);
+    QSizePolicy sizePolicy(QSizePolicy::Preferred, QSizePolicy::Preferred);
+    sizePolicy.setHorizontalStretch(0);
+    sizePolicy.setVerticalStretch(0);
+    sizePolicy.setHeightForWidth(ui->projExplorerGUI->sizePolicy().hasHeightForWidth());
+    sizePolicy.setHeightForWidth(prExplorerTree->sizePolicy().hasHeightForWidth());
+    prExplorerTree->setSizePolicy(sizePolicy);
 
-    ui->prExplorerTree->setModel(fileSystemModel);
-    ui->prExplorerTree->setColumnHidden(1, true);
-    ui->prExplorerTree->setColumnHidden(2, true);
-    ui->prExplorerTree->setColumnHidden(3, true);
-
-    ui->prExplorerTree->setRootIndex(fileSystemModel->index(QDir::currentPath()));
-    ui->prExplorerTree->show();  
+    ui->horizontalLayout->addWidget(prExplorerTree);
 
 }
 
@@ -190,7 +195,6 @@ void MainWindow::createMesh(Ogre::Vector3 pos, Ogre::String meshName, Ogre::Stri
 
 }
 
-
 void MainWindow::OnSceneNodeClicked()
 {
       QTreeWidgetItem *item = ui->sceneNodesTree->selectedItems()[0];
@@ -200,6 +204,7 @@ void MainWindow::OnSceneNodeClicked()
       Ogre::Entity *entity = ogreWindow->getSceneManager()->getEntity(item->data(0, Qt::UserRole).toString().toStdString());
 
       UpdateComponents(node, entity);
+	  
       GizmoManager::cameraNode->setPosition(node->getPosition());
       if( ui->actionTranslate->isChecked())
       {
@@ -225,6 +230,9 @@ void MainWindow::OnSceneNodeClicked()
            GizmoManager::SetGizmoPosition(GizmoManager::getScaleGizmo(),node->getPosition());
            GizmoManager::UpdateAxisSize(ogreWindow,GizmoManager::getScaleGizmo(),node);
       }
+
+      UpdateMaterialView(entity);
+
 }
 
 void MainWindow::UpdateSceneNodesList(QString nodeName)
@@ -239,6 +247,32 @@ void MainWindow::UpdateSceneNodesList(QString nodeName)
            }
           ++it;
        }
+}
+
+void MainWindow::UpdateMaterialView(Ogre::Entity *entity)
+{
+    // Get Texture file name
+     Ogre::Material *mat = static_cast<Ogre::Material*>
+             (Ogre::MaterialManager::getSingletonPtr()->getByName(entity->getSubEntity(0)->getMaterialName()).get());
+
+     Ogre::String str = mat->getTechnique(0)->getPass(0)->getTextureUnitState(0)->getTextureName();
+
+
+     // Image Rendering
+     QPixmap pix( QDir::currentPath() + "/media/materials/textures/" + QString::fromStdString(str) );
+     ui->materialViwer->scene()->addPixmap (pix.scaled(ui->materialViwer->width(),
+                                                        ui->materialViwer->height()) );
+
+}
+
+void MainWindow::AddItemToSceneList(Ogre::String name)
+{
+    QStringList lst;
+    lst << QString::fromStdString("Object");
+    QTreeWidgetItem* pItem = new QTreeWidgetItem(lst, 0);
+    pItem->setData(0, Qt::UserRole, QString::fromStdString(name));
+
+    ui->sceneNodesTree->addTopLevelItem(pItem);
 }
 
 void MainWindow::OnPositionChanged(const QString & str)
@@ -274,4 +308,43 @@ if (ui->position_x->hasFocus() || ui->position_x->hasFocus()|| ui->position_y->h
   }
 }
 
+void MainWindow::OnMaterialButtonDown()
+{
 
+    QString fileName = QFileInfo((QFileDialog::getOpenFileName(this, "Load Material",
+                                              QDir::currentPath() + "/media",
+                                              "Materials (*.material)"))).baseName();
+    Ogre::SceneNode *node;
+    Ogre::Entity *entity;
+    if ((node = ogreWindow->getCurrentNode())  && (fileName != ""))
+    {
+        entity = static_cast<Ogre::Entity*>(node->getAttachedObject(node->getName()));
+        entity->setMaterialName(fileName.toStdString());
+
+        UpdateMaterialView(entity);
+        ui->texture_edit->setText(fileName);
+    }
+}
+
+void MainWindow::OnMeshButtonDown()
+{
+
+    QString fileName = QFileInfo((QFileDialog::getOpenFileName(this, "Load Mesh",
+                                              QDir::currentPath() + "/media",
+                                              "Models (*.mesh)"))).fileName();
+    Ogre::SceneNode *node;
+    if ((node = ogreWindow->getCurrentNode()) && (fileName != ""))
+    {
+        Ogre::Entity *entity = static_cast<Ogre::Entity*>(node->getAttachedObject(node->getName()));
+        Ogre::String materialName = entity->getSubEntity(0)->getMaterialName();
+
+        ogreWindow->getSceneManager()->destroyEntity(entity);
+
+        entity = ogreWindow->getSceneManager()->createEntity(node->getName(), fileName.toStdString());
+        entity->setMaterialName(materialName);
+
+        node->attachObject( entity );
+
+        ui->mesh_edit->setText(fileName);
+    }
+}
