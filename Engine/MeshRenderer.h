@@ -9,8 +9,9 @@
 #define EA_13853455_424F_46f4_AC0F_6072E31102D4__INCLUDED_
 
 #include "Component.h"
-
+class OgreWidget;
 #include <OgreEntity.h>
+#include "QtWidget.h"
 
 class MeshRenderer : public Component
 {

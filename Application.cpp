@@ -15,6 +15,7 @@ int main(int argc, char **argv)
 
     QApplication app(argc, argv);
     MainWindow::getInstance()->show();
+    MainWindow::getInstance()->showMaximized();
 /*
     GameObject go("object");
     go.AddComponent(new MeshRenderer(go.name, "robot.mesh", "Robot"));

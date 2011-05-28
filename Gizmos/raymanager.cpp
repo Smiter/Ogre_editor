@@ -31,7 +31,8 @@ Ogre::Entity * RayManager::raycastEntityOnScene(OgreWidget * ogreWidget,float _x
             Ogre::Real closest_distance = -1.0f;
             Ogre::Vector3 closest_result;
             Ogre::RaySceneQueryResult &query_result = ogreWidget->getRaySceneQuery()->getLastResults();
-            Ogre::RaySceneQueryResult::iterator itr = query_result.begin( );
+            Ogre::RaySceneQueryResult::iterator itr = query_result.begin(
+                        );
 
             /// перебор всех объектов, в которые попал луч
             for (size_t qr_idx = 0; qr_idx < query_result.size( ); qr_idx++, itr++ )

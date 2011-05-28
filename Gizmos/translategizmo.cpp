@@ -1,22 +1,21 @@
 #include "translategizmo.h"
 
-TranslateGizmo::TranslateGizmo(OgreWidget * widget)
-{
-    ogreWidget = widget;
-    MainAxisNode = ogreWidget->getSceneManager()->getRootSceneNode()->createChildSceneNode("MainAxisNode");
-    lineX =  ogreWidget->getSceneManager()->createManualObject("lineX");
+TranslateGizmo::TranslateGizmo()
+{    
+    MainAxisNode = MainWindow::getInstance()->ogreWindow->getSceneManager()->getRootSceneNode()->createChildSceneNode("MainAxisNode");
+    lineX =  MainWindow::getInstance()->ogreWindow->getSceneManager()->createManualObject("lineX");
     NodelineX = MainAxisNode->createChildSceneNode("NodelineX");
-    lineY =  ogreWidget->getSceneManager()->createManualObject("lineY");
+    lineY =  MainWindow::getInstance()->ogreWindow->getSceneManager()->createManualObject("lineY");
     NodelineY = MainAxisNode->createChildSceneNode("NodelineY");
-    lineZ =  ogreWidget->getSceneManager()->createManualObject("lineZ");
+    lineZ =  MainWindow::getInstance()->ogreWindow->getSceneManager()->createManualObject("lineZ");
     NodelineZ = MainAxisNode->createChildSceneNode("NodelineZ");
-    lineXCone=  ogreWidget->getSceneManager()->createManualObject("lineXCone");
+    lineXCone=  MainWindow::getInstance()->ogreWindow->getSceneManager()->createManualObject("lineXCone");
     NodelineXCone = MainAxisNode->createChildSceneNode("NodelineXCone");
-    lineYCone=  ogreWidget->getSceneManager()->createManualObject("lineYCone");
+    lineYCone=  MainWindow::getInstance()->ogreWindow->getSceneManager()->createManualObject("lineYCone");
     NodelineYCone = MainAxisNode->createChildSceneNode("NodelineYCone");
-    lineZCone=  ogreWidget->getSceneManager()->createManualObject("lineZCone");
+    lineZCone=  MainWindow::getInstance()->ogreWindow->getSceneManager()->createManualObject("lineZCone");
     NodelineZCone = MainAxisNode->createChildSceneNode("NodelineZCone");
-    Quadr=  ogreWidget->getSceneManager()->createManualObject("Quadr");
+    Quadr=  MainWindow::getInstance()->ogreWindow->getSceneManager()->createManualObject("Quadr");
     NodeQuadr = MainAxisNode->createChildSceneNode("NodeQuadr");
     NodelineX->attachObject(lineX);
     NodelineY->attachObject(lineY);
@@ -33,13 +32,13 @@ TranslateGizmo::TranslateGizmo(OgreWidget * widget)
     lineZCone->setRenderQueueGroup(Ogre::RENDER_QUEUE_OVERLAY);
     Quadr->setRenderQueueGroup(Ogre::RENDER_QUEUE_OVERLAY);
 
-    lineX->setQueryFlags(widget->AXIS_MASK_XYZ);
-    lineY->setQueryFlags(widget->AXIS_MASK_XYZ);
-    lineZ->setQueryFlags(widget->AXIS_MASK_XYZ);
-    lineXCone->setQueryFlags(widget->AXIS_MASK_XYZ);
-    lineYCone->setQueryFlags(widget->AXIS_MASK_XYZ);
-    lineZCone->setQueryFlags(widget->AXIS_MASK_XYZ);
-    Quadr->setQueryFlags(widget->AXIS_MASK_XYZ);
+    lineX->setQueryFlags(OgreWidget::AXIS_MASK_XYZ);
+    lineY->setQueryFlags(OgreWidget::AXIS_MASK_XYZ);
+    lineZ->setQueryFlags(OgreWidget::AXIS_MASK_XYZ);
+    lineXCone->setQueryFlags(OgreWidget::AXIS_MASK_XYZ);
+    lineYCone->setQueryFlags(OgreWidget::AXIS_MASK_XYZ);
+    lineZCone->setQueryFlags(OgreWidget::AXIS_MASK_XYZ);
+    Quadr->setQueryFlags(OgreWidget::AXIS_MASK_XYZ);
     isVisible=true;
     boundsize = 70;
     draw(false,false,false,false);
@@ -194,7 +193,7 @@ void TranslateGizmo::draw(bool lightedX,bool lightedY,bool lightedZ ,bool lighte
     if (lightedQuadr)
             Quadr->begin("LightedMaterial", Ogre::RenderOperation::OT_TRIANGLE_FAN);
     else
-            Quadr->begin("Gizmo_Translate_Quadro", Ogre::RenderOperation::OT_TRIANGLE_FAN);
+            Quadr->begin("QuadrMaterial", Ogre::RenderOperation::OT_TRIANGLE_FAN);
 
     Quadr->position(0,0,0);
     Quadr->position(0,0,(bounds+bounds/3)/5);
@@ -236,6 +235,16 @@ void TranslateGizmo::setPosition(Ogre::Vector3 position)
 void TranslateGizmo::Translate(float x, float y, float z,Ogre::Node::TransformSpace space)
 {
    MainAxisNode->translate(x,y,z,space);
+}
+
+void  TranslateGizmo::scale(float x, float y, float z)
+{
+    MainAxisNode->setScale(x,y,z);
+}
+
+Ogre::Vector3 TranslateGizmo::getScale()
+{
+    return MainAxisNode->getScale();
 }
 
 
