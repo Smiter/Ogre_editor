@@ -9,6 +9,8 @@ int main(int argc, char **argv)
 
     QApplication app(argc, argv);
     MainWindow::getInstance()->show();
+    MainWindow::getInstance()->showMaximized();
+
 
     return app.exec();
 }

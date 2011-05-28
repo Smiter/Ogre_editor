@@ -81,14 +81,12 @@ void OgreWidget::paintGL()
 void OgreWidget::resizeGL( int width, int height )
 {
   assert( mOgreWindow );
-
   mOgreWindow->windowMovedOrResized();
-  if(mCurrentNode)
-  {
-      GizmoManager::UpdateAxisSize(GizmoManager::getTranslateGizmo(),mCurrentNode);
-      GizmoManager::UpdateAxisSize(GizmoManager::getRotateGizmo(),mCurrentNode);
-      GizmoManager::UpdateAxisSize(GizmoManager::getScaleGizmo(),mCurrentNode);
-  }
+
+
+  GizmoManager::ActionsAfterResizeWindow(width,height);
+
+
 }
 
 Ogre::RenderSystem* OgreWidget::chooseRenderer( Ogre::RenderSystemList *renderers )
@@ -127,11 +125,20 @@ void OgreWidget::mousePressEvent ( QMouseEvent * event )
     if(event->button() == Qt::LeftButton &&  !altClick )
     {
 
+        if( (mCurrentEntity = RayManager::raycastEntityOnScene(event->x() ,   event->y(), AXIS_CAMERA )) != 0 &&  !altClick )
+        {
+            GizmoManager::ClickOnCameraGizmo(mCurrentEntity->getName());
+            return;
+        }
+
        if( (startMousePosition = RayManager::raycastIntersectionOnScene(event->x() ,   event->y(), AXIS_MASK_XYZ,true )) != Ogre::Vector3::ZERO )
+
        {
            GizmoManager::SetStartPoint(startMousePosition);
            return;
+
        }
+
 
        if( (mCurrentNode = RayManager::raycastNodeOnScene(event->x() ,   event->y(), NONE_MASK )) != 0 )
         {
@@ -144,7 +151,8 @@ void OgreWidget::mousePressEvent ( QMouseEvent * event )
             {
                  GizmoManager::Show(GizmoManager::getTranslateGizmo());
                  GizmoManager::SetGizmoPosition(GizmoManager::getTranslateGizmo(),mCurrentNode->getPosition());
-                 GizmoManager::UpdateAxisSize(GizmoManager::getTranslateGizmo(),mCurrentNode);
+
+                 GizmoManager::UpdateAxisSize(GizmoManager::getTranslateGizmo(),mCurrentNode,"",0);
 
                  if(MainWindow::getInstance()->ui->actionGlobal->isChecked())
                      GizmoManager::ConvertGizmo(false,true,mCurrentNode);
@@ -156,24 +164,27 @@ void OgreWidget::mousePressEvent ( QMouseEvent * event )
             {
                  GizmoManager::Show(GizmoManager::getRotateGizmo());
                  GizmoManager::SetGizmoPosition(GizmoManager::getRotateGizmo(),mCurrentNode->getPosition());
-                 GizmoManager::UpdateAxisSize(GizmoManager::getRotateGizmo(),mCurrentNode);
+
+                 GizmoManager::UpdateAxisSize(GizmoManager::getRotateGizmo(),mCurrentNode,"",0);
             }
             if( MainWindow::getInstance()->ui->actionScale->isChecked())
             {
                  GizmoManager::Show(GizmoManager::getScaleGizmo());
                  GizmoManager::SetGizmoPosition(GizmoManager::getScaleGizmo(),mCurrentNode->getPosition());
-                 GizmoManager::UpdateAxisSize(GizmoManager::getScaleGizmo(),mCurrentNode);
+
+                 GizmoManager::UpdateAxisSize(GizmoManager::getScaleGizmo(),mCurrentNode,"",0);
             }
 
 
 
-        }
+        }       
        else
        {
             GizmoManager::Hide(GizmoManager::getTranslateGizmo());
             GizmoManager::Hide(GizmoManager::getRotateGizmo());
             GizmoManager::Hide(GizmoManager::getScaleGizmo());
        }
+
 
     }
 }
@@ -188,7 +199,9 @@ void OgreWidget::mouseMoveEvent (QMouseEvent * event)
     {
         if( MainWindow::getInstance()->ui->actionGlobal->isChecked())
         {
+
              GizmoManager::ManipulationWithGizmo(mCurrentEntity->getName(),mCurrentNode,event->x(),event->y(),false,true);
+
         }
         if( MainWindow::getInstance()->ui->actionLocal->isChecked())
         {
@@ -199,17 +212,22 @@ void OgreWidget::mouseMoveEvent (QMouseEvent * event)
         return;
     }
 
-    if( (mCurrentEntity = RayManager::raycastEntityOnScene(event->x() ,   event->y(), AXIS_MASK_XYZ )) != 0 &&  !altClick )
+    if( (mCurrentEntity = RayManager::raycastEntityOnScene(event->x(), event->y(), AXIS_MASK_XYZ )) != 0 &&  !altClick )
     {
         GizmoManager::SetLightOn(GizmoManager::getTranslateGizmo(),mCurrentEntity->getName());
         GizmoManager::SetLightOn(GizmoManager::getRotateGizmo(),mCurrentEntity->getName());
-        GizmoManager::SetLightOn(GizmoManager::getScaleGizmo(),mCurrentEntity->getName());
+        GizmoManager::SetLightOn(GizmoManager::getScaleGizmo(),mCurrentEntity->getName());        
+    }
+    else if( (mCurrentEntity = RayManager::raycastEntityOnScene(event->x() ,   event->y(), AXIS_CAMERA )) != 0 &&  !altClick )
+    {
+        GizmoManager::SetLightOn(GizmoManager::getCameraGizmo(),mCurrentEntity->getName());
     }
     else
     {
          GizmoManager::SetLightOff(GizmoManager::getRotateGizmo());
          GizmoManager::SetLightOff(GizmoManager::getTranslateGizmo());
          GizmoManager::SetLightOff(GizmoManager::getScaleGizmo());
+         GizmoManager::SetLightOff(GizmoManager::getCameraGizmo());
     }
 
     if(event->buttons() == Qt::RightButton)
@@ -236,30 +254,45 @@ void OgreWidget::keyPressEvent( QKeyEvent * event )
     switch(event->key())
     {
         case Qt::Key_Up:
+       if (GizmoManager::cameraGizmoisClicked  )
+            mCamera->moveRelative(Ogre::Vector3(0,cameraSpeed,0));
+       else
+            GizmoManager::cameraNode->setPosition((GizmoManager::cameraNode->getPosition() + Ogre::Vector3(mCamera->getRealDirection().x*cameraSpeed, 0,mCamera->getRealDirection().z*cameraSpeed )) );
 
-        GizmoManager::cameraNode->setPosition((GizmoManager::cameraNode->getPosition() + Ogre::Vector3(mCamera->getRealDirection().x*cameraSpeed, 0,mCamera->getRealDirection().z*cameraSpeed )) );
-                 break;
+       break;
+
         case Qt::Key_Down:
-
-        GizmoManager::cameraNode->setPosition((GizmoManager::cameraNode->getPosition() + Ogre::Vector3(mCamera->getRealDirection().x*-cameraSpeed, 0,mCamera->getRealDirection().z*-cameraSpeed )));
+        if (GizmoManager::cameraGizmoisClicked  )
+             mCamera->moveRelative(Ogre::Vector3(0,-cameraSpeed,0));
+        else
+             GizmoManager::cameraNode->setPosition((GizmoManager::cameraNode->getPosition() + Ogre::Vector3(mCamera->getRealDirection().x*-cameraSpeed, 0,mCamera->getRealDirection().z*-cameraSpeed )));
                  break;
         case Qt::Key_Left:
-
-        GizmoManager::cameraNode->translate(mCamera->getRealOrientation() * Ogre::Vector3( -cameraSpeed, 0, 0 ));
+        if (GizmoManager::cameraGizmoisClicked  )
+             mCamera->moveRelative(Ogre::Vector3(-cameraSpeed,0,0));
+        else
+              GizmoManager::cameraNode->translate(mCamera->getRealOrientation() * Ogre::Vector3( -cameraSpeed, 0, 0 ));
                  break;
         case Qt::Key_Right:
-
-        GizmoManager::cameraNode->translate(mCamera->getRealOrientation() * Ogre::Vector3( cameraSpeed, 0, 0 ));
+        if (GizmoManager::cameraGizmoisClicked  )
+             mCamera->moveRelative(Ogre::Vector3(cameraSpeed,0,0));
+        else
+            GizmoManager::cameraNode->translate(mCamera->getRealOrientation() * Ogre::Vector3( cameraSpeed, 0, 0 ));
                  break;
         case Qt::Key_Alt:
         altClick=true;
+
             break;
     }
+
+    GizmoManager::getCameraGizmo()->NodeCameraGizmoSupport->setPosition(mCamera->getPosition());
+
     if(mCurrentNode)
     {
-          GizmoManager::UpdateAxisSize(GizmoManager::getTranslateGizmo(),mCurrentNode);
-          GizmoManager::UpdateAxisSize(GizmoManager::getRotateGizmo(),mCurrentNode);
-          GizmoManager::UpdateAxisSize(GizmoManager::getScaleGizmo(),mCurrentNode);
+
+          GizmoManager::UpdateAxisSize(GizmoManager::getTranslateGizmo(),mCurrentNode,"",0);
+          GizmoManager::UpdateAxisSize(GizmoManager::getRotateGizmo(),mCurrentNode,"",0);
+          GizmoManager::UpdateAxisSize(GizmoManager::getScaleGizmo(),mCurrentNode,"",0);
     }
 
 }
@@ -285,12 +318,21 @@ void OgreWidget::keyReleaseEvent ( QKeyEvent * event )
 
 void OgreWidget::wheelEvent( QWheelEvent * event )
 {
+
     mOgreWindow->getViewport(0)->getCamera()->moveRelative(Ogre::Vector3(0.0f,0.0f,event->delta() * -0.1f));
-    if(mCurrentNode)
+    float WindowWidth  = this->width();
+    float WindowHeight = this->height();
+
+   Ogre::Ray mouseRay = mCamera->getCameraToViewportRay((WindowWidth-60)/WindowWidth,(WindowHeight-WindowHeight+60)/WindowHeight);
+   GizmoManager::getCameraGizmo()->setPosition(Ogre::Vector3(mouseRay.getPoint(mCamera->getNearClipDistance()).x,mouseRay.getPoint(mCamera->getNearClipDistance()).y,mouseRay.getPoint(mCamera->getNearClipDistance()).z));
+
+   if(mCurrentNode)
     {
-        GizmoManager::UpdateAxisSize(GizmoManager::getTranslateGizmo(),mCurrentNode);
-        GizmoManager::UpdateAxisSize(GizmoManager::getRotateGizmo(),mCurrentNode);
-        GizmoManager::UpdateAxisSize(GizmoManager::getScaleGizmo(),mCurrentNode);
+
+        GizmoManager::UpdateAxisSize(GizmoManager::getTranslateGizmo(),mCurrentNode,"",0);
+        GizmoManager::UpdateAxisSize(GizmoManager::getRotateGizmo(),mCurrentNode,"",0);
+        GizmoManager::UpdateAxisSize(GizmoManager::getScaleGizmo(),mCurrentNode,"",0);
+
     }  
 }
 
@@ -301,21 +343,35 @@ void OgreWidget::CameraLooking(float x, float y, float currentX, float currentY)
 
     if(x<currentX)
     {
-            mCamera->yaw(Ogre::Radian(deltaX) * 0.006f);
+           mCamera->yaw(Ogre::Radian(deltaX) * 0.006f);
+           GizmoManager::getCameraGizmo()->NodeCameraGizmoSupport->rotate( Ogre::Vector3::UNIT_Y,Ogre::Radian(deltaX) * 0.006f, Ogre::Node::TS_PARENT);
+           GizmoManager::getCameraGizmo()->Rotate( Ogre::Vector3::UNIT_Y,Ogre::Radian(-deltaX) * 0.006f, Ogre::Node::TS_LOCAL);
     }
     else
     {
-            mCamera->yaw(Ogre::Radian(deltaX) * 0.006f);
+          mCamera->yaw(Ogre::Radian(deltaX) * 0.006f);
+          GizmoManager::getCameraGizmo()->NodeCameraGizmoSupport->rotate( Ogre::Vector3::UNIT_Y,Ogre::Radian(deltaX) * 0.006f, Ogre::Node::TS_PARENT);
+          GizmoManager::getCameraGizmo()->Rotate( Ogre::Vector3::UNIT_Y,Ogre::Radian(-deltaX) * 0.006f, Ogre::Node::TS_LOCAL);
     }
 
     if(y<currentY)
     {
-            mCamera->pitch(Ogre::Radian(deltaY) * 0.006f);
+          mCamera->pitch(Ogre::Radian(deltaY) * 0.006f);
+          GizmoManager::getCameraGizmo()->NodeCameraGizmoSupport->rotate( mCamera->getRealOrientation()*Ogre::Vector3(1,0,0),Ogre::Radian(deltaY) * 0.006f, Ogre::Node::TS_PARENT);
+          GizmoManager::getCameraGizmo()->Rotate( mCamera->getRealOrientation()*Ogre::Vector3(1,0,0),Ogre::Radian(-deltaY) * 0.006f, Ogre::Node::TS_PARENT);
+
     }
     else
     {
-            mCamera->pitch(Ogre::Radian(deltaY) * 0.006f);
+           mCamera->pitch(Ogre::Radian(deltaY) * 0.006f);
+           GizmoManager::getCameraGizmo()->NodeCameraGizmoSupport->rotate( mCamera->getRealOrientation()*Ogre::Vector3(1,0,0),Ogre::Radian(deltaY) * 0.006f, Ogre::Node::TS_PARENT);
+           GizmoManager::getCameraGizmo()->Rotate( mCamera->getRealOrientation()*Ogre::Vector3(1,0,0),Ogre::Radian(-deltaY) * 0.006f, Ogre::Node::TS_PARENT);
     }
+    float WindowWidth  = this->width();
+    float WindowHeight = this->height();
+    Ogre::Ray mouseRay = mCamera->getCameraToViewportRay((WindowWidth-60)/WindowWidth,(WindowHeight-WindowHeight+60)/WindowHeight);
+    GizmoManager::getCameraGizmo()->setPosition(Ogre::Vector3(mouseRay.getPoint(mCamera->getNearClipDistance()).x,mouseRay.getPoint(mCamera->getNearClipDistance()).y,mouseRay.getPoint(mCamera->getNearClipDistance()).z));
+
 }
 void OgreWidget::SphereCameraRotating(float x, float y, float currentX, float currentY)
 {
@@ -327,24 +383,28 @@ void OgreWidget::SphereCameraRotating(float x, float y, float currentX, float cu
     {
             theta = Ogre::Radian(static_cast<float>(deltaX) / 350.0f);
             GizmoManager::cameraNode->rotate( Ogre::Vector3::UNIT_Y , theta, Ogre::Node::TS_PARENT);
-            GizmoManager::planeNode->rotate(Ogre::Vector3::UNIT_Y , theta,Ogre::Node::TS_LOCAL);    }
+            GizmoManager::planeNode->rotate(Ogre::Vector3::UNIT_Y , theta,Ogre::Node::TS_LOCAL);
+            GizmoManager::getCameraGizmo()->Rotate(Ogre::Vector3::UNIT_Y,-theta, Ogre::Node::TS_LOCAL);
+    }
     else
     {
             theta = Ogre::Radian(static_cast<float>(-deltaX) / 350.0f);
             GizmoManager::cameraNode->rotate( Ogre::Vector3::UNIT_Y, -theta, Ogre::Node::TS_PARENT);
             GizmoManager::planeNode->rotate(Ogre::Vector3::UNIT_Y, -theta,Ogre::Node::TS_LOCAL);
-
+            GizmoManager::getCameraGizmo()->Rotate(Ogre::Vector3::UNIT_Y,theta, Ogre::Node::TS_LOCAL);
     }
 
     if(y<currentY)
     {
             phi = Ogre::Radian(static_cast<float>(deltaY) / 50.0f);
             GizmoManager::cameraNode->rotate( Ogre::Vector3::UNIT_Z, phi, Ogre::Node::TS_LOCAL);
+            GizmoManager::getCameraGizmo()->Rotate( mCamera->getRealOrientation()*Ogre::Vector3(1,0,0),-phi, Ogre::Node::TS_LOCAL);
     }
     else
     {
             phi = Ogre::Radian(static_cast<float>(deltaY) / 50.0f);
             GizmoManager::cameraNode->rotate( Ogre::Vector3::UNIT_Z, phi, Ogre::Node::TS_LOCAL);
+            GizmoManager::getCameraGizmo()->Rotate( mCamera->getRealOrientation()*Ogre::Vector3(1,0,0),-phi, Ogre::Node::TS_LOCAL);
     }   
 
 }

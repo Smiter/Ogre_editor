@@ -5,8 +5,10 @@ class RayManager;
 
 #include <QtOpenGL/QGLWidget>
 #include <QDir>
-#include "Handles/raymanager.h"
-#include "Handles/gizmomanager.h"
+
+#include "Gizmos/raymanager.h"
+#include "Gizmos/gizmomanager.h"
+
 #include "ui_mainwindow.h"
 
 class OgreWidget : public QGLWidget
@@ -81,7 +83,7 @@ public:
          PLANE_XZ_MASK = 1<<9,
          PLANE_Z_MASK = 1<<10,
          NONE_MASK = 1<<11,
-         AXIS_MASK_SCALE = 1<<12,
+         AXIS_CAMERA = 1<<12,
   };
 
 

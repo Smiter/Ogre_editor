@@ -1,27 +1,28 @@
-#include "scalegizmo.h"
+#include "Gizmos/scalegizmo.h"
 
-ScaleGizmo::ScaleGizmo(OgreWidget * widget)
-{
-    ogreWidget = widget;
-    MainScaleNode = widget->getSceneManager()->getRootSceneNode()->createChildSceneNode("MainScaleNode");
-    lineXScale =  widget->getSceneManager()->createManualObject("lineXscale");
+#include "mainwindow.h"
+
+ScaleGizmo::ScaleGizmo()
+{    
+    MainScaleNode = MainWindow::getInstance()->ogreWindow->getSceneManager()->getRootSceneNode()->createChildSceneNode("MainScaleNode");
+    lineXScale =  MainWindow::getInstance()->ogreWindow->getSceneManager()->createManualObject("lineXscale");
     NodelineXScale = MainScaleNode->createChildSceneNode("NodelineXscale");
-    lineYScale =  widget->getSceneManager()->createManualObject("lineYscale");
+    lineYScale =  MainWindow::getInstance()->ogreWindow->getSceneManager()->createManualObject("lineYscale");
     NodelineYScale = MainScaleNode->createChildSceneNode("NodelineYscale");
-    lineZScale =  widget->getSceneManager()->createManualObject("lineZscale");
+    lineZScale =  MainWindow::getInstance()->ogreWindow->getSceneManager()->createManualObject("lineZscale");
     NodelineZScale = MainScaleNode->createChildSceneNode("NodelineZscale");
 
     NodescaleXQuadr = MainScaleNode->createChildSceneNode("NodescaleXQuadr");
     NodescaleYQuadr = MainScaleNode->createChildSceneNode("NodescaleYQuadr");
     NodescaleZQuadr = MainScaleNode->createChildSceneNode("NodescaleZQuadr");
 
-    ScaleXent = widget->getSceneManager()->createEntity("cubX",Ogre::SceneManager::PT_CUBE);
+    ScaleXent = MainWindow::getInstance()->ogreWindow->getSceneManager()->createEntity("cubX",Ogre::SceneManager::PT_CUBE);
     NodescaleXQuadr->attachObject( ScaleXent );
     ScaleXent->setCastShadows(false);
-    ScaleYent = widget->getSceneManager()->createEntity("cubY",Ogre::SceneManager::PT_CUBE);
+    ScaleYent = MainWindow::getInstance()->ogreWindow->getSceneManager()->createEntity("cubY",Ogre::SceneManager::PT_CUBE);
     NodescaleYQuadr->attachObject( ScaleYent );
     ScaleYent->setCastShadows(false);
-    ScaleZent = widget->getSceneManager()->createEntity("cubZ",Ogre::SceneManager::PT_CUBE);
+    ScaleZent = MainWindow::getInstance()->ogreWindow->getSceneManager()->createEntity("cubZ",Ogre::SceneManager::PT_CUBE);
     NodescaleZQuadr->attachObject( ScaleZent );
     ScaleZent->setCastShadows(false);
 
@@ -38,12 +39,12 @@ ScaleGizmo::ScaleGizmo(OgreWidget * widget)
     ScaleYent->setRenderQueueGroup(Ogre::RENDER_QUEUE_OVERLAY);
     ScaleZent->setRenderQueueGroup(Ogre::RENDER_QUEUE_OVERLAY);
 
-    lineXScale->setQueryFlags(widget->AXIS_MASK_XYZ);
-    lineYScale->setQueryFlags(widget->AXIS_MASK_XYZ);
-    lineZScale->setQueryFlags(widget->AXIS_MASK_XYZ);
-    ScaleXent->setQueryFlags(widget->AXIS_MASK_XYZ);
-    ScaleYent->setQueryFlags(widget->AXIS_MASK_XYZ);
-    ScaleZent->setQueryFlags(widget->AXIS_MASK_XYZ);
+    lineXScale->setQueryFlags(OgreWidget::AXIS_MASK_XYZ);
+    lineYScale->setQueryFlags(OgreWidget::AXIS_MASK_XYZ);
+    lineZScale->setQueryFlags(OgreWidget::AXIS_MASK_XYZ);
+    ScaleXent->setQueryFlags(OgreWidget::AXIS_MASK_XYZ);
+    ScaleYent->setQueryFlags(OgreWidget::AXIS_MASK_XYZ);
+    ScaleZent->setQueryFlags(OgreWidget::AXIS_MASK_XYZ);
     isVisible=true;
     boundsize = 70;
     draw(false,false,false,false);
@@ -144,4 +145,14 @@ void ScaleGizmo::hide()
 void ScaleGizmo::setPosition(Ogre::Vector3 position)
 {
    MainScaleNode->setPosition(position);
+}
+
+void  ScaleGizmo::scale(float x, float y, float z)
+{
+    MainScaleNode->setScale(x,y,z);
+}
+
+Ogre::Vector3 ScaleGizmo::getScale()
+{
+    return MainScaleNode->getScale();
 }

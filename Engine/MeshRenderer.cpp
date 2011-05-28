@@ -11,7 +11,7 @@
 #include <OgreMeshManager.h>
 
 #include "mainwindow.h"
-#include "QtWidget.h"
+
 
 MeshRenderer::MeshRenderer(){
 	

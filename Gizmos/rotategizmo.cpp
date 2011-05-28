@@ -1,14 +1,15 @@
-#include "rotategizmo.h"
+#include "Gizmos/rotategizmo.h"
 
-RotateGizmo::RotateGizmo(OgreWidget * widget)
-{
-    ogreWidget = widget;
-    MainRotateNode = widget->getSceneManager()->getRootSceneNode()->createChildSceneNode("MainRotateNode");
-    CircleY=  widget->getSceneManager()->createManualObject("CircleY");
+#include "mainwindow.h"
+
+RotateGizmo::RotateGizmo()
+{  
+    MainRotateNode = MainWindow::getInstance()->ogreWindow->getSceneManager()->getRootSceneNode()->createChildSceneNode("MainRotateNode");
+    CircleY=  MainWindow::getInstance()->ogreWindow->getSceneManager()->createManualObject("CircleY");
     NodeCircleY = MainRotateNode->createChildSceneNode("NodeCircleY");
-    CircleX=  widget->getSceneManager()->createManualObject("CircleX");
+    CircleX=  MainWindow::getInstance()->ogreWindow->getSceneManager()->createManualObject("CircleX");
     NodeCircleX = MainRotateNode->createChildSceneNode("NodeCircleX");
-    CircleZ=  widget->getSceneManager()->createManualObject("CircleZ");
+    CircleZ=  MainWindow::getInstance()->ogreWindow->getSceneManager()->createManualObject("CircleZ");
     NodeCircleZ = MainRotateNode->createChildSceneNode("NodeCircleZ");
     NodeCircleX->attachObject(CircleX);
     NodeCircleY->attachObject(CircleY);
@@ -16,9 +17,9 @@ RotateGizmo::RotateGizmo(OgreWidget * widget)
     CircleX->setRenderQueueGroup(Ogre::RENDER_QUEUE_OVERLAY);
     CircleY->setRenderQueueGroup(Ogre::RENDER_QUEUE_OVERLAY);
     CircleZ->setRenderQueueGroup(Ogre::RENDER_QUEUE_OVERLAY);
-    CircleX->setQueryFlags(widget->AXIS_MASK_XYZ);
-    CircleY->setQueryFlags(widget->AXIS_MASK_XYZ);
-    CircleZ->setQueryFlags(widget->AXIS_MASK_XYZ);
+    CircleX->setQueryFlags(OgreWidget::AXIS_MASK_XYZ);
+    CircleY->setQueryFlags(OgreWidget::AXIS_MASK_XYZ);
+    CircleZ->setQueryFlags(OgreWidget::AXIS_MASK_XYZ);
     isVisible=true;
     boundsize = 70;
     draw(false,false,false,false);
@@ -101,8 +102,17 @@ void RotateGizmo::hide()
     isVisible=false;
 }
 
-
 void RotateGizmo::setPosition(Ogre::Vector3 position)
 {
    MainRotateNode->setPosition(position);
+}
+
+void  RotateGizmo::scale(float x, float y, float z)
+{
+    MainRotateNode->setScale(x,y,z);
+}
+
+Ogre::Vector3 RotateGizmo::getScale()
+{
+    return MainRotateNode->getScale();
 }

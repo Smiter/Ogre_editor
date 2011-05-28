@@ -1,9 +1,13 @@
-#include "raymanager.h"
+#include "Gizmos/raymanager.h"
+
+#include "mainwindow.h"
 
 Ogre::Viewport * RayManager::viewPort = 0;
 
-Ogre::Entity * RayManager::raycastEntityOnScene(OgreWidget * ogreWidget,float _x, float _y,Ogre::uint32 _mask)
+Ogre::Entity * RayManager::raycastEntityOnScene(float _x, float _y,Ogre::uint32 _mask)
 {
+    OgreWidget *ogreWidget = MainWindow::getInstance()->ogreWindow;
+
     viewPort = ogreWidget->getSceneManager()->getCurrentViewport();
     float WindowWidth=viewPort->getActualWidth();
     float WindowHeight=viewPort->getActualHeight();
@@ -31,7 +35,8 @@ Ogre::Entity * RayManager::raycastEntityOnScene(OgreWidget * ogreWidget,float _x
             Ogre::Real closest_distance = -1.0f;
             Ogre::Vector3 closest_result;
             Ogre::RaySceneQueryResult &query_result = ogreWidget->getRaySceneQuery()->getLastResults();
-            Ogre::RaySceneQueryResult::iterator itr = query_result.begin( );
+            Ogre::RaySceneQueryResult::iterator itr = query_result.begin(
+                        );
 
             /// перебор всех объектов, в которые попал луч
             for (size_t qr_idx = 0; qr_idx < query_result.size( ); qr_idx++, itr++ )
@@ -57,8 +62,10 @@ Ogre::Entity * RayManager::raycastEntityOnScene(OgreWidget * ogreWidget,float _x
 
 
 
-Ogre::SceneNode * RayManager::raycastNodeOnScene(OgreWidget * ogreWidget,float _x, float _y,Ogre::uint32 _mask)
+Ogre::SceneNode * RayManager::raycastNodeOnScene(float _x, float _y,Ogre::uint32 _mask)
 {
+    OgreWidget *ogreWidget = MainWindow::getInstance()->ogreWindow;
+
     viewPort = ogreWidget->getSceneManager()->getCurrentViewport();
     float WindowWidth=viewPort->getActualWidth();
     float WindowHeight=viewPort->getActualHeight();
@@ -150,10 +157,10 @@ Ogre::SceneNode * RayManager::raycastNodeOnScene(OgreWidget * ogreWidget,float _
 }
 
 
-
-
-Ogre::Vector3  RayManager::raycastIntersectionOnScene(OgreWidget * ogreWidget,float _x, float _y,Ogre::uint32 _mask,bool bounds,bool local,bool global, Ogre::SceneNode * plane)
+Ogre::Vector3  RayManager::raycastIntersectionOnScene(float _x, float _y,Ogre::uint32 _mask,bool bounds,bool local,bool global, Ogre::SceneNode * plane)
 {
+    OgreWidget *ogreWidget = MainWindow::getInstance()->ogreWindow;
+
     viewPort = ogreWidget->getSceneManager()->getCurrentViewport();
     float WindowWidth=viewPort->getActualWidth();
     float WindowHeight=viewPort->getActualHeight();
