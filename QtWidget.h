@@ -5,8 +5,8 @@ class RayManager;
 
 #include <QtOpenGL/QGLWidget>
 #include <QDir>
-#include "raymanager.h"
-#include "gizmomanager.h"
+#include "Handles/raymanager.h"
+#include "Handles/gizmomanager.h"
 #include "ui_mainwindow.h"
 
 class OgreWidget : public QGLWidget

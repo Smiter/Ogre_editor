@@ -62,7 +62,7 @@ void OgreWidget::initializeGL()
   QObject::connect(timer, SIGNAL(timeout()), this,SLOT(OnRenderTimer()));
   timer->setInterval(10);
   timer->start();
-  GizmoManager::CreateGizmo(this);
+  GizmoManager::CreateGizmo();
   altClick=false; 
 
  // mCamera->setPolygonMode(Ogre::PM_SOLID);
@@ -85,9 +85,9 @@ void OgreWidget::resizeGL( int width, int height )
   mOgreWindow->windowMovedOrResized();
   if(mCurrentNode)
   {
-      GizmoManager::UpdateAxisSize(this,GizmoManager::getTranslateGizmo(),mCurrentNode);
-      GizmoManager::UpdateAxisSize(this,GizmoManager::getRotateGizmo(),mCurrentNode);
-      GizmoManager::UpdateAxisSize(this,GizmoManager::getScaleGizmo(),mCurrentNode);
+      GizmoManager::UpdateAxisSize(GizmoManager::getTranslateGizmo(),mCurrentNode);
+      GizmoManager::UpdateAxisSize(GizmoManager::getRotateGizmo(),mCurrentNode);
+      GizmoManager::UpdateAxisSize(GizmoManager::getScaleGizmo(),mCurrentNode);
   }
 }
 
@@ -127,13 +127,13 @@ void OgreWidget::mousePressEvent ( QMouseEvent * event )
     if(event->button() == Qt::LeftButton &&  !altClick )
     {
 
-       if( (startMousePosition = RayManager::raycastIntersectionOnScene(this,event->x() ,   event->y(), AXIS_MASK_XYZ,true )) != Ogre::Vector3::ZERO )
+       if( (startMousePosition = RayManager::raycastIntersectionOnScene(event->x() ,   event->y(), AXIS_MASK_XYZ,true )) != Ogre::Vector3::ZERO )
        {
            GizmoManager::SetStartPoint(startMousePosition);
            return;
        }
 
-       if( (mCurrentNode = RayManager::raycastNodeOnScene(this,event->x() ,   event->y(), NONE_MASK )) != 0 )
+       if( (mCurrentNode = RayManager::raycastNodeOnScene(event->x() ,   event->y(), NONE_MASK )) != 0 )
         {
             MainWindow::getInstance()->UpdateComponents(mCurrentNode,mSceneMgr->getEntity(mCurrentNode->getName()));
 
@@ -144,7 +144,7 @@ void OgreWidget::mousePressEvent ( QMouseEvent * event )
             {
                  GizmoManager::Show(GizmoManager::getTranslateGizmo());
                  GizmoManager::SetGizmoPosition(GizmoManager::getTranslateGizmo(),mCurrentNode->getPosition());
-                 GizmoManager::UpdateAxisSize(this,GizmoManager::getTranslateGizmo(),mCurrentNode);
+                 GizmoManager::UpdateAxisSize(GizmoManager::getTranslateGizmo(),mCurrentNode);
 
                  if(MainWindow::getInstance()->ui->actionGlobal->isChecked())
                      GizmoManager::ConvertGizmo(false,true,mCurrentNode);
@@ -156,13 +156,13 @@ void OgreWidget::mousePressEvent ( QMouseEvent * event )
             {
                  GizmoManager::Show(GizmoManager::getRotateGizmo());
                  GizmoManager::SetGizmoPosition(GizmoManager::getRotateGizmo(),mCurrentNode->getPosition());
-                 GizmoManager::UpdateAxisSize(this,GizmoManager::getRotateGizmo(),mCurrentNode);
+                 GizmoManager::UpdateAxisSize(GizmoManager::getRotateGizmo(),mCurrentNode);
             }
             if( MainWindow::getInstance()->ui->actionScale->isChecked())
             {
                  GizmoManager::Show(GizmoManager::getScaleGizmo());
                  GizmoManager::SetGizmoPosition(GizmoManager::getScaleGizmo(),mCurrentNode->getPosition());
-                 GizmoManager::UpdateAxisSize(this,GizmoManager::getScaleGizmo(),mCurrentNode);
+                 GizmoManager::UpdateAxisSize(GizmoManager::getScaleGizmo(),mCurrentNode);
             }
 
 
@@ -188,18 +188,18 @@ void OgreWidget::mouseMoveEvent (QMouseEvent * event)
     {
         if( MainWindow::getInstance()->ui->actionGlobal->isChecked())
         {
-             GizmoManager::ManipulationWithGizmo(mCurrentEntity->getName(),this,mCurrentNode,event->x(),event->y(),false,true);
+             GizmoManager::ManipulationWithGizmo(mCurrentEntity->getName(),mCurrentNode,event->x(),event->y(),false,true);
         }
         if( MainWindow::getInstance()->ui->actionLocal->isChecked())
         {
-             GizmoManager::ManipulationWithGizmo(mCurrentEntity->getName(),this,mCurrentNode,event->x(),event->y(),true,false);
+             GizmoManager::ManipulationWithGizmo(mCurrentEntity->getName(),mCurrentNode,event->x(),event->y(),true,false);
         }
 
         MainWindow::getInstance()->UpdateComponents(mCurrentNode,mSceneMgr->getEntity(mCurrentNode->getName()));             
         return;
     }
 
-    if( (mCurrentEntity = RayManager::raycastEntityOnScene(this,event->x() ,   event->y(), AXIS_MASK_XYZ )) != 0 &&  !altClick )
+    if( (mCurrentEntity = RayManager::raycastEntityOnScene(event->x() ,   event->y(), AXIS_MASK_XYZ )) != 0 &&  !altClick )
     {
         GizmoManager::SetLightOn(GizmoManager::getTranslateGizmo(),mCurrentEntity->getName());
         GizmoManager::SetLightOn(GizmoManager::getRotateGizmo(),mCurrentEntity->getName());
@@ -257,9 +257,9 @@ void OgreWidget::keyPressEvent( QKeyEvent * event )
     }
     if(mCurrentNode)
     {
-          GizmoManager::UpdateAxisSize(this,GizmoManager::getTranslateGizmo(),mCurrentNode);
-          GizmoManager::UpdateAxisSize(this,GizmoManager::getRotateGizmo(),mCurrentNode);
-          GizmoManager::UpdateAxisSize(this,GizmoManager::getScaleGizmo(),mCurrentNode);
+          GizmoManager::UpdateAxisSize(GizmoManager::getTranslateGizmo(),mCurrentNode);
+          GizmoManager::UpdateAxisSize(GizmoManager::getRotateGizmo(),mCurrentNode);
+          GizmoManager::UpdateAxisSize(GizmoManager::getScaleGizmo(),mCurrentNode);
     }
 
 }
@@ -288,9 +288,9 @@ void OgreWidget::wheelEvent( QWheelEvent * event )
     mOgreWindow->getViewport(0)->getCamera()->moveRelative(Ogre::Vector3(0.0f,0.0f,event->delta() * -0.1f));
     if(mCurrentNode)
     {
-        GizmoManager::UpdateAxisSize(this,GizmoManager::getTranslateGizmo(),mCurrentNode);
-        GizmoManager::UpdateAxisSize(this,GizmoManager::getRotateGizmo(),mCurrentNode);
-        GizmoManager::UpdateAxisSize(this,GizmoManager::getScaleGizmo(),mCurrentNode);
+        GizmoManager::UpdateAxisSize(GizmoManager::getTranslateGizmo(),mCurrentNode);
+        GizmoManager::UpdateAxisSize(GizmoManager::getRotateGizmo(),mCurrentNode);
+        GizmoManager::UpdateAxisSize(GizmoManager::getScaleGizmo(),mCurrentNode);
     }  
 }
 
