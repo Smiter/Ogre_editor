@@ -145,6 +145,12 @@ void ScaleGizmo::setPosition(Ogre::Vector3 position)
    MainScaleNode->setPosition(position);
 }
 
+void ScaleGizmo::setOrientation(Ogre::Quaternion orientation)
+{
+   MainScaleNode->setOrientation(orientation);
+}
+
+
 void  ScaleGizmo::scale(float x, float y, float z)
 {
     MainScaleNode->setScale(x,y,z);

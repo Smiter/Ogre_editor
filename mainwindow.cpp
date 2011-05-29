@@ -113,6 +113,8 @@ void MainWindow::ProcessToolBar()
        GizmoManager::Show(GizmoManager::getScaleGizmo());
        GizmoManager::SetGizmoPosition(GizmoManager::getScaleGizmo(),ogreWindow->getCurrentNode()->getPosition());
        GizmoManager::UpdateAxisSize(GizmoManager::getScaleGizmo(),ogreWindow->getCurrentNode(),"",0);
+       GizmoManager::ConvertGizmo(true,false,ogreWindow->getCurrentNode());
+
        }
    }
    if (QObject::sender() == ui->actionLocal)
@@ -130,7 +132,11 @@ void MainWindow::ProcessToolBar()
        ui->actionGlobal->setChecked(true);
        if(ogreWindow->getCurrentNode())
        {
-       GizmoManager::ConvertGizmo(false,true,ogreWindow->getCurrentNode());
+           if( ui->actionTranslate->isChecked())
+           {
+                GizmoManager::ConvertGizmo(false,true,ogreWindow->getCurrentNode());
+           }
+
        }
    }
 }
@@ -207,6 +213,7 @@ void MainWindow::OnSceneNodeClicked()
            GizmoManager::Show(GizmoManager::getScaleGizmo());
            GizmoManager::SetGizmoPosition(GizmoManager::getScaleGizmo(),node->getPosition());
            GizmoManager::UpdateAxisSize(GizmoManager::getScaleGizmo(),node,"",0);
+           GizmoManager::ConvertGizmo(false,true,node);
       }
 
       UpdateMaterialView(entity);

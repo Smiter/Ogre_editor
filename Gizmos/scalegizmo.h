@@ -12,7 +12,7 @@ public:
      void scale(float,float,float);
      Ogre::Vector3 getScale();
      void setPosition(Ogre::Vector3);
-
+     void setOrientation(Ogre::Quaternion);
 private:
 
     Ogre::SceneNode* MainScaleNode;

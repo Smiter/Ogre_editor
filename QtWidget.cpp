@@ -167,6 +167,7 @@ void OgreWidget::mousePressEvent ( QMouseEvent * event )
                  GizmoManager::Show(GizmoManager::getScaleGizmo());
                  GizmoManager::SetGizmoPosition(GizmoManager::getScaleGizmo(),mCurrentNode->getPosition());
                  GizmoManager::UpdateAxisSize(GizmoManager::getScaleGizmo(),mCurrentNode,"",0);
+                 GizmoManager::ConvertGizmo(false,true,mCurrentNode);
             }
 
 
@@ -176,7 +177,7 @@ void OgreWidget::mousePressEvent ( QMouseEvent * event )
        {
             GizmoManager::Hide(GizmoManager::getTranslateGizmo());
             GizmoManager::Hide(GizmoManager::getRotateGizmo());
-            GizmoManager::Hide(GizmoManager::getScaleGizmo());
+            GizmoManager::Hide(GizmoManager::getScaleGizmo());           
        }
 
 
