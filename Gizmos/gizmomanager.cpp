@@ -1,4 +1,6 @@
-#include "gizmomanager.h"
+#include "Gizmos/gizmomanager.h"
+
+#include "mainwindow.h"
 
 TranslateGizmo * GizmoManager::translateGizmo = 0;
 RotateGizmo * GizmoManager::rotateGizmo = 0;
@@ -82,7 +84,7 @@ void GizmoManager::Hide(IGizmo* gizmo)
     gizmo->hide();
 }
 
-void GizmoManager::ManipulationWithGizmo(Ogre::String gizmoName, OgreWidget* widget,Ogre::SceneNode* currentNode,float x,float y,bool localGizmo, bool globalGizmo)
+void GizmoManager::ManipulationWithGizmo(Ogre::String gizmoName, Ogre::SceneNode* currentNode,float x,float y,bool localGizmo, bool globalGizmo)
 {
    Ogre::Vector3 intersection;
 
@@ -90,7 +92,7 @@ void GizmoManager::ManipulationWithGizmo(Ogre::String gizmoName, OgreWidget* wid
     {
         if(globalGizmo)
         {
-            intersection=  RayManager::raycastIntersectionOnScene(widget,  x , y, OgreWidget::PLANE_XZ_MASK,false );
+            intersection=  RayManager::raycastIntersectionOnScene( x , y, OgreWidget::PLANE_XZ_MASK,false );
             Ogre::Vector3 deltaPos =intersection - startMousePosition;
             translateGizmo->Translate(deltaPos.x,0,0);
             planeNode->translate(deltaPos.x,0,0);
@@ -99,7 +101,7 @@ void GizmoManager::ManipulationWithGizmo(Ogre::String gizmoName, OgreWidget* wid
         }
         if(localGizmo)
         {
-            intersection=  RayManager::raycastIntersectionOnScene(widget,  x , y,OgreWidget::PLANE_XZ_MASK,false,true,false,planeNode );
+            intersection=  RayManager::raycastIntersectionOnScene( x , y,OgreWidget::PLANE_XZ_MASK,false,true,false,planeNode );
             Ogre::Vector3 deltaPos =intersection - startMousePosition;
             if(abs(deltaPos.x) <50)
             {
@@ -114,7 +116,7 @@ void GizmoManager::ManipulationWithGizmo(Ogre::String gizmoName, OgreWidget* wid
     {
         if(globalGizmo)
         {
-            intersection=  RayManager::raycastIntersectionOnScene(widget,  x , y, OgreWidget::PLANE_XY_MASK,false );
+            intersection=  RayManager::raycastIntersectionOnScene(x , y, OgreWidget::PLANE_XY_MASK,false );
             Ogre::Vector3 deltaPos =intersection - startMousePosition;
             translateGizmo->Translate(0,deltaPos.y,0);
             planeNode->translate(0,deltaPos.y,0);
@@ -123,7 +125,7 @@ void GizmoManager::ManipulationWithGizmo(Ogre::String gizmoName, OgreWidget* wid
         }
         if(localGizmo)
         {
-            intersection=  RayManager::raycastIntersectionOnScene(widget,  x , y, OgreWidget::PLANE_XY_MASK,false,true,false,planeNode );
+            intersection=  RayManager::raycastIntersectionOnScene( x , y, OgreWidget::PLANE_XY_MASK,false,true,false,planeNode );
             Ogre::Vector3 deltaPos =intersection - startMousePosition;
             if(abs(deltaPos.y) <50)
             {
@@ -138,7 +140,7 @@ void GizmoManager::ManipulationWithGizmo(Ogre::String gizmoName, OgreWidget* wid
     {
         if(globalGizmo)
         {
-            intersection=  RayManager::raycastIntersectionOnScene(widget,  x , y, OgreWidget::PLANE_XZ_MASK,false );
+            intersection=  RayManager::raycastIntersectionOnScene(x , y, OgreWidget::PLANE_XZ_MASK,false );
             Ogre::Vector3 deltaPos =intersection - startMousePosition;
             translateGizmo->Translate(0,0,deltaPos.z);
             planeNode->translate(0,0,deltaPos.z);
@@ -147,8 +149,10 @@ void GizmoManager::ManipulationWithGizmo(Ogre::String gizmoName, OgreWidget* wid
         }
         if(localGizmo)
         {
+
             intersection=  RayManager::raycastIntersectionOnScene(widget,  x , y, OgreWidget::PLANE_XZ_MASK,false,true,false,planeNode );
-            Ogre::Vector3 deltaPos =intersection - startMousePosition;           
+            Ogre::Vector3 deltaPos =intersection - startMousePosition;   
+
             if(abs(deltaPos.z) <50)
             {
                translateGizmo->Translate(0,0,deltaPos.z,Ogre::Node::TS_LOCAL);
@@ -160,7 +164,7 @@ void GizmoManager::ManipulationWithGizmo(Ogre::String gizmoName, OgreWidget* wid
     }
     if(gizmoName == "Quadr" )
     {
-        intersection=  RayManager::raycastIntersectionOnScene(widget,  x , y, OgreWidget::PLANE_XZ_MASK,false );
+        intersection=  RayManager::raycastIntersectionOnScene( x , y, OgreWidget::PLANE_XZ_MASK,false );
         Ogre::Vector3 deltaPos =intersection - startMousePosition;
         translateGizmo->Translate(deltaPos.x,0,deltaPos.z);
         planeNode->translate(deltaPos.x,0,deltaPos.z);
@@ -169,14 +173,14 @@ void GizmoManager::ManipulationWithGizmo(Ogre::String gizmoName, OgreWidget* wid
     }
     if(gizmoName == "CircleX" )
     {
-        intersection=  RayManager::raycastIntersectionOnScene(widget,  x , y, OgreWidget::PLANE_XZ_MASK,false );
+        intersection=  RayManager::raycastIntersectionOnScene( x , y, OgreWidget::PLANE_XZ_MASK,false );
         Ogre::Vector3 deltaPos =intersection - startMousePosition;
         if(abs(deltaPos.x) <4)
            currentNode->rotate(Ogre::Vector3::UNIT_Z , Ogre::Radian(-deltaPos.x*0.1),Ogre::Node::TS_WORLD);
     }
     if(gizmoName == "CircleY" )
     {
-        intersection=  RayManager::raycastIntersectionOnScene(widget,  x , y, OgreWidget::PLANE_XY_MASK,false );
+        intersection=  RayManager::raycastIntersectionOnScene( x , y, OgreWidget::PLANE_XY_MASK,false );
         Ogre::Vector3 deltaPos =intersection - startMousePosition;
         if(abs(deltaPos.z) <4)
            {
@@ -185,13 +189,13 @@ void GizmoManager::ManipulationWithGizmo(Ogre::String gizmoName, OgreWidget* wid
     }
     if(gizmoName == "CircleZ" )
     {
-        intersection=  RayManager::raycastIntersectionOnScene(widget,  x , y, OgreWidget::PLANE_XZ_MASK,false );
+        intersection=  RayManager::raycastIntersectionOnScene( x , y, OgreWidget::PLANE_XZ_MASK,false );
         Ogre::Vector3 deltaPos =intersection - startMousePosition;
         if(abs(deltaPos.z) <4)
            currentNode->rotate(Ogre::Vector3::UNIT_X , Ogre::Radian(deltaPos.z*0.1),Ogre::Node::TS_WORLD);
     }
     if(gizmoName == "lineXscale" || gizmoName =="cubX")
-    {     
+	{
         intersection=  RayManager::raycastIntersectionOnScene(widget,  x , y,OgreWidget::PLANE_XZ_MASK,false,true,false,planeNode );
         Ogre::Vector3 deltaPos =intersection - startMousePosition;
         if(abs(deltaPos.x) <15)
@@ -201,6 +205,7 @@ void GizmoManager::ManipulationWithGizmo(Ogre::String gizmoName, OgreWidget* wid
 
     }
     if(gizmoName == "lineYscale" || gizmoName =="cubY" )
+
     {      
         intersection=  RayManager::raycastIntersectionOnScene(widget,  x , y, OgreWidget::PLANE_XY_MASK,false,true,false,planeNode );
         Ogre::Vector3 deltaPos =intersection - startMousePosition;
@@ -210,11 +215,11 @@ void GizmoManager::ManipulationWithGizmo(Ogre::String gizmoName, OgreWidget* wid
         }
     }
     if(gizmoName == "lineZscale" || gizmoName =="cubZ")
+
     {       
 
         intersection=  RayManager::raycastIntersectionOnScene(widget,  x , y, OgreWidget::PLANE_XZ_MASK,false,true,false,planeNode );
-        Ogre::Vector3 deltaPos =intersection - startMousePosition;
-         qDebug()<<abs(deltaPos.z);
+        Ogre::Vector3 deltaPos =intersection - startMousePosition;        
         if(abs(deltaPos.z) <15)
         {
           currentNode->setScale(currentNode->getScale().x,currentNode->getScale().y,currentNode->getScale().z + deltaPos.z*0.1);

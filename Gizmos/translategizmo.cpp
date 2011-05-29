@@ -1,4 +1,6 @@
-#include "translategizmo.h"
+#include "Gizmos/translategizmo.h"
+
+#include "mainwindow.h"
 
 TranslateGizmo::TranslateGizmo()
 {    

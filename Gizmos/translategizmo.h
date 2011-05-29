@@ -1,8 +1,8 @@
 #ifndef TRANSLATEGIZMO_H
 #define TRANSLATEGIZMO_H
-class OgreWidget;
-#include "QtWidget.h"
-#include "IGizmo.h"
+
+#include "Gizmos/IGizmo.h"
+
 class TranslateGizmo : public IGizmo
 {
 public:

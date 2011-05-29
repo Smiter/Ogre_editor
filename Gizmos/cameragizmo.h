@@ -1,7 +1,8 @@
 #ifndef CAMERAGIZMO_H
 #define CAMERAGIZMO_H
-#include "IGizmo.h"
-#include "QtWidget.h"
+
+#include "Gizmos/IGizmo.h"
+
 class CameraGizmo : public IGizmo
 {
 public:

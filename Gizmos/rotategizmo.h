@@ -1,7 +1,8 @@
 #ifndef ROTATEGIZMO_H
 #define ROTATEGIZMO_H
-#include "IGizmo.h"
-#include "QtWidget.h"
+
+#include "Gizmos/IGizmo.h"
+
 class RotateGizmo : public IGizmo
 {
 public:

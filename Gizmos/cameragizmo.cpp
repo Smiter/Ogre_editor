@@ -1,4 +1,6 @@
-#include "cameragizmo.h"
+#include "Gizmos/cameragizmo.h"
+
+#include "mainwindow.h"
 
 CameraGizmo::CameraGizmo()
 {

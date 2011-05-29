@@ -80,7 +80,9 @@ void MainWindow::ProcessToolBar()
        GizmoManager::Hide(GizmoManager::getRotateGizmo());
        GizmoManager::Show(GizmoManager::getTranslateGizmo());
        GizmoManager::SetGizmoPosition(GizmoManager::getTranslateGizmo(),ogreWindow->getCurrentNode()->getPosition());
+
        GizmoManager::UpdateAxisSize(GizmoManager::getTranslateGizmo(),ogreWindow->getCurrentNode(),"",0);
+
        if(ui->actionGlobal->isChecked())
            GizmoManager::ConvertGizmo(false,true,ogreWindow->getCurrentNode());
        if(ui->actionLocal->isChecked())
@@ -98,7 +100,9 @@ void MainWindow::ProcessToolBar()
        GizmoManager::Hide(GizmoManager::getTranslateGizmo());
        GizmoManager::Show(GizmoManager::getRotateGizmo());
        GizmoManager::SetGizmoPosition(GizmoManager::getRotateGizmo(),ogreWindow->getCurrentNode()->getPosition());
+
        GizmoManager::UpdateAxisSize(GizmoManager::getRotateGizmo(),ogreWindow->getCurrentNode(),"",0);
+
        }
    }
    if (QObject::sender() == ui->actionScale)
@@ -112,9 +116,9 @@ void MainWindow::ProcessToolBar()
        GizmoManager::Hide(GizmoManager::getTranslateGizmo());
        GizmoManager::Show(GizmoManager::getScaleGizmo());
        GizmoManager::SetGizmoPosition(GizmoManager::getScaleGizmo(),ogreWindow->getCurrentNode()->getPosition());
+
        GizmoManager::UpdateAxisSize(GizmoManager::getScaleGizmo(),ogreWindow->getCurrentNode(),"",0);
        GizmoManager::ConvertGizmo(true,false,ogreWindow->getCurrentNode());
-
        }
    }
    if (QObject::sender() == ui->actionLocal)
@@ -194,7 +198,9 @@ void MainWindow::OnSceneNodeClicked()
       {
            GizmoManager::Show(GizmoManager::getTranslateGizmo());
            GizmoManager::SetGizmoPosition(GizmoManager::getTranslateGizmo(),node->getPosition());
+
            GizmoManager::UpdateAxisSize(GizmoManager::getTranslateGizmo(),node,"",0);
+
 
            if(ui->actionGlobal->isChecked())
                GizmoManager::ConvertGizmo(false,true,node);
@@ -206,12 +212,15 @@ void MainWindow::OnSceneNodeClicked()
       {
            GizmoManager::Show(GizmoManager::getRotateGizmo());
            GizmoManager::SetGizmoPosition(GizmoManager::getRotateGizmo(),node->getPosition());
+
            GizmoManager::UpdateAxisSize(GizmoManager::getRotateGizmo(),node,"",0);
+
       }
       if(ui->actionScale->isChecked())
       {
            GizmoManager::Show(GizmoManager::getScaleGizmo());
            GizmoManager::SetGizmoPosition(GizmoManager::getScaleGizmo(),node->getPosition());
+
            GizmoManager::UpdateAxisSize(GizmoManager::getScaleGizmo(),node,"",0);
            GizmoManager::ConvertGizmo(false,true,node);
       }
@@ -240,6 +249,7 @@ void MainWindow::UpdateMaterialView(Ogre::Entity *entity)
      Ogre::Material *mat = static_cast<Ogre::Material*>
              (Ogre::MaterialManager::getSingletonPtr()->getByName(entity->getSubEntity(0)->getMaterialName()).get());
 
+
      Ogre::Pass::TextureUnitStateIterator texIter =  mat->getTechnique(0)->getPass(0)->getTextureUnitStateIterator();
      if(texIter.hasMoreElements() )
      {
@@ -251,6 +261,7 @@ void MainWindow::UpdateMaterialView(Ogre::Entity *entity)
      }
      else
          qDebug()<<"\n There is no texture in material...Check your .material file \n";
+
 }
 
 void MainWindow::AddItemToSceneList(Ogre::String name)

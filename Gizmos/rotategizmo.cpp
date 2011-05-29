@@ -1,4 +1,6 @@
-#include "rotategizmo.h"
+#include "Gizmos/rotategizmo.h"
+
+#include "mainwindow.h"
 
 RotateGizmo::RotateGizmo()
 {  

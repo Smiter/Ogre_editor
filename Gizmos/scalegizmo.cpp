@@ -1,4 +1,6 @@
-#include "scalegizmo.h"
+#include "Gizmos/scalegizmo.h"
+
+#include "mainwindow.h"
 
 ScaleGizmo::ScaleGizmo()
 {    

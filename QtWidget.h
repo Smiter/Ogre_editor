@@ -5,8 +5,10 @@ class RayManager;
 
 #include <QtOpenGL/QGLWidget>
 #include <QDir>
+
 #include "Gizmos/raymanager.h"
 #include "Gizmos/gizmomanager.h"
+
 #include "ui_mainwindow.h"
 
 class OgreWidget : public QGLWidget

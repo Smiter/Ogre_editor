@@ -1,7 +1,8 @@
 #ifndef SCALEGIZMO_H
 #define SCALEGIZMO_H
-#include "IGizmo.h"
-#include "QtWidget.h"
+
+#include "Gizmos/IGizmo.h"
+
 class ScaleGizmo : public IGizmo
 {
 public:

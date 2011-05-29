@@ -1,15 +1,12 @@
 #ifndef GIZMOMANAGER_H
 #define GIZMOMANAGER_H
-#include "IGizmo.h"
+#include "Gizmos/IGizmo.h"
+
 #include "translategizmo.h"
-class RotateGizmo;
-class ScaleGizmo;
-class CameraGizmo;
-#include "QtWidget.h"
 #include "rotategizmo.h"
 #include "scalegizmo.h"
 #include "cameragizmo.h"
-#include "mainwindow.h"
+
 class GizmoManager
 {
 public:
@@ -21,7 +18,7 @@ public:
   static void SetGizmoPosition(IGizmo*,Ogre::Vector3);
   static void Show(IGizmo*);
   static void Hide(IGizmo*);
-  static void ManipulationWithGizmo(Ogre::String, OgreWidget*,Ogre::SceneNode*,float,float,bool,bool);
+  static void ManipulationWithGizmo(Ogre::String,Ogre::SceneNode*,float,float,bool,bool);
   static TranslateGizmo * getTranslateGizmo();
   static RotateGizmo * getRotateGizmo();
   static ScaleGizmo * getScaleGizmo();  

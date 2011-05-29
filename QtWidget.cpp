@@ -83,7 +83,9 @@ void OgreWidget::resizeGL( int width, int height )
   assert( mOgreWindow );
   mOgreWindow->windowMovedOrResized();
 
+
   GizmoManager::ActionsAfterResizeWindow(width,height);
+
 
 }
 
@@ -123,13 +125,14 @@ void OgreWidget::mousePressEvent ( QMouseEvent * event )
     if(event->button() == Qt::LeftButton &&  !altClick )
     {
 
-        if( (mCurrentEntity = RayManager::raycastEntityOnScene(this,event->x() ,   event->y(), AXIS_CAMERA )) != 0 &&  !altClick )
+        if( (mCurrentEntity = RayManager::raycastEntityOnScene(event->x() ,   event->y(), AXIS_CAMERA )) != 0 &&  !altClick )
         {
             GizmoManager::ClickOnCameraGizmo(mCurrentEntity->getName());
             return;
         }
 
-       if( (startMousePosition = RayManager::raycastIntersectionOnScene(this,event->x() ,   event->y(), AXIS_MASK_XYZ,true )) != Ogre::Vector3::ZERO )
+       if( (startMousePosition = RayManager::raycastIntersectionOnScene(event->x() ,   event->y(), AXIS_MASK_XYZ,true )) != Ogre::Vector3::ZERO )
+
        {
            GizmoManager::SetStartPoint(startMousePosition);
            return;
@@ -137,7 +140,7 @@ void OgreWidget::mousePressEvent ( QMouseEvent * event )
        }
 
 
-       if( (mCurrentNode = RayManager::raycastNodeOnScene(this,event->x() ,   event->y(), NONE_MASK )) != 0 )
+       if( (mCurrentNode = RayManager::raycastNodeOnScene(event->x() ,   event->y(), NONE_MASK )) != 0 )
         {
             MainWindow::getInstance()->UpdateComponents(mCurrentNode,mSceneMgr->getEntity(mCurrentNode->getName()));
 
@@ -148,6 +151,7 @@ void OgreWidget::mousePressEvent ( QMouseEvent * event )
             {
                  GizmoManager::Show(GizmoManager::getTranslateGizmo());
                  GizmoManager::SetGizmoPosition(GizmoManager::getTranslateGizmo(),mCurrentNode->getPosition());
+
                  GizmoManager::UpdateAxisSize(GizmoManager::getTranslateGizmo(),mCurrentNode,"",0);
 
                  if(MainWindow::getInstance()->ui->actionGlobal->isChecked())
@@ -160,12 +164,14 @@ void OgreWidget::mousePressEvent ( QMouseEvent * event )
             {
                  GizmoManager::Show(GizmoManager::getRotateGizmo());
                  GizmoManager::SetGizmoPosition(GizmoManager::getRotateGizmo(),mCurrentNode->getPosition());
+
                  GizmoManager::UpdateAxisSize(GizmoManager::getRotateGizmo(),mCurrentNode,"",0);
             }
             if( MainWindow::getInstance()->ui->actionScale->isChecked())
             {
                  GizmoManager::Show(GizmoManager::getScaleGizmo());
                  GizmoManager::SetGizmoPosition(GizmoManager::getScaleGizmo(),mCurrentNode->getPosition());
+
                  GizmoManager::UpdateAxisSize(GizmoManager::getScaleGizmo(),mCurrentNode,"",0);
                  GizmoManager::ConvertGizmo(false,true,mCurrentNode);
             }
@@ -194,24 +200,26 @@ void OgreWidget::mouseMoveEvent (QMouseEvent * event)
     {
         if( MainWindow::getInstance()->ui->actionGlobal->isChecked())
         {
-             GizmoManager::ManipulationWithGizmo(mCurrentEntity->getName(),this,mCurrentNode,event->x(),event->y(),false,true);             
+
+             GizmoManager::ManipulationWithGizmo(mCurrentEntity->getName(),mCurrentNode,event->x(),event->y(),false,true);
+
         }
         if( MainWindow::getInstance()->ui->actionLocal->isChecked())
         {
-             GizmoManager::ManipulationWithGizmo(mCurrentEntity->getName(),this,mCurrentNode,event->x(),event->y(),true,false);
+             GizmoManager::ManipulationWithGizmo(mCurrentEntity->getName(),mCurrentNode,event->x(),event->y(),true,false);
         }
 
         MainWindow::getInstance()->UpdateComponents(mCurrentNode,mSceneMgr->getEntity(mCurrentNode->getName()));             
         return;
     }
 
-    if( (mCurrentEntity = RayManager::raycastEntityOnScene(this,event->x() ,   event->y(), AXIS_MASK_XYZ )) != 0 &&  !altClick )
+    if( (mCurrentEntity = RayManager::raycastEntityOnScene(event->x(), event->y(), AXIS_MASK_XYZ )) != 0 &&  !altClick )
     {
         GizmoManager::SetLightOn(GizmoManager::getTranslateGizmo(),mCurrentEntity->getName());
         GizmoManager::SetLightOn(GizmoManager::getRotateGizmo(),mCurrentEntity->getName());
         GizmoManager::SetLightOn(GizmoManager::getScaleGizmo(),mCurrentEntity->getName());        
     }
-    else if( (mCurrentEntity = RayManager::raycastEntityOnScene(this,event->x() ,   event->y(), AXIS_CAMERA )) != 0 &&  !altClick )
+    else if( (mCurrentEntity = RayManager::raycastEntityOnScene(event->x() ,   event->y(), AXIS_CAMERA )) != 0 &&  !altClick )
     {
         GizmoManager::SetLightOn(GizmoManager::getCameraGizmo(),mCurrentEntity->getName());
     }
@@ -282,6 +290,7 @@ void OgreWidget::keyPressEvent( QKeyEvent * event )
 
     if(mCurrentNode)
     {
+
           GizmoManager::UpdateAxisSize(GizmoManager::getTranslateGizmo(),mCurrentNode,"",0);
           GizmoManager::UpdateAxisSize(GizmoManager::getRotateGizmo(),mCurrentNode,"",0);
           GizmoManager::UpdateAxisSize(GizmoManager::getScaleGizmo(),mCurrentNode,"",0);
@@ -320,9 +329,11 @@ void OgreWidget::wheelEvent( QWheelEvent * event )
 
    if(mCurrentNode)
     {
+
         GizmoManager::UpdateAxisSize(GizmoManager::getTranslateGizmo(),mCurrentNode,"",0);
         GizmoManager::UpdateAxisSize(GizmoManager::getRotateGizmo(),mCurrentNode,"",0);
         GizmoManager::UpdateAxisSize(GizmoManager::getScaleGizmo(),mCurrentNode,"",0);
+
     }  
 }
 
